@@ -8,6 +8,7 @@ import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 
+import com.JEngine.Game.Visual.UI.TextScroller;
 import com.dungeoncrawler.Scenes.ColorManager;
 
 import javafx.scene.input.KeyCode;
@@ -66,7 +67,7 @@ public class SpeechManager extends Player {
                 activeScroller.stop();
             }
             activeScroller = new TextScroller(activeSpeech.text, activeText,activeSpeech.duration, args -> onComplete());
-            SceneManager.getActiveScene().add(activeScroller);
+            addComponent(activeScroller);
             activeScroller.play();
         }
     }
@@ -116,5 +117,6 @@ public class SpeechManager extends Player {
 
     @Override
     public void Update(){
+        super.Update();
     }
 }

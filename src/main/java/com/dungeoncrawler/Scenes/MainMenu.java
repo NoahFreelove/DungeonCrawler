@@ -1,12 +1,13 @@
 package com.dungeoncrawler.Scenes;
 
+import com.JEngine.Core.GameObject;
+import com.JEngine.Core.Identity;
+import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector2;
-import com.JEngine.Game.Visual.GameWindow;
+import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
-import com.dungeoncrawler.UI.TextScroller;
-import com.dungeoncrawler.UI.UIAnimator;
-import javafx.scene.Group;
-import javafx.scene.paint.Color;
+import com.JEngine.Game.Visual.UI.TextScroller;
+import com.JEngine.Game.Visual.UI.UIAnimator;
 import javafx.scene.text.Text;
 
 public class MainMenu extends GameScene {
@@ -15,6 +16,7 @@ public class MainMenu extends GameScene {
     }
 
     private void createMenu(){
+        GameObject animRoot = new GameObject(Transform.simpleTransform(Vector3.emptyVector()), new Identity("animRoot"));
         Text titleText = new Text("Generic Dungeon Crawler");
         titleText.setStyle("-fx-font-size: 50px;");
         titleText.setFill(ColorManager.titleTextColor);
@@ -42,12 +44,13 @@ public class MainMenu extends GameScene {
 
 
         addUI(authorText);
-        add(authorScroller);
 
         addUI(titleText);
-        add(scroller);
-        add(titleAnimator);
+        add(animRoot);
 
+        animRoot.addComponent(scroller);
+        animRoot.addComponent(authorScroller);
+        animRoot.addComponent(titleAnimator);
     }
 
     @Override
