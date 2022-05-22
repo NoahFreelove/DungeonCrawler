@@ -5,6 +5,7 @@ import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameWindow;
+import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.Misc.GenericMethod;
 import javafx.scene.text.Text;
 
@@ -24,6 +25,7 @@ public class TextScroller extends GameObject {
         this.timeTarget = time;
         this.content = content;
         this.onComplete = onComplete;
+        this.progress = 0f;
     }
     public TextScroller(String content, Text text, float time) {
         super(Transform.simpleTransform(Vector3.emptyVector()), new Identity("textScroll"));
@@ -31,6 +33,7 @@ public class TextScroller extends GameObject {
         this.timeTarget = time;
         this.content = content;
         this.onComplete = null;
+        this.progress = 0f;
     }
 
     public void play(){
@@ -65,13 +68,14 @@ public class TextScroller extends GameObject {
             {
                 progress += 1/ GameWindow.getInstance().getTargetFPS()/timeTarget;
                 index = (int) (progress * content.length());
-                animText.setText(content.substring(0, index));
-            }
-            else {
-                pause();
-                if(onComplete !=null)
+                animText.setText(content.substring(0, GameMath.clamp( 0, content.length(), index)));
+                if(progress >= 1)
                 {
-                    onComplete.call(null);
+                    pause();
+                    if(onComplete !=null)
+                    {
+                        onComplete.call(null);
+                    }
                 }
             }
         }

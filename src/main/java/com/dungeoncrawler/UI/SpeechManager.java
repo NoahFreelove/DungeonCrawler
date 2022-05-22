@@ -21,15 +21,19 @@ public class SpeechManager extends Player {
     private final Text activeText;
     private SpeechStruct activeSpeech;
     private TextScroller activeScroller;
+    private boolean textCanBeSkipped;
 
     private final GameImage normalBackground = new GameImage("bin/speechBackground.png");
     public SpeechManager() {
-        super(Transform.simpleTransform(0,400,0), new GameImage("bin/speechBackground.png"), new Identity("SpeechManager"));
+        super(Transform.simpleTransform(0,500,0), null, new Identity("SpeechManager"));
+
         activeText = new Text();
-        activeText.setTranslateX(0);
+        activeText.setTranslateX(30);
         activeText.setTranslateY(getPosition().y + 60);
         activeText.setWrappingWidth(1280*GameWindow.getInstance().getScaleMultiplier());
-        activeText.setStyle("-fx-font-size: 40px;");
+
+        // make text pixelated
+        activeText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 40px;");
 
         addComponent(new DontDestroyOnLoad_Comp());
         speechQueue = new ArrayList<>(0);
@@ -40,7 +44,7 @@ public class SpeechManager extends Player {
         speechQueue.add(speech);
     }
 
-    public void speak(){
+    private void speak(){
         if(speechQueue != null){
 
             if(!SceneManager.getActiveScene().uiObjects.getChildren().contains(activeText))
@@ -56,6 +60,11 @@ public class SpeechManager extends Player {
                 case PLAYER -> activeText.setFill(ColorManager.playerTextColor);
                 case NORMAL -> activeText.setFill(ColorManager.textColor);
             }
+            textCanBeSkipped = activeSpeech.skipable;
+            if(activeScroller !=null)
+            {
+                activeScroller.stop();
+            }
             activeScroller = new TextScroller(activeSpeech.text, activeText,activeSpeech.duration, args -> onComplete());
             SceneManager.getActiveScene().add(activeScroller);
             activeScroller.play();
@@ -67,11 +76,15 @@ public class SpeechManager extends Player {
     }
 
     private void onComplete(){
-        activeSpeech.skipable = true;
+        textCanBeSkipped = true;
     }
 
     private void next(){
         removeFirst();
+        startSpeech();
+    }
+
+    public void startSpeech(){
         if(speechQueue.size() > 0)
         {
             setSprite(normalBackground);
@@ -93,11 +106,15 @@ public class SpeechManager extends Player {
         {
             if(activeSpeech != null)
             {
-                if(activeSpeech.skipable)
+                if(textCanBeSkipped)
                 {
                     next();
                 }
             }
         }
+    }
+
+    @Override
+    public void Update(){
     }
 }
