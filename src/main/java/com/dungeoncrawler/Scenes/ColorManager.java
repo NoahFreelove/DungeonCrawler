@@ -8,5 +8,7 @@ public class ColorManager {
     public static Color textColor = Color.WHITE;
     public static Color bossTextColor = Color.RED;
     public static Color playerTextColor = Color.LIGHTGREEN;
+    public static Color buttonTextColor = Color.WHITE;
+    public static Color buttonColor = Color.DARKBLUE;
 
 }

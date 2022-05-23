@@ -8,7 +8,7 @@ import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 
-import com.JEngine.Game.Visual.UI.TextScroller;
+import com.JEngine.Components.UI.TextScroller;
 import com.dungeoncrawler.Scenes.ColorManager;
 
 import javafx.scene.input.KeyCode;
@@ -18,13 +18,14 @@ import java.util.ArrayList;
 
 public class SpeechManager extends Player {
     private final ArrayList<SpeechStruct> speechQueue;
+    private final GameImage background = new GameImage("bin/speechBackground.png");
 
     private final Text activeText;
     private SpeechStruct activeSpeech;
     private TextScroller activeScroller;
     private boolean textCanBeSkipped;
 
-    private final GameImage normalBackground = new GameImage("bin/speechBackground.png");
+
     public SpeechManager() {
         super(Transform.simpleTransform(0,500,0), null, new Identity("SpeechManager"));
 
@@ -88,7 +89,7 @@ public class SpeechManager extends Player {
     public void startSpeech(){
         if(speechQueue.size() > 0)
         {
-            setSprite(normalBackground);
+            setSprite(background);
             activeText.setVisible(true);
             speak();
         }
@@ -96,7 +97,6 @@ public class SpeechManager extends Player {
         {
             setSprite(null);
             activeText.setVisible(false);
-            System.out.println("No more speeches");
         }
     }
 
