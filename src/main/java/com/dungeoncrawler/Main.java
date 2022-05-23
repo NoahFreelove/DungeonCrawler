@@ -63,7 +63,7 @@ public class Main extends Application {
         window.setTargetFPS(30);
         MainMenu mainMenu = new MainMenu();
         GameCamera cam = new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam")); // Create the main menu camera
-        SceneManager.switchScene(mainMenu);
+        SceneManager.switchScene(mainMenu, true);
         // Create our window
         window.setBackgroundColor(ColorManager.backgroundColor);
     }

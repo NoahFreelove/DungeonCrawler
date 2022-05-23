@@ -15,8 +15,9 @@ public class RoomManager {
     public static int width;
     public static int height;
     public static SpeechManager speechManager;
-
+    private static boolean inTutorial = false;
     public static void CreateRooms(int width, int height, int overallDifficulty) {
+        inTutorial = false;
         if(overallDifficulty <= 0)
             overallDifficulty = 1;
         RoomManager.speechManager = new SpeechManager();
@@ -49,7 +50,26 @@ public class RoomManager {
         }
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
         rooms[0][0].add(speechManager);
-        speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s! Controls: WASD/Arrow Keys - Movement : ", GameInfo.getAppName()), 1.5f));
+
+    }
+
+    public static void CreateTutorial(){
+        inTutorial = true;
+        RoomManager.speechManager = new SpeechManager();
+
+        RoomManager.width = 1;
+        RoomManager.height = 5;
+        rooms = new Room[1][5];
+        rooms[0][0] = new Room(0, false, false, true, false);
+        rooms[0][1] = new Room(0, false, false, true, true);
+        rooms[0][2] = new Room(0, false, false, true, true);
+        rooms[0][3] = new Room(0, false, false, true, true);
+        rooms[0][4] = new Room(0, false, false, false, true);
+
+        rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
+        rooms[0][0].add(speechManager);
+
+        speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, false));
         speechManager.startSpeech();
     }
 
@@ -62,7 +82,30 @@ public class RoomManager {
             SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
         }
         //System.out.println("Switched to room: " + currentRoomX + ", " + currentRoomY);
-        speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You have entered a room.", 0.5f));
-        speechManager.startSpeech();
+        //speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You have entered a room.", 0.5f));
+        //speechManager.startSpeech();
+
+        if(inTutorial)
+        {
+            switch (currentRoomY)
+            {
+                case 0:
+                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, false));
+                    break;
+                case 1:
+                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You can use Shift to attack using a selected weapon", 1.5f, false));
+                    break;
+                case 2:
+                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "Room 3", 1.5f, false));
+                    break;
+                case 3:
+                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "Room 4", 1.5f, false));
+                    break;
+                case 4:
+                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "Room 5", 1.5f, false));
+                    break;
+            }
+            speechManager.startSpeech();
+        }
     }
 }

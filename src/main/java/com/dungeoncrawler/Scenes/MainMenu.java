@@ -10,10 +10,15 @@ import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Components.UI.TextScroller;
 import com.JEngine.Components.UI.UIAnimator;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameUtility;
+import com.dungeoncrawler.SaveManager;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
+import com.dungeoncrawler.UI.SpeechManager;
+import com.dungeoncrawler.UI.SpeechStruct;
+import com.dungeoncrawler.UI.SpeechType;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
@@ -72,7 +77,7 @@ public class MainMenu extends GameScene {
         Button quitButton = new Button("Quit Game");
         quitButton.setMinWidth(400);
         quitButton.setTranslateX(440);
-        quitButton.setTranslateY(400);
+        quitButton.setTranslateY(500);
 
         quitButton.setOnAction(actionEvent -> GameUtility.exitApp());
         quitButton.setTextFill(ColorManager.buttonTextColor);
@@ -85,6 +90,10 @@ public class MainMenu extends GameScene {
         newGameButton.setTranslateY(200);
 
         newGameButton.setOnAction(actionEvent -> {
+            RoomManager.CreateTutorial();
+            GameWindow.getInstance().setTargetFPS(60);
+            SceneManager.switchScene(RoomManager.rooms[0][0]);
+            SaveManager.newGame();
 
         });
         newGameButton.setTextFill(ColorManager.buttonTextColor);
@@ -94,11 +103,12 @@ public class MainMenu extends GameScene {
         if(new File("bin/save.dat").exists())
         {
             String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
-            Button loadButton = new Button("Load Game: " + saveData[0]);
+            Button loadButton = new Button("Load Game: '" + saveData[0] + "'\n(level " + saveData[1] + ")");
+            loadButton.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
             loadButton.setMinWidth(400);
             loadButton.setTranslateX(440);
             loadButton.setTranslateY(300);
-
+            loadButton.setMaxWidth(400);
             loadButton.setOnAction(actionEvent -> {
                 try {
                     int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
