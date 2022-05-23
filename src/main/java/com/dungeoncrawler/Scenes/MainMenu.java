@@ -1,5 +1,7 @@
 package com.dungeoncrawler.Scenes;
 
+import com.JEngine.Components.UI.TextScroller;
+import com.JEngine.Components.UI.UIAnimator;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
@@ -7,18 +9,12 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
-import com.JEngine.Components.UI.TextScroller;
-import com.JEngine.Components.UI.UIAnimator;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.SaveManager;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
-import com.dungeoncrawler.UI.SpeechManager;
-import com.dungeoncrawler.UI.SpeechStruct;
-import com.dungeoncrawler.UI.SpeechType;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
