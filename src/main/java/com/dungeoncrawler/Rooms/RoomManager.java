@@ -5,14 +5,20 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessing.MissingTexture;
 import com.dungeoncrawler.GameObjects.PlayerController;
+import com.dungeoncrawler.UI.SpeechManager;
+import com.dungeoncrawler.UI.SpeechStruct;
+import com.dungeoncrawler.UI.SpeechType;
 
 public class RoomManager {
     public static Room[][] rooms;
-    public static int currentRoomX;
-    public static int currentRoomY;
+    public static int currentRoomX = 0;
+    public static int currentRoomY = 0;
     public static int width;
     public static int height;
+    public static SpeechManager speechManager;
+
     public static void CreateRooms(int width, int height) {
+        RoomManager.speechManager = new SpeechManager();
         RoomManager.width = width;
         RoomManager.height = height;
 
@@ -41,7 +47,7 @@ public class RoomManager {
             }
         }
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0), new GameImage(MissingTexture.getMissingTextureImage(64,64))));
-
+        rooms[0][0].add(speechManager);
     }
 
     public static void switchRoom(int deltaX, int deltaY) {
@@ -52,8 +58,9 @@ public class RoomManager {
             currentRoomY = currentRoomY+deltaY;
             SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
         }
-        System.out.println("Switched to room: " + currentRoomX + ", " + currentRoomY);
+        //System.out.println("Switched to room: " + currentRoomX + ", " + currentRoomY);
         SceneManager.getWindow().setTargetFPS(60);
-
+       /* speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You have entered a new room.",1));
+        speechManager.startSpeech();*/
     }
 }

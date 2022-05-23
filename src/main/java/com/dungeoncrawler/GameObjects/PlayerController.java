@@ -9,8 +9,13 @@ import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Player;
+import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Utility.Input;
 import com.dungeoncrawler.Rooms.RoomManager;
+import com.dungeoncrawler.Scenes.ColorManager;
+import javafx.scene.Group;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class PlayerController extends Player {
 
@@ -26,7 +31,8 @@ public class PlayerController extends Player {
     private float moveSpeed = 15f;
 
     public static PlayerController instance;
-
+    private Text roomNumber = new Text("Room Number");
+    private Group playerUI = new Group();
     public PlayerController(Vector3 pos, GameImage newSprite, String name, int initLevel, int initGold, int initExp, int roomsCleared) {
         super(Transform.simpleTransform(pos), newSprite, new Identity("PlayerController", "player"));
         if(instance == null)
@@ -52,11 +58,19 @@ public class PlayerController extends Player {
             return;
         addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
         addComponent(new DontDestroyOnLoad_Comp());
+        roomNumber = new Text();
+        roomNumber.setTranslateX(10);
+        roomNumber.setTranslateY(40);
+        roomNumber.setFill(ColorManager.textColor);
+        roomNumber.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
+        playerUI.getChildren().add(roomNumber);
+        GameWindow.getInstance().addPermanentUI(playerUI);
     }
 
     @Override
     public void Update(){
         super.Update();
+        roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
         //System.out.println(getPosition());
         if(Input.W_Pressed)
         {

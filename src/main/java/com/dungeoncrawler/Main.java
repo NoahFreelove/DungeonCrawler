@@ -22,7 +22,6 @@ import javafx.stage.Stage;
 import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 public class Main extends Application {
-    public static SpeechManager speechManager;
     public static GameWindow window;
     private static Stage stage;
 

@@ -25,7 +25,6 @@ public class SpeechManager extends Player {
     private TextScroller activeScroller;
     private boolean textCanBeSkipped;
 
-
     public SpeechManager() {
         super(Transform.simpleTransform(0,500,0), null, new Identity("SpeechManager"));
 
@@ -39,6 +38,8 @@ public class SpeechManager extends Player {
 
         addComponent(new DontDestroyOnLoad_Comp());
         speechQueue = new ArrayList<>(0);
+        GameWindow.getInstance().addPermanentUI(activeText);
+
     }
 
     public void addSpeech(SpeechStruct speech)
@@ -49,10 +50,6 @@ public class SpeechManager extends Player {
     private void speak(){
         if(speechQueue != null){
 
-            if(!SceneManager.getActiveScene().uiObjects.getChildren().contains(activeText))
-            {
-                SceneManager.getActiveScene().addUI(activeText);
-            }
 
             activeSpeech = speechQueue.get(0);
 
