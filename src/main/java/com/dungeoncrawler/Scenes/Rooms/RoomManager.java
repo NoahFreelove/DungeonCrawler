@@ -1,9 +1,8 @@
-package com.dungeoncrawler.Rooms;
+package com.dungeoncrawler.Scenes.Rooms;
 
-import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.JEngine.Utility.ImageProcessing.MissingTexture;
+import com.JEngine.Utility.About.GameInfo;
 import com.dungeoncrawler.GameObjects.PlayerController;
 import com.dungeoncrawler.UI.SpeechManager;
 import com.dungeoncrawler.UI.SpeechStruct;
@@ -17,7 +16,9 @@ public class RoomManager {
     public static int height;
     public static SpeechManager speechManager;
 
-    public static void CreateRooms(int width, int height) {
+    public static void CreateRooms(int width, int height, int overallDifficulty) {
+        if(overallDifficulty <= 0)
+            overallDifficulty = 1;
         RoomManager.speechManager = new SpeechManager();
         RoomManager.width = width;
         RoomManager.height = height;
@@ -26,7 +27,7 @@ public class RoomManager {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 // create random num 1-15
-                int randomNum = (int) (Math.random() * 15) + 1;
+                int randomNum = (int) (Math.random() * overallDifficulty) + 1;
                 boolean leftDoor = true;
                 boolean rightDoor = true;
                 boolean topDoor = true;
@@ -46,12 +47,14 @@ public class RoomManager {
                 rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor);
             }
         }
-        rooms[0][0].add(new PlayerController(new Vector3(200,300,0), new GameImage(MissingTexture.getMissingTextureImage(64,64))));
+        rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
         rooms[0][0].add(speechManager);
+        speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s! Controls: WASD/Arrow Keys - Movement : ", GameInfo.getAppName()), 1.5f));
+        speechManager.startSpeech();
     }
 
     public static void switchRoom(int deltaX, int deltaY) {
-        SceneManager.getWindow().setTargetFPS(30);
+        speechManager.clear();
 
         if(currentRoomX+deltaX < width && currentRoomY+deltaY < height && currentRoomX+deltaX >= 0 && currentRoomY+deltaY >= 0) {
             currentRoomX = currentRoomX+deltaX;
@@ -59,8 +62,7 @@ public class RoomManager {
             SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
         }
         //System.out.println("Switched to room: " + currentRoomX + ", " + currentRoomY);
-        SceneManager.getWindow().setTargetFPS(60);
-       /* speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You have entered a new room.",1));
-        speechManager.startSpeech();*/
+        speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You have entered a room.", 0.5f));
+        speechManager.startSpeech();
     }
 }

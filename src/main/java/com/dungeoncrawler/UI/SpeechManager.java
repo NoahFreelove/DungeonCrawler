@@ -26,15 +26,15 @@ public class SpeechManager extends Player {
     private boolean textCanBeSkipped;
 
     public SpeechManager() {
-        super(Transform.simpleTransform(0,500,0), null, new Identity("SpeechManager"));
+        super(Transform.simpleTransform(0,600,0), null, new Identity("SpeechManager"));
 
         activeText = new Text();
         activeText.setTranslateX(30);
-        activeText.setTranslateY(getPosition().y + 60);
+        activeText.setTranslateY(getPosition().y + 30);
         activeText.setWrappingWidth(1280*GameWindow.getInstance().getScaleMultiplier());
 
         // make text pixelated
-        activeText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 40px;");
+        activeText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
         addComponent(new DontDestroyOnLoad_Comp());
         speechQueue = new ArrayList<>(0);
@@ -95,6 +95,10 @@ public class SpeechManager extends Player {
             setSprite(null);
             activeText.setVisible(false);
         }
+    }
+    public void clear(){
+        speechQueue.clear();
+        startSpeech();
     }
 
     @Override

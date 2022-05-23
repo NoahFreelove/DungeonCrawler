@@ -5,18 +5,15 @@ import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
-import com.JEngine.Game.Visual.GameCamera;
+import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Components.UI.TextScroller;
 import com.JEngine.Components.UI.UIAnimator;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameUtility;
-import com.JEngine.Utility.Misc.GenericMethod;
-import com.dungeoncrawler.Rooms.Room;
-import com.dungeoncrawler.Rooms.RoomManager;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
@@ -30,7 +27,7 @@ public class MainMenu extends GameScene {
 
     private void createMenu(){
         GameObject animRoot = new GameObject(Transform.simpleTransform(Vector3.emptyVector()), new Identity("animRoot"));
-
+        GameWindow.getInstance().permanentUI.getChildren().clear();
         // Create title text
         Text titleText = new Text("Generic Dungeon Crawler");
         titleText.setStyle("-fx-font-size: 50px;");
@@ -40,11 +37,9 @@ public class MainMenu extends GameScene {
 
         // Animate title text. Start pos, End pos, Start scale, end Scale, text ref, duration
         UIAnimator titleAnimator = new UIAnimator(
-                new Vector2((float) (1280 / 2f - titleText.getLayoutBounds().getWidth() * 2), 300),
+                new Vector2((float) (1280 / 2f - titleText.getLayoutBounds().getWidth() * 2), 500),
                 new Vector2((float) (1280 / 2 - titleText.getLayoutBounds().getWidth() * 2), 100),
-                new Vector2(0.5f, 0.5f),
-                new Vector2(1, 1),
-                titleText, 0.5f);
+                titleText, 1);
         titleAnimator.play();
 
 
@@ -106,9 +101,14 @@ public class MainMenu extends GameScene {
 
             loadButton.setOnAction(actionEvent -> {
                 try {
+                    int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
+                    //RoomManager.CreateRooms(5 + level,5 + level, level);
+                    RoomManager.CreateRooms(1,2, level);
+
+                    GameWindow.getInstance().setTargetFPS(60);
                     SceneManager.switchScene(RoomManager.rooms[0][0]);
-                    SceneManager.getWindow().setTargetFPS(60);
-                }catch (Exception e){}
+
+                }catch (Exception ignored){}
             });
             loadButton.setTextFill(ColorManager.buttonTextColor);
             loadButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(4) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");

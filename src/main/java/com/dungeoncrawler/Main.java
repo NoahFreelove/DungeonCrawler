@@ -1,21 +1,20 @@
 package com.dungeoncrawler;
 
+import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameCamera;
 import com.JEngine.Game.Visual.GameWindow;
+import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.Misc.GameUtility;
-import com.dungeoncrawler.Rooms.Room;
-import com.dungeoncrawler.Rooms.RoomManager;
+import com.dungeoncrawler.GameObjects.PlayerController;
+import com.dungeoncrawler.Scenes.Rooms.Room;
+import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
-import com.dungeoncrawler.UI.SpeechManager;
-import com.dungeoncrawler.UI.SpeechStruct;
-import com.dungeoncrawler.UI.SpeechType;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -31,14 +30,17 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        Main.stage = stage;
+        setupGameInfo();
 
+        Main.stage = stage;
         stage.addEventHandler(KEY_PRESSED, (e) -> {
             if(e.getCode() == KeyCode.ESCAPE){
                 GameUtility.exitApp();
             }
             if(e.getCode() == KeyCode.F1){
                 createMenu();
+                SceneManager.getActiveScene().remove(PlayerController.instance);
+                PlayerController.instance = null;
             }
             if(e.getCode()==KeyCode.F2)
             {
@@ -46,21 +48,23 @@ public class Main extends Application {
             }
 
         });
-
+        window = new GameWindow(new GameScene("empty"), 1f, "Dungeon Crawler", stage);
         createMenu();
 
     }
 
+    static void setupGameInfo(){
+        GameInfo.appName = "Dungeon Crawler";
+        GameInfo.appVersionMajor = 0;
+        GameInfo.appVersionMinor = 1;
+        GameInfo.authors = new String[]{"Noah Freelove"};
+    }
     public static void createMenu(){
+        window.setTargetFPS(30);
         MainMenu mainMenu = new MainMenu();
-        window = new GameWindow(mainMenu, 1f, "Dungeon Crawler", stage);
-        GameWindow.getInstance().setTargetFPS(30);
-
         GameCamera cam = new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam")); // Create the main menu camera
         SceneManager.switchScene(mainMenu);
         // Create our window
         window.setBackgroundColor(ColorManager.backgroundColor);
-        window.setTargetFPS(30);
-        RoomManager.CreateRooms(10,10);
     }
 }

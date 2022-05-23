@@ -1,4 +1,4 @@
-package com.dungeoncrawler.Rooms;
+package com.dungeoncrawler.Scenes.Rooms;
 
 import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Core.GameImage;
@@ -7,7 +7,6 @@ import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
-import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 
 public class Wall extends Sprite {
     public Wall(Vector2 pos, Vector2 scale) {
