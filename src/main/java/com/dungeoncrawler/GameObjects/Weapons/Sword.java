@@ -13,7 +13,7 @@ public class Sword extends Weapon {
     private float animationTime = 0f;
     public Sword(Vector3 pos, GameImage sprite) {
         super(2, 0.5, pos, sprite);
-        addCollider(new SwordCollider(new Vector3(0,0,0),16,32, true, this));
+        addCollider(new SwordCollider(new Vector3(0,0,0),32,32, true, this));
     }
 
     @Override
@@ -37,9 +37,9 @@ public class Sword extends Weapon {
 
         switch (direction) {
             case UP -> targetWeaponOffset = new Vector3(0, -32, 0);
-            case DOWN -> targetWeaponOffset = new Vector3(0, 32, 0);
+            case DOWN -> targetWeaponOffset = new Vector3(0, 64, 0);
             case LEFT -> targetWeaponOffset = new Vector3(-32, 0, 0);
-            case RIGHT -> targetWeaponOffset = new Vector3(32, 0, 0);
+            case RIGHT -> targetWeaponOffset = new Vector3(64, 0, 0);
         }
     }
 }

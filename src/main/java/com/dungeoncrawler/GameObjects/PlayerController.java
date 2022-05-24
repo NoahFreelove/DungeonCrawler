@@ -4,16 +4,12 @@ import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
-import com.JEngine.Core.Position.Transform;
-import com.JEngine.Core.Position.Vector2;
-import com.JEngine.Core.Position.Vector3;
+import com.JEngine.Core.Position.*;
 import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.Input;
-import com.dungeoncrawler.GameObjects.Weapons.Sword;
-import com.dungeoncrawler.GameObjects.Weapons.Weapon;
+import com.dungeoncrawler.GameObjects.Weapons.*;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.SimpleDirection;
@@ -41,7 +37,7 @@ public class PlayerController extends Player {
     private Weapon selectedWeapon;
 
 
-    private SimpleDirection facing = SimpleDirection.LEFT;
+    private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private boolean isAttacking;
 
     public PlayerController(Vector3 pos, String name, int initLevel, int initGold, int initExp, int roomsCleared) {
@@ -80,27 +76,28 @@ public class PlayerController extends Player {
         super.Update();
 
         roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
-        //System.out.println(getPosition());
+
         if(Input.Up)
         {
             Move(new Vector2(0,-1), moveSpeed);
-            facing = SimpleDirection.UP;
+            directionFacing = SimpleDirection.UP;
         }
         if(Input.Down)
         {
             Move(new Vector2(0,1), moveSpeed);
-            facing = SimpleDirection.DOWN;
+            directionFacing = SimpleDirection.DOWN;
         }
 
         if(Input.Left)
         {
             Move(new Vector2(-1,0), moveSpeed);
-            facing = SimpleDirection.LEFT;
+            directionFacing = SimpleDirection.LEFT;
         }
+
         if(Input.Right)
         {
             Move(new Vector2(1,0), moveSpeed);
-            facing = SimpleDirection.RIGHT;
+            directionFacing = SimpleDirection.RIGHT;
         }
 
         if(getPosition().x <=0)
@@ -122,6 +119,10 @@ public class PlayerController extends Player {
         {
             RoomManager.switchRoom(0,-1);
             PlayerController.instance.setPosition(new Vector3(580,50,0));
+        }
+
+        if(Input.Shift_Pressed) {
+            selectedWeapon.requestAttack(directionFacing);
         }
 
     }
@@ -206,14 +207,6 @@ public class PlayerController extends Player {
         GameWindow.getInstance().addPermanentUI(playerUI);
     }
 
-    @Override
-    public void onKeyPressed(KeyCode k)
-    {
-        if(k == KeyCode.SHIFT) {
-            selectedWeapon.requestAttack(facing);
-        }
-    }
-
     public void setSelectedWeapon(Weapon w) {
         if(selectedWeapon != null)
         {
@@ -231,8 +224,8 @@ public class PlayerController extends Player {
         return isAttacking;
     }
 
-    public SimpleDirection getFacing() {
-        return facing;
+    public SimpleDirection getDirectionFacing() {
+        return directionFacing;
     }
 
     public void setAttacking(boolean attacking) {

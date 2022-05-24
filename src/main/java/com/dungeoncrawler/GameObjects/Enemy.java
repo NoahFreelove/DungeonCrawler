@@ -49,4 +49,8 @@ public class Enemy extends Pawn {
     public boolean canAttack() {
         return canAttack;
     }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
 }

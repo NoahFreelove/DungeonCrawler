@@ -18,6 +18,7 @@ public class RoomManager {
     public static int height;
     public static SpeechManager speechManager;
     private static boolean inTutorial = false;
+
     public static void CreateRooms(int width, int height, int overallDifficulty) {
         inTutorial = false;
         if(overallDifficulty <= 0)
@@ -59,18 +60,18 @@ public class RoomManager {
         inTutorial = true;
         RoomManager.speechManager = new SpeechManager();
 
-        RoomManager.width = 1;
-        RoomManager.height = 5;
-        rooms = new Room[1][5];
+        RoomManager.width = 2;
+        RoomManager.height = 2;
+        rooms = new Room[2][2];
         rooms[0][0] = new Room(0, false, false, true, false);
-        rooms[0][1] = new Room(0, false, false, true, true);
-        rooms[0][2] = new Room(0, false, false, true, true);
-        rooms[0][3] = new Room(0, false, false, true, true);
-        rooms[0][4] = new Room(0, false, false, false, true);
+        rooms[0][1] = new Room(0, false, true, false, true);
+        rooms[1][1] = new Room(0, true, false, false, false);
 
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
         rooms[0][0].add(speechManager);
-        rooms[0][0].add(new Enemy(new Vector3(400,300), new GameImage("bin/enemy.png"), 1, 10, 1));
+        Enemy firstEnemy = new Enemy(new Vector3(1150,300), new GameImage("bin/enemy.png"), 1, 10, 1);
+        firstEnemy.setCanAttack(false);
+        rooms[0][1].add(firstEnemy);
         speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, false));
         speechManager.startSpeech();
     }
@@ -87,26 +88,18 @@ public class RoomManager {
         //speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You have entered a room.", 0.5f));
         //speechManager.startSpeech();
 
-        if(inTutorial)
-        {
-            switch (currentRoomY)
-            {
-                case 0:
-                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, false));
-                    break;
-                case 1:
-                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You can use Shift to attack using a selected weapon", 1.5f, false));
-                    break;
-                case 2:
-                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "Room 3", 1.5f, false));
-                    break;
-                case 3:
-                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "Room 4", 1.5f, false));
-                    break;
-                case 4:
-                    speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "Room 5", 1.5f, false));
-                    break;
+        if(inTutorial) {
+            if (currentRoomX == 0 && currentRoomY == 0) {
+                speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, false));
             }
+            if (currentRoomX == 0 && currentRoomY == 1) {
+                speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You can use Shift to attack using a selected weapon. This sword does 2 damage a hit.\nThis enemy has 10 health", 1.5f, false));
+            }
+            if (currentRoomX == 1 && currentRoomY == 1) {
+                speechManager.addSpeech(new SpeechStruct(SpeechType.BOSS, "You can find better weapons by killing bosses and buying them with gold\n" +
+                        "You can also heal by purchasing or finding health packs", 1.5f, false));
+            }
+
             speechManager.startSpeech();
         }
     }
