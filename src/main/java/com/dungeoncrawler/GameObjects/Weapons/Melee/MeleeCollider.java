@@ -7,11 +7,11 @@ import com.dungeoncrawler.GameObjects.Enemy;
 import com.dungeoncrawler.GameObjects.PlayerCollider;
 import com.dungeoncrawler.GameObjects.PlayerController;
 
-public class SwordCollider extends Collider_Comp {
-    Sword parent;
-    public SwordCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
+public class MeleeCollider extends Collider_Comp {
+    Melee parent;
+    public MeleeCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
         super(initialOffset, width, height, isTrigger, parent);
-        this.parent = (Sword) parent;
+        this.parent = (Melee) parent;
     }
 
     @Override
