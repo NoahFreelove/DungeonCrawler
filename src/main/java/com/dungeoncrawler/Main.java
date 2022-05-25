@@ -1,6 +1,5 @@
 package com.dungeoncrawler;
 
-import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameCamera;
@@ -10,10 +9,9 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.GameObjects.PlayerController;
-import com.dungeoncrawler.Scenes.Rooms.Room;
-import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
+import com.dungeoncrawler.Scenes.Rooms.Room;
 import javafx.application.Application;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;

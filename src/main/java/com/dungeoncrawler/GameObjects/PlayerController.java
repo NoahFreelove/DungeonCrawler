@@ -10,6 +10,7 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Input;
 import com.dungeoncrawler.GameObjects.Weapons.*;
+import com.dungeoncrawler.GameObjects.Weapons.Melee.Sword;
 import com.dungeoncrawler.GameObjects.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
@@ -36,6 +37,7 @@ public class PlayerController extends Player {
 
     private Weapon selectedWeapon;
 
+    private boolean wasdFacing = true;
 
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private boolean isAttacking;
@@ -68,7 +70,7 @@ public class PlayerController extends Player {
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
 
-        setSelectedWeapon(new BarrettM82(pos));
+        setSelectedWeapon(new Sword(pos));
 
         SceneManager.getActiveScene().add(selectedWeapon);
     }
@@ -79,27 +81,68 @@ public class PlayerController extends Player {
 
         roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
 
-        if(Input.Up)
+        if(Input.UArrow_Pressed)
         {
-            Move(new Vector2(0,-1), moveSpeed);
+            MoveUp();
+            if (!wasdFacing) {
+                directionFacing = SimpleDirection.UP;
+            }
+        }
+        if(Input.DArrow_Pressed)
+        {
+            MoveDown();
+            if (!wasdFacing) {
+                directionFacing = SimpleDirection.DOWN;
+            }
+        }
+
+        if(Input.LArrow_Pressed)
+        {
+            MoveLeft();
+            if (!wasdFacing) {
+                directionFacing = SimpleDirection.LEFT;
+            }
+        }
+
+        if(Input.RArrow_Pressed) {
+            MoveRight();
+            if (!wasdFacing)
+            {
+                directionFacing = SimpleDirection.RIGHT;
+            }
+        }
+        if(Input.W_Pressed)
+        {
             directionFacing = SimpleDirection.UP;
+            if(!wasdFacing)
+            {
+
+                MoveUp();
+            }
         }
-        if(Input.Down)
+        if(Input.S_Pressed)
         {
-            Move(new Vector2(0,1), moveSpeed);
             directionFacing = SimpleDirection.DOWN;
+            if(!wasdFacing)
+            {
+                MoveDown();
+            }
         }
-
-        if(Input.Left)
+        if(Input.A_Pressed)
         {
-            Move(new Vector2(-1,0), moveSpeed);
             directionFacing = SimpleDirection.LEFT;
+            if(!wasdFacing)
+            {
+                MoveLeft();
+            }
         }
-
-        if(Input.Right)
+        if(Input.D_Pressed)
         {
-            Move(new Vector2(1,0), moveSpeed);
             directionFacing = SimpleDirection.RIGHT;
+            if(!wasdFacing)
+            {
+                MoveRight();
+            }
         }
 
         if(getPosition().x <=0)
@@ -232,5 +275,18 @@ public class PlayerController extends Player {
 
     public void setAttacking(boolean attacking) {
         isAttacking = attacking;
+    }
+
+    private void MoveUp(){
+        Move(new Vector2(0,-1), moveSpeed);
+    }
+    private void MoveDown(){
+        Move(new Vector2(0,1), moveSpeed);
+    }
+    private void MoveLeft(){
+        Move(new Vector2(-1,0), moveSpeed);
+    }
+    private void MoveRight(){
+        Move(new Vector2(1,0), moveSpeed);
     }
 }
