@@ -10,6 +10,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameUtility;
@@ -30,22 +31,21 @@ public class MainMenu extends GameScene {
         GameObject animRoot = new GameObject(Transform.simpleTransform(Vector3.emptyVector()), new Identity("animRoot"));
         GameWindow.getInstance().permanentUI.getChildren().clear();
         // Create title text
-        Text titleText = new Text("Generic Dungeon Crawler");
+        Text titleText = new Text(GameInfo.getAppName());
         titleText.setStyle("-fx-font-size: 50px;");
         titleText.setFill(ColorManager.titleTextColor);
-        titleText.setTranslateX(1280/2 - titleText.getLayoutBounds().getWidth()*2);
         titleText.setTranslateY(100);
 
-        // Animate title text. Start pos, End pos, Start scale, end Scale, text ref, duration
+        // Animate title text. Start pos, End pos, text ref, duration
         UIAnimator titleAnimator = new UIAnimator(
-                new Vector2((float) (1280 / 2f - titleText.getLayoutBounds().getWidth() * 2), 500),
-                new Vector2((float) (1280 / 2 - titleText.getLayoutBounds().getWidth() * 2), 100),
+                new Vector2((float) (1280 / 2f - titleText.getLayoutBounds().getWidth() * 2)-10, 500),
+                new Vector2((float) (1280 / 2 - titleText.getLayoutBounds().getWidth() * 2)-10, 100),
                 titleText, 1);
         titleAnimator.play();
 
 
         // Make title text scroll. Target Text, Text Ref, Duration, When done, create the menu buttons
-        TextScroller scroller = new TextScroller("Generic Dungeon Crawler", titleText, 1, args -> createMenuButtons());
+        TextScroller scroller = new TextScroller(GameInfo.getAppName(), titleText, 1, args -> createMenuButtons());
         scroller.play();
 
         // Create author text

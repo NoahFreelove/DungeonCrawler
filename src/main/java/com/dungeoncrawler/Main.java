@@ -46,15 +46,15 @@ public class Main extends Application {
                 SceneManager.switchScene(new Room(1, true, true, true, true));
             }
         });
-        window = new GameWindow(new GameScene("empty"), 1f, "Dungeon Crawler", stage);
+        window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
         createMenu();
     }
 
     static void setupGameInfo(){
-        GameInfo.appName = "Dungeon Crawler";
-        GameInfo.appVersionMajor = 0;
-        GameInfo.appVersionMinor = 1;
-        GameInfo.authors = new String[]{"Noah Freelove"};
+        GameInfo.setAppName("Dungeon Crawler");
+        GameInfo.setAppVersionMajor(0);
+        GameInfo.setAppVersionMinor(1);
+        GameInfo.setAuthors(new String[]{"Noah Freelove"});
     }
     public static void createMenu(){
         window.setTargetFPS(30);

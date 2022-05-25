@@ -4,15 +4,14 @@ import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Utility.GameMath;
 import com.dungeoncrawler.GameObjects.PlayerController;
-import com.dungeoncrawler.GameObjects.SwordCollider;
 import com.dungeoncrawler.SimpleDirection;
 
 public class Sword extends Weapon {
     private Vector3 weaponOffset = new Vector3(0,0,0);
     private Vector3 targetWeaponOffset = new Vector3(0,0,0);
     private float animationTime = 0f;
-    public Sword(Vector3 pos, GameImage sprite) {
-        super(2, 0.5, pos, sprite);
+    public Sword(Vector3 pos) {
+        super(2, 0.5, pos, new GameImage("bin/sword.png"));
         addCollider(new SwordCollider(new Vector3(0,0,0),32,32, true, this));
     }
 

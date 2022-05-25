@@ -110,6 +110,11 @@ public class SpeechManager extends Player {
             {
                 if(textCanBeSkipped)
                 {
+                    if(activeScroller.getProgress() < 1)
+                    {
+                        activeScroller.skip();
+                        return;
+                    }
                     next();
                 }
             }

@@ -67,7 +67,7 @@ public class PlayerController extends Player {
         addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
-        setSelectedWeapon(new Sword(pos, new GameImage("bin/sword.png")));
+        setSelectedWeapon(new Bow(pos));
         SceneManager.getActiveScene().add(selectedWeapon);
     }
 

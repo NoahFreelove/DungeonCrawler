@@ -72,7 +72,7 @@ public class RoomManager {
         Enemy firstEnemy = new Enemy(new Vector3(1150,300), new GameImage("bin/enemy.png"), 1, 10, 1);
         firstEnemy.setCanAttack(false);
         rooms[0][1].add(firstEnemy);
-        speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, false));
+        speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, true));
         speechManager.startSpeech();
     }
 
