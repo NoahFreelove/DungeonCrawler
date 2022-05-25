@@ -6,7 +6,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.dungeoncrawler.GameObjects.PlayerController;
 import com.dungeoncrawler.GameObjects.Weapons.Weapon;
-import com.dungeoncrawler.SimpleDirection;
+import com.JEngine.Core.Position.SimpleDirection;
 
 public class BarrettM82 extends Weapon {
 

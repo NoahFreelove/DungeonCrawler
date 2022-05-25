@@ -5,7 +5,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Utility.GameMath;
 import com.dungeoncrawler.GameObjects.PlayerController;
 import com.dungeoncrawler.GameObjects.Weapons.Weapon;
-import com.dungeoncrawler.SimpleDirection;
+import com.JEngine.Core.Position.SimpleDirection;
 
 public class Sword extends Weapon {
     private Vector3 weaponOffset = new Vector3(0,0,0);

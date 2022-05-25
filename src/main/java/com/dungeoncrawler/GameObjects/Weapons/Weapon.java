@@ -2,14 +2,12 @@ package com.dungeoncrawler.GameObjects.Weapons;
 
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;
-import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector3;
-import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Utility.Misc.GameUtility;
-import com.dungeoncrawler.SimpleDirection;
+import com.JEngine.Core.Position.SimpleDirection;
 
 public abstract class Weapon extends Sprite {
 
@@ -40,5 +38,10 @@ public abstract class Weapon extends Sprite {
 
     public float getDamage() {
         return damage;
+    }
+
+    public void updateRotation(float newRot)
+    {
+        getTransform().setRotation(new Vector3(newRot,0,0));
     }
 }

@@ -10,12 +10,11 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Input;
 import com.dungeoncrawler.GameObjects.Weapons.*;
-import com.dungeoncrawler.GameObjects.Weapons.Melee.Sword;
 import com.dungeoncrawler.GameObjects.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.GameObjects.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
-import com.dungeoncrawler.SimpleDirection;
+import com.JEngine.Core.Position.SimpleDirection;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
 
@@ -71,81 +70,82 @@ public class PlayerController extends Player {
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
 
-        setSelectedWeapon(new BarrettM82(pos));
+        setSelectedWeapon(new Bow(pos));
 
         SceneManager.getActiveScene().add(selectedWeapon);
     }
 
     @Override
-    public void Update(){
+    public void Update() {
         super.Update();
 
         roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
 
-        if(Input.UArrow_Pressed)
-        {
+        if (Input.UArrow_Pressed) {
             MoveUp();
             if (wasdMovement) {
                 directionFacing = SimpleDirection.UP;
             }
         }
-        if(Input.DArrow_Pressed)
-        {
+        if (Input.DArrow_Pressed) {
             MoveDown();
             if (wasdMovement) {
                 directionFacing = SimpleDirection.DOWN;
             }
         }
 
-        if(Input.LArrow_Pressed)
-        {
+        if (Input.LArrow_Pressed) {
             MoveLeft();
             if (wasdMovement) {
                 directionFacing = SimpleDirection.LEFT;
             }
         }
 
-        if(Input.RArrow_Pressed) {
+        if (Input.RArrow_Pressed) {
             MoveRight();
-            if (wasdMovement)
-            {
+            if (wasdMovement) {
                 directionFacing = SimpleDirection.RIGHT;
             }
         }
-        if(Input.W_Pressed)
-        {
+        if (Input.W_Pressed) {
             directionFacing = SimpleDirection.UP;
-            if(wasdMovement)
-            {
+            if (wasdMovement) {
 
                 MoveUp();
             }
         }
-        if(Input.S_Pressed)
-        {
+        if (Input.S_Pressed) {
             directionFacing = SimpleDirection.DOWN;
-            if(wasdMovement)
-            {
+            if (wasdMovement) {
                 MoveDown();
             }
         }
-        if(Input.A_Pressed)
-        {
+        if (Input.A_Pressed) {
             directionFacing = SimpleDirection.LEFT;
-            if(wasdMovement)
-            {
+            if (wasdMovement) {
                 MoveLeft();
             }
         }
-        if(Input.D_Pressed)
-        {
+        if (Input.D_Pressed) {
             directionFacing = SimpleDirection.RIGHT;
-            if(wasdMovement)
-            {
+            if (wasdMovement) {
                 MoveRight();
             }
         }
 
+
+        if (selectedWeapon != null)
+        {
+            if (Input.Shift_Pressed) {
+                selectedWeapon.requestAttack(directionFacing);
+            }
+            selectedWeapon.updateRotation(DirectionAngleConversion.dirToAngle(directionFacing));
+        }
+        checkMoveRoom();
+
+    }
+
+    private void checkMoveRoom(){
         if(getPosition().x <=0)
         {
             RoomManager.switchRoom(-1,0);
@@ -166,11 +166,6 @@ public class PlayerController extends Player {
             RoomManager.switchRoom(0,-1);
             PlayerController.instance.setPosition(new Vector3(580,50,0));
         }
-
-        if(Input.Shift_Pressed) {
-            selectedWeapon.requestAttack(directionFacing);
-        }
-
     }
 
     public void addGold(int amount) {
