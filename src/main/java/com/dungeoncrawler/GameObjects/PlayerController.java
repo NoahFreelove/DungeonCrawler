@@ -72,7 +72,7 @@ public class PlayerController extends Player {
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
 
-        setSelectedWeapon(new Sword(pos));
+        setSelectedWeapon(new Bow(pos));
 
         SceneManager.getActiveScene().add(selectedWeapon);
     }
