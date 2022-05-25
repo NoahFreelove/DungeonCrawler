@@ -1,18 +1,16 @@
-package com.dungeoncrawler.GameObjects.Weapons;
+package com.dungeoncrawler.GameObjects.Weapons.Projectile;
 
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
 import com.dungeoncrawler.GameObjects.Enemy;
-import com.dungeoncrawler.GameObjects.PlayerCollider;
 import com.dungeoncrawler.GameObjects.PlayerController;
-import com.dungeoncrawler.GameObjects.Weapons.Sword;
 
-public class ArrowCollider extends Collider_Comp {
-    Arrow parent;
-    public ArrowCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
+public class ProjectileCollider extends Collider_Comp {
+    Projectile parent;
+    public ProjectileCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
         super(initialOffset, width, height, true, parent);
-        this.parent = (Arrow) parent;
+        this.parent = (Projectile) parent;
     }
 
     @Override

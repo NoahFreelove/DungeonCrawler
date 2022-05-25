@@ -1,13 +1,14 @@
-package com.dungeoncrawler.GameObjects.Weapons;
+package com.dungeoncrawler.GameObjects.Weapons.Projectile;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.dungeoncrawler.GameObjects.PlayerController;
+import com.dungeoncrawler.GameObjects.Weapons.Weapon;
 import com.dungeoncrawler.SimpleDirection;
 
-public class Bow extends Weapon{
+public class Bow extends Weapon {
     public Bow(Vector3 pos) {
         super(5, 0.5, pos, new GameImage("bin/bow.png"));
     }
@@ -33,8 +34,8 @@ public class Bow extends Weapon{
             }
         }
 
-        Arrow arrow = new Arrow(getPosition(), rot, dir, 5);
-        SceneManager.getActiveScene().add(arrow);
+        Projectile projectile = new Projectile(getPosition(), rot, dir, 5, 5f, new GameImage("bin/arrow.png"));
+        SceneManager.getActiveScene().add(projectile);
 
     }
 

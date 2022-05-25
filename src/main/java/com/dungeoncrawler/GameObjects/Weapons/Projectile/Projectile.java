@@ -1,4 +1,4 @@
-package com.dungeoncrawler.GameObjects.Weapons;
+package com.dungeoncrawler.GameObjects.Weapons.Projectile;
 
 import com.JEngine.Core.Component;
 import com.JEngine.Core.GameImage;
@@ -9,17 +9,18 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 
-public class Arrow extends Pawn {
-    float moveSpeed = 10f;
+public class Projectile extends Pawn {
+    float moveSpeed;
     Vector2 direction;
     double damage;
     int life = 60;
-    ArrowCollider collider;
-    public Arrow(Vector3 pos, Vector3 rot, Vector2 moveDirection, double damage) {
-        super(new Transform(pos, rot, Vector3.oneVector()), new GameImage("bin/arrow.png"), new Identity("arrow"));
+    ProjectileCollider collider;
+    public Projectile(Vector3 pos, Vector3 rot, Vector2 moveDirection, double damage, float moveSpeed, GameImage sprite) {
+        super(new Transform(pos, rot, Vector3.oneVector()), sprite, new Identity("arrow"));
         this.direction = moveDirection;
         this.damage = damage;
-        collider = new ArrowCollider(Vector3.emptyVector(), 32,32, true, this);
+        collider = new ProjectileCollider(Vector3.emptyVector(), 32,32, true, this);
+        this.moveSpeed = moveSpeed;
         addComponent(collider);
     }
 

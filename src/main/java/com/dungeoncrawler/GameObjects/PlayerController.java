@@ -10,11 +10,11 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Input;
 import com.dungeoncrawler.GameObjects.Weapons.*;
+import com.dungeoncrawler.GameObjects.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.SimpleDirection;
 import javafx.scene.Group;
-import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 
 public class PlayerController extends Player {
@@ -67,7 +67,9 @@ public class PlayerController extends Player {
         addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
-        setSelectedWeapon(new Bow(pos));
+
+        setSelectedWeapon(new BarrettM82(pos));
+
         SceneManager.getActiveScene().add(selectedWeapon);
     }
 

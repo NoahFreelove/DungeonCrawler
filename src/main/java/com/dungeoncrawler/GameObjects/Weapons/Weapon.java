@@ -25,6 +25,7 @@ public abstract class Weapon extends Sprite {
         this.attackDelay = attackDelay;
         this.ableToAttack = true;
     }
+
     public boolean requestAttack(SimpleDirection direction) {
         if(ableToAttack){
             ableToAttack = false;

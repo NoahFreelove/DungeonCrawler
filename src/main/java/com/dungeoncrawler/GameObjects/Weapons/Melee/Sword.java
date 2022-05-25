@@ -1,9 +1,10 @@
-package com.dungeoncrawler.GameObjects.Weapons;
+package com.dungeoncrawler.GameObjects.Weapons.Melee;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Utility.GameMath;
 import com.dungeoncrawler.GameObjects.PlayerController;
+import com.dungeoncrawler.GameObjects.Weapons.Weapon;
 import com.dungeoncrawler.SimpleDirection;
 
 public class Sword extends Weapon {

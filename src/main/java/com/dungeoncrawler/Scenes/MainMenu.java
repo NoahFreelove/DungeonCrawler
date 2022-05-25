@@ -109,7 +109,7 @@ public class MainMenu extends GameScene {
                 try {
                     int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
                     //RoomManager.CreateRooms(5 + level,5 + level, level);
-                    RoomManager.CreateRooms(1,2, level);
+                    RoomManager.CreateRooms(5,5, level);
 
                     GameWindow.getInstance().setTargetFPS(60);
                     SceneManager.switchScene(RoomManager.rooms[0][0]);

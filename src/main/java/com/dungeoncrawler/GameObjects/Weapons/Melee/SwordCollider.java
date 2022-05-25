@@ -1,4 +1,4 @@
-package com.dungeoncrawler.GameObjects.Weapons;
+package com.dungeoncrawler.GameObjects.Weapons.Melee;
 
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
@@ -6,7 +6,6 @@ import com.JEngine.Core.Position.Vector3;
 import com.dungeoncrawler.GameObjects.Enemy;
 import com.dungeoncrawler.GameObjects.PlayerCollider;
 import com.dungeoncrawler.GameObjects.PlayerController;
-import com.dungeoncrawler.GameObjects.Weapons.Sword;
 
 public class SwordCollider extends Collider_Comp {
     Sword parent;
