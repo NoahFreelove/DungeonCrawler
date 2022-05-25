@@ -37,7 +37,7 @@ public class PlayerController extends Player {
 
     private Weapon selectedWeapon;
 
-    private boolean wasdMovement = false;
+    private boolean wasdMovement = true;
 
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private boolean isAttacking;
