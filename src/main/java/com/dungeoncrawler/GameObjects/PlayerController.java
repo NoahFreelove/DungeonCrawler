@@ -12,6 +12,7 @@ import com.JEngine.Utility.Input;
 import com.dungeoncrawler.GameObjects.Weapons.*;
 import com.dungeoncrawler.GameObjects.Weapons.Melee.Sword;
 import com.dungeoncrawler.GameObjects.Weapons.Projectile.BarrettM82;
+import com.dungeoncrawler.GameObjects.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.SimpleDirection;
@@ -32,12 +33,12 @@ public class PlayerController extends Player {
     private float moveSpeed = 15f;
 
     public static PlayerController instance;
-    private Text roomNumber = new Text("Room Number");
+    private Text roomNumber = new Text("Room #:#");
     private Group playerUI = new Group();
 
     private Weapon selectedWeapon;
 
-    private boolean wasdFacing = true;
+    private boolean wasdMovement = false;
 
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private boolean isAttacking;
@@ -70,7 +71,7 @@ public class PlayerController extends Player {
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
 
-        setSelectedWeapon(new Sword(pos));
+        setSelectedWeapon(new BarrettM82(pos));
 
         SceneManager.getActiveScene().add(selectedWeapon);
     }
@@ -84,14 +85,14 @@ public class PlayerController extends Player {
         if(Input.UArrow_Pressed)
         {
             MoveUp();
-            if (!wasdFacing) {
+            if (wasdMovement) {
                 directionFacing = SimpleDirection.UP;
             }
         }
         if(Input.DArrow_Pressed)
         {
             MoveDown();
-            if (!wasdFacing) {
+            if (wasdMovement) {
                 directionFacing = SimpleDirection.DOWN;
             }
         }
@@ -99,14 +100,14 @@ public class PlayerController extends Player {
         if(Input.LArrow_Pressed)
         {
             MoveLeft();
-            if (!wasdFacing) {
+            if (wasdMovement) {
                 directionFacing = SimpleDirection.LEFT;
             }
         }
 
         if(Input.RArrow_Pressed) {
             MoveRight();
-            if (!wasdFacing)
+            if (wasdMovement)
             {
                 directionFacing = SimpleDirection.RIGHT;
             }
@@ -114,7 +115,7 @@ public class PlayerController extends Player {
         if(Input.W_Pressed)
         {
             directionFacing = SimpleDirection.UP;
-            if(!wasdFacing)
+            if(wasdMovement)
             {
 
                 MoveUp();
@@ -123,7 +124,7 @@ public class PlayerController extends Player {
         if(Input.S_Pressed)
         {
             directionFacing = SimpleDirection.DOWN;
-            if(!wasdFacing)
+            if(wasdMovement)
             {
                 MoveDown();
             }
@@ -131,7 +132,7 @@ public class PlayerController extends Player {
         if(Input.A_Pressed)
         {
             directionFacing = SimpleDirection.LEFT;
-            if(!wasdFacing)
+            if(wasdMovement)
             {
                 MoveLeft();
             }
@@ -139,7 +140,7 @@ public class PlayerController extends Player {
         if(Input.D_Pressed)
         {
             directionFacing = SimpleDirection.RIGHT;
-            if(!wasdFacing)
+            if(wasdMovement)
             {
                 MoveRight();
             }
