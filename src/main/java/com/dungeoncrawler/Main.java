@@ -28,24 +28,30 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        setupGameInfo();
+        try {
+            setupGameInfo();
 
-        Main.stage = stage;
-        stage.addEventHandler(KEY_PRESSED, (e) -> {
-            if(e.getCode() == KeyCode.ESCAPE){
-                GameUtility.exitApp();
-            }
-            if(e.getCode() == KeyCode.F1){
-                createMenu();
-                SceneManager.getActiveScene().remove(PlayerController.instance);
-                PlayerController.instance = null;
-            }
-            if(e.getCode()==KeyCode.F2) {
-                SceneManager.switchScene(new Room(1, true, true, true, true));
-            }
-        });
-        window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
-        createMenu();
+            Main.stage = stage;
+            stage.addEventHandler(KEY_PRESSED, (e) -> {
+                if(e.getCode() == KeyCode.ESCAPE){
+                    GameUtility.exitApp();
+                }
+                if(e.getCode() == KeyCode.F1){
+                    createMenu();
+                    SceneManager.getActiveScene().remove(PlayerController.instance);
+                    PlayerController.instance = null;
+                }
+                if(e.getCode()==KeyCode.F2) {
+                    SceneManager.switchScene(new Room(1, true, true, true, true));
+                }
+            });
+            window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
+            createMenu();
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     static void setupGameInfo(){

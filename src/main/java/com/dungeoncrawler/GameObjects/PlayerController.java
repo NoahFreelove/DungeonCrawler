@@ -54,7 +54,7 @@ public class PlayerController extends Player {
         this.maxHealth = 10+initLevel;
         this.health = maxHealth;
         this.gold = initGold;
-        this.exp =initExp;
+        this.exp = initExp;
         this.expToNextLevel = 10*initLevel;
         this.roomsCleared = roomsCleared;
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, false, this));
@@ -68,11 +68,10 @@ public class PlayerController extends Player {
             instance = this;
         else
             return;
-        addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
-        addComponent(new DontDestroyOnLoad_Comp());
+        addComponents(new DontDestroyOnLoad_Comp(), new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
         setupUI();
 
-        setSelectedWeapon(new Bow(pos));
+        setSelectedWeapon(new Boomerang(pos));
 
         SceneManager.getActiveScene().add(selectedWeapon);
     }
