@@ -77,7 +77,7 @@ public class MainMenu extends GameScene {
 
         quitButton.setOnAction(actionEvent -> GameUtility.exitApp());
         quitButton.setTextFill(ColorManager.buttonTextColor);
-        quitButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(4) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
+        quitButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
         addUI(quitButton);
 
         Button newGameButton = new Button("Start New Game");
@@ -93,7 +93,7 @@ public class MainMenu extends GameScene {
 
         });
         newGameButton.setTextFill(ColorManager.buttonTextColor);
-        newGameButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(4) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
+        newGameButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
         addUI(newGameButton);
 
         if(new File("bin/save.dat").exists())
@@ -117,7 +117,7 @@ public class MainMenu extends GameScene {
                 }catch (Exception ignored){}
             });
             loadButton.setTextFill(ColorManager.buttonTextColor);
-            loadButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(4) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
+            loadButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
             addUI(loadButton);
         }
     }
