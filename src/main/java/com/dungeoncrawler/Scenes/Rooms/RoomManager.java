@@ -93,7 +93,7 @@ public class RoomManager {
                 speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, false));
             }
             if (currentRoomX == 0 && currentRoomY == 1) {
-                speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You can use Shift to attack using a selected weapon. This sword does 2 damage a hit.\nThis enemy has 10 health", 1.5f, false));
+                speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You can use Shift to attack using a selected weapon. This sword does 10 damage a hit.\nThis enemy has 10 health", 1.5f, false));
             }
             if (currentRoomX == 1 && currentRoomY == 1) {
                 speechManager.addSpeech(new SpeechStruct(SpeechType.BOSS, "You can find better weapons by killing bosses and buying them with gold\n" +

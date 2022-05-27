@@ -39,7 +39,7 @@ public class PlayerController extends Player {
 
     private Weapon selectedWeapon;
 
-    private boolean wasdMovement = true;
+    private boolean wasdMovement = false;
 
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private boolean isAttacking;
@@ -71,7 +71,7 @@ public class PlayerController extends Player {
         addComponents(new DontDestroyOnLoad_Comp(), new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
         setupUI();
 
-        setSelectedWeapon(new Boomerang(pos));
+        setSelectedWeapon(new Sword(pos));
 
         SceneManager.getActiveScene().add(selectedWeapon);
     }

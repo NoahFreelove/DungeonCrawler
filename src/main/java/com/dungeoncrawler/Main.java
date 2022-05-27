@@ -20,7 +20,7 @@ import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 public class Main extends Application {
     public static GameWindow window;
-    private static Stage stage;
+    public static Stage stage;
 
     public static void main(String[] args) {
         launch();
