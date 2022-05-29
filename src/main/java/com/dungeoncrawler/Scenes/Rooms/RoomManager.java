@@ -5,6 +5,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
 import com.dungeoncrawler.GameObjects.Enemy;
+import com.dungeoncrawler.GameObjects.Follower;
 import com.dungeoncrawler.GameObjects.PlayerController;
 import com.dungeoncrawler.UI.SpeechManager;
 import com.dungeoncrawler.UI.SpeechStruct;
@@ -69,8 +70,8 @@ public class RoomManager {
 
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
         rooms[0][0].add(speechManager);
-        Enemy firstEnemy = new Enemy(new Vector3(1150,300), new GameImage("bin/enemy.png"), 1, 10, 1);
-        firstEnemy.setCanAttack(false);
+        Follower firstEnemy = new Follower(new Vector3(1150-300,300));
+        //firstEnemy.setCanAttack(false);
         rooms[0][1].add(firstEnemy);
         speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, true));
         speechManager.startSpeech();

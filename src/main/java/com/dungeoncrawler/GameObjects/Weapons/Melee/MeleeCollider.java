@@ -49,6 +49,8 @@ public class MeleeCollider extends Collider_Comp {
     public void onHit(Collider_Comp other) {
         if(parent == null)
             return;
+        if(parent.isAbleToAttack())
+            return;
         switch (other.getParent().getIdentity().getTag()) {
             case "enemy" -> {
                 if (PlayerController.instance.isAttacking())

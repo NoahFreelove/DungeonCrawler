@@ -22,8 +22,8 @@ public class Enemy extends Pawn {
         this.health = health;
         this.attackDelay = attackDelay;
         canAttack = true;
-        addCollider(new EnemyCollider(new Vector3(-32,-32,0), 128,128,true,this));
-        addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 64,64, false, this));
+        addCollider(new EnemyCollider(new Vector3(-newSprite.getWidth()/2f,-newSprite.getHeight()/2f,0), 128,128,true,this));
+        addCollider(new BoxCollider_Comp(Vector3.emptyVector(), newSprite.getWidth(),newSprite.getHeight(), false, this));
     }
     public void attack(){
         canAttack = false;

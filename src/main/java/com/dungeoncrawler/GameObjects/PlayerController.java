@@ -39,7 +39,7 @@ public class PlayerController extends Player {
 
     private Weapon selectedWeapon;
 
-    private boolean wasdMovement = false;
+    private boolean wasdMovement = true;
 
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private boolean isAttacking;
@@ -140,7 +140,9 @@ public class PlayerController extends Player {
             if (Input.Shift_Pressed) {
                 selectedWeapon.requestAttack(directionFacing);
             }
-            selectedWeapon.updateRotation(DirectionAngleConversion.dirToAngle(directionFacing));
+            float flipOffset = 180;
+
+            selectedWeapon.updateRotation(new Vector2(DirectionAngleConversion.dirToAngle(directionFacing), flipOffset));
         }
         checkMoveRoom();
 
