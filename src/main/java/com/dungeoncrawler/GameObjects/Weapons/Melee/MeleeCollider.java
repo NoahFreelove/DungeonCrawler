@@ -9,8 +9,8 @@ import com.dungeoncrawler.GameObjects.PlayerController;
 
 public class MeleeCollider extends Collider_Comp {
     Melee parent;
-    public MeleeCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
-        super(initialOffset, width, height, isTrigger, parent);
+    public MeleeCollider(Vector3 initialOffset, float width, float height, GameObject parent) {
+        super(initialOffset, width, height, true, parent);
         this.parent = (Melee) parent;
     }
 

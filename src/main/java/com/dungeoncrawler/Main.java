@@ -37,7 +37,7 @@ public class Main extends Application {
                     GameUtility.exitApp();
                 }
                 if(e.getCode() == KeyCode.F1){
-                    createMenu();
+                    createMainMenu();
                     SceneManager.getActiveScene().remove(PlayerController.instance);
                     PlayerController.instance = null;
                 }
@@ -46,7 +46,7 @@ public class Main extends Application {
                 }
             });
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
-            createMenu();
+            createMainMenu();
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
@@ -60,7 +60,7 @@ public class Main extends Application {
         GameInfo.setAppVersionMinor(1);
         GameInfo.setAuthors(new String[]{"Noah Freelove"});
     }
-    public static void createMenu(){
+    public static void createMainMenu(){
         window.setTargetFPS(30);
         MainMenu mainMenu = new MainMenu();
         GameCamera cam = new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam")); // Create the main menu camera

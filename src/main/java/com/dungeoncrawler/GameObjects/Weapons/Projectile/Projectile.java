@@ -19,7 +19,7 @@ public class Projectile extends Pawn {
         super(new Transform(pos, rot, Vector3.oneVector()), sprite, new Identity("arrow"));
         this.direction = moveDirection;
         this.damage = damage;
-        collider = new ProjectileCollider(Vector3.emptyVector(), 32,32, true, this);
+        collider = new ProjectileCollider(Vector3.emptyVector(), 32,32, this);
         this.moveSpeed = moveSpeed;
         addComponent(collider);
     }

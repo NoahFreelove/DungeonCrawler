@@ -8,7 +8,7 @@ import com.dungeoncrawler.GameObjects.PlayerController;
 
 public class ProjectileCollider extends Collider_Comp {
     Projectile parent;
-    public ProjectileCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
+    public ProjectileCollider(Vector3 initialOffset, float width, float height, GameObject parent) {
         super(initialOffset, width, height, true, parent);
         this.parent = (Projectile) parent;
     }

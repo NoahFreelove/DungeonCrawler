@@ -21,7 +21,7 @@ public class Melee extends Weapon {
         this.attackDistance = attackDistance;
         this.animationSpeed = animationSpeed;
         this.isThrowable = isThrowable;
-        addCollider(new MeleeCollider(new Vector3(0,0,0),32,32, true, this));
+        addCollider(new MeleeCollider(new Vector3(0,0,0),32,32, this));
     }
 
     @Override

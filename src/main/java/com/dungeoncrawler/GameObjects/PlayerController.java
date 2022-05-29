@@ -10,18 +10,19 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Input;
 import com.dungeoncrawler.GameObjects.Weapons.*;
-import com.dungeoncrawler.GameObjects.Weapons.Melee.Boomerang;
 import com.dungeoncrawler.GameObjects.Weapons.Melee.Sword;
-import com.dungeoncrawler.GameObjects.Weapons.Projectile.BarrettM82;
-import com.dungeoncrawler.GameObjects.Weapons.Projectile.Bow;
+import com.dungeoncrawler.Main;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.JEngine.Core.Position.SimpleDirection;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.text.Text;
 
 public class PlayerController extends Player {
+    public static PlayerController instance;
 
+    // Player Stats
     private String name = "Player";
     private int gold = 0;
     private int level = 1;
@@ -31,18 +32,17 @@ public class PlayerController extends Player {
     private int maxHealth = 10;
     private int roomsCleared = 0;
 
+    private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private float moveSpeed = 15f;
-
-    public static PlayerController instance;
-    private Text roomNumber = new Text("Room #:#");
-    private Group playerUI = new Group();
-
+    private boolean isAttacking;
     private Weapon selectedWeapon;
-
     private boolean wasdMovement = true;
 
-    private SimpleDirection directionFacing = SimpleDirection.LEFT;
-    private boolean isAttacking;
+    // UI
+    private Group playerUI = new Group();
+    private Text roomNumber = new Text("Room #:#");
+    private Text healthText = new Text("Health: 15");
+
 
     public PlayerController(Vector3 pos, String name, int initLevel, int initGold, int initExp, int roomsCleared) {
         super(Transform.simpleTransform(pos), new GameImage("bin/player.png"), new Identity("PlayerController", "player"));
@@ -80,8 +80,33 @@ public class PlayerController extends Player {
     public void Update() {
         super.Update();
 
-        roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
+        if(health<= 0)
+        {
+            health = 0;
+            Platform.runLater(() -> {
+                SceneManager.getActiveScene().remove(PlayerController.instance);
+                PlayerController.instance = null;
+                Main.createMainMenu();
+            });
+            return;
+        }
 
+        checkInput();
+        updateUI();
+
+        if (selectedWeapon != null)
+        {
+            if (Input.Shift_Pressed) {
+                selectedWeapon.requestAttack(directionFacing);
+            }
+            float flipOffset = 180;
+
+            selectedWeapon.updateRotation(new Vector2(DirectionAngleConversion.dirToAngle(directionFacing), flipOffset));
+        }
+        checkMoveRoom();
+    }
+
+    private void checkInput() {
         if (Input.UArrow_Pressed) {
             MoveUp();
             if (wasdMovement) {
@@ -133,19 +158,6 @@ public class PlayerController extends Player {
                 MoveRight();
             }
         }
-
-
-        if (selectedWeapon != null)
-        {
-            if (Input.Shift_Pressed) {
-                selectedWeapon.requestAttack(directionFacing);
-            }
-            float flipOffset = 180;
-
-            selectedWeapon.updateRotation(new Vector2(DirectionAngleConversion.dirToAngle(directionFacing), flipOffset));
-        }
-        checkMoveRoom();
-
     }
 
     private void checkMoveRoom(){
@@ -247,10 +259,23 @@ public class PlayerController extends Player {
         roomNumber.setTranslateY(40);
         roomNumber.setFill(ColorManager.textColor);
         roomNumber.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
+
+        healthText = new Text("Health: "+ health);
+        healthText.setTranslateX(150);
+        healthText.setTranslateY(40);
+        healthText.setFill(ColorManager.textColor);
+        healthText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
+
+        playerUI.getChildren().add(healthText);
         playerUI.getChildren().add(roomNumber);
+        GameWindow.getInstance().addPermanentUI(healthText);
         GameWindow.getInstance().addPermanentUI(playerUI);
     }
 
+    private void updateUI(){
+        roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
+        healthText.setText("Health: "+ health);
+    }
     public void setSelectedWeapon(Weapon w) {
         if(selectedWeapon != null)
         {
