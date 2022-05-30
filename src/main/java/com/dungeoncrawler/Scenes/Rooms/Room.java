@@ -1,11 +1,20 @@
 package com.dungeoncrawler.Scenes.Rooms;
 
 import com.JEngine.Core.Position.Vector2;
+import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
+import com.dungeoncrawler.GameObjects.Follower;
 
 public class Room extends GameScene {
+    boolean isSpawnRoom = false;
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor) {
         super("Room");
+        CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
+    }
+
+    public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, boolean isSpawnRoom) {
+        super("Room");
+        this.isSpawnRoom = isSpawnRoom;
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
     }
 
@@ -48,11 +57,20 @@ public class Room extends GameScene {
             add(new Wall(new Vector2(0,620), new Vector2(8.5, 1)));
             add(new Wall(new Vector2(660,620), new Vector2(8.5, 1)));
         }
-        createEnemies(difficulty);
+        if(!isSpawnRoom)
+            createEnemies(difficulty);
     }
 
     private void createEnemies(int difficulty) {
+        Vector3 randomPosition = new Vector3(0,0,0);
+        for(int i = 0; i<difficulty; i++)
+        {
+            randomPosition.x = (float) (Math.random()*600)+400;
+            randomPosition.y = 300;
 
+            add(new Follower(randomPosition));
+
+        }
     }
 
 }

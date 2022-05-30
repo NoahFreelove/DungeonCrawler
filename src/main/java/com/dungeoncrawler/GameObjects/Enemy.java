@@ -16,14 +16,18 @@ public class Enemy extends Pawn {
     private double health;
     private double attackDelay;
     private boolean canAttack;
-    public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay) {
+    private Vector3 startPos;
+    private int difficulty;
+    public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty) {
         super(Transform.simpleTransform(initPos), newSprite, new Identity("enemy"));
         this.damage = damage;
         this.health = health;
         this.attackDelay = attackDelay;
+        this.difficulty = difficulty;
         canAttack = true;
         addCollider(new EnemyCollider(new Vector3(-newSprite.getWidth()/2f,-newSprite.getHeight()/2f,0), 128,128,true,this));
         addCollider(new BoxCollider_Comp(Vector3.emptyVector(), newSprite.getWidth(),newSprite.getHeight(), false, this));
+        startPos = initPos;
     }
     public void attack(){
         canAttack = false;
@@ -53,4 +57,10 @@ public class Enemy extends Pawn {
     public void setCanAttack(boolean canAttack) {
         this.canAttack = canAttack;
     }
+
+    public Vector3 getStartPos() {
+        return startPos;
+    }
+
+    public int getDifficulty(){return difficulty;}
 }

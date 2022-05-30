@@ -1,6 +1,7 @@
 package com.dungeoncrawler.Scenes.Rooms;
 
 import com.JEngine.Core.GameImage;
+import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
@@ -49,7 +50,13 @@ public class RoomManager {
                 if(j == height - 1) {
                     topDoor = false;
                 }
-                rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor);
+                if(i == 0 && j == 0) {
+                    rooms[0][0] = new Room(randomNum, false, rightDoor, topDoor, false, true);
+                    System.out.println("spawn room");
+                }
+                else {
+                    rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor);
+                }
             }
         }
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
@@ -84,6 +91,12 @@ public class RoomManager {
             currentRoomX = currentRoomX+deltaX;
             currentRoomY = currentRoomY+deltaY;
             SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
+            for (GameObject go: rooms[currentRoomX][currentRoomY].getObjects()) {
+                if(go instanceof Enemy enemy)
+                {
+                    enemy.setPosition(enemy.getStartPos());
+                }
+            }
         }
         //System.out.println("Switched to room: " + currentRoomX + ", " + currentRoomY);
         //speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You have entered a room.", 0.5f));

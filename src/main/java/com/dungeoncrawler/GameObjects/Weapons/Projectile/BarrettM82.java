@@ -11,7 +11,7 @@ import com.JEngine.Core.Position.SimpleDirection;
 public class BarrettM82 extends Weapon {
 
     public BarrettM82(Vector3 pos) {
-        super(25, 3, pos, new GameImage("bin/barrett.png", 128,128));
+        super(50, 3, pos, new GameImage("bin/barrett.png", 128,128));
     }
 
     @Override

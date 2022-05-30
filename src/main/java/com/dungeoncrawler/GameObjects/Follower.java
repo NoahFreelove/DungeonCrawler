@@ -8,9 +8,9 @@ import com.JEngine.Utility.Misc.GenericMethod;
 public class Follower extends Enemy{
     private Pathfinding_Comp pathfinding_comp;
     public Follower(Vector3 initPos) {
-        super(initPos, new GameImage("bin/follower.png"), 5, 25, 3);
+        super(initPos, new GameImage("bin/follower.png"), 5, 25, 3,1);
         pathfinding_comp = new Pathfinding_Comp(PlayerController.instance);
-        pathfinding_comp.setMoveSpeed(5);
+        pathfinding_comp.setMoveSpeed(3);
         pathfinding_comp.setSuccessRange(64);
         pathfinding_comp.setMoveWhenSuccess(false);
         addComponent(pathfinding_comp);
@@ -19,6 +19,7 @@ public class Follower extends Enemy{
     @Override
     public void Update(){
         super.Update();
+        pathfinding_comp.setTarget(PlayerController.instance);
         // face player
         Vector3 deltaPos = PlayerController.instance.getPosition().subtract(getPosition());
         double deg;

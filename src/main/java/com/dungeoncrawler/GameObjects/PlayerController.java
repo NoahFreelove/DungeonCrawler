@@ -11,6 +11,7 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Input;
 import com.dungeoncrawler.GameObjects.Weapons.*;
 import com.dungeoncrawler.GameObjects.Weapons.Melee.Sword;
+import com.dungeoncrawler.GameObjects.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.GameObjects.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Main;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
@@ -72,7 +73,7 @@ public class PlayerController extends Player {
         addComponents(new DontDestroyOnLoad_Comp(), new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
         setupUI();
 
-        setSelectedWeapon(new Bow(pos));
+        setSelectedWeapon(new BarrettM82(pos));
 
         SceneManager.getActiveScene().add(selectedWeapon);
     }
