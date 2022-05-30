@@ -60,10 +60,11 @@ public class Main extends Application {
         GameInfo.setAppVersionMinor(1);
         GameInfo.setAuthors(new String[]{"Noah Freelove"});
     }
+
     public static void createMainMenu(){
         window.setTargetFPS(30);
         MainMenu mainMenu = new MainMenu();
-        GameCamera cam = new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam")); // Create the main menu camera
+        new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam")); // Create the main menu camera
         SceneManager.switchScene(mainMenu, true);
         // Create our window
         window.setBackgroundColor(ColorManager.backgroundColor);
