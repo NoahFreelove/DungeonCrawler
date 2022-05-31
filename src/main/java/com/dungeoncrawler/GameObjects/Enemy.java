@@ -8,8 +8,8 @@ import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.Misc.GameTimer;
 import com.JEngine.Utility.Misc.GameUtility;
-import com.JEngine.Utility.Misc.GenericMethod;
 
 public class Enemy extends Pawn {
     private double damage;
@@ -18,6 +18,7 @@ public class Enemy extends Pawn {
     private boolean canAttack;
     private Vector3 startPos;
     private int difficulty;
+    protected boolean canMove;
     public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty) {
         super(Transform.simpleTransform(initPos), newSprite, new Identity("enemy"));
         this.damage = damage;
@@ -63,4 +64,16 @@ public class Enemy extends Pawn {
     }
 
     public int getDifficulty(){return difficulty;}
+
+    public void activate(GameTimer t){
+        canMove = true;
+        canAttack = true;
+        t.stop();
+    }
+
+
+    public void neutralize(){
+        canMove = false;
+        canAttack = false;
+    }
 }

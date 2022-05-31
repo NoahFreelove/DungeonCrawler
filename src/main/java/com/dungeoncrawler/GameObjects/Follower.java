@@ -18,6 +18,8 @@ public class Follower extends Enemy{
 
     @Override
     public void Update(){
+        if(!canMove)
+            return;
         super.Update();
         pathfinding_comp.setTarget(PlayerController.instance);
         // face player

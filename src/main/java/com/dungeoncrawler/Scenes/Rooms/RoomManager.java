@@ -1,10 +1,11 @@
 package com.dungeoncrawler.Scenes.Rooms;
 
-import com.JEngine.Core.GameImage;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
+import com.JEngine.Utility.Misc.GameTimer;
+import com.JEngine.Utility.Misc.GenericMethod;
 import com.dungeoncrawler.GameObjects.Enemy;
 import com.dungeoncrawler.GameObjects.Follower;
 import com.dungeoncrawler.GameObjects.PlayerController;
@@ -95,6 +96,11 @@ public class RoomManager {
                 if(go instanceof Enemy enemy)
                 {
                     enemy.setPosition(enemy.getStartPos());
+                    enemy.neutralize();
+                    GameTimer t = new GameTimer(1000, args -> {});
+                    t.setRunEvents(new GenericMethod[]{args -> enemy.activate(t)});
+                    t.start();
+
                 }
             }
         }
