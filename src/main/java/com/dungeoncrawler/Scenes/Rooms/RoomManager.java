@@ -23,6 +23,8 @@ public class RoomManager {
     private static boolean inTutorial = false;
 
     public static void CreateRooms(int width, int height, int overallDifficulty) {
+        currentRoomY = 0;
+        currentRoomX = 0;
         inTutorial = false;
         if(overallDifficulty <= 0)
             overallDifficulty = 1;
@@ -66,6 +68,8 @@ public class RoomManager {
     }
 
     public static void CreateTutorial(){
+        currentRoomY = 0;
+        currentRoomX = 0;
         inTutorial = true;
         RoomManager.speechManager = new SpeechManager();
 
