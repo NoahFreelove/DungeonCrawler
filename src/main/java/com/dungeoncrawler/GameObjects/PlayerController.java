@@ -73,7 +73,6 @@ public class PlayerController extends Player {
         addComponents(new DontDestroyOnLoad_Comp(), new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
         setupUI();
 
-        setSelectedWeapon(new BarrettM82(pos));
 
         SceneManager.getActiveScene().add(selectedWeapon);
     }

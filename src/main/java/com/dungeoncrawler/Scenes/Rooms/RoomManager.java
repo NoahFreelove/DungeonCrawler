@@ -101,7 +101,7 @@ public class RoomManager {
                 {
                     enemy.setPosition(enemy.getStartPos());
                     enemy.neutralize();
-                    GameTimer t = new GameTimer(1000, args -> {});
+                    GameTimer t = new GameTimer(500, args -> {});
                     t.setRunEvents(new GenericMethod[]{args -> enemy.activate(t)});
                     t.start();
 
