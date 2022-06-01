@@ -3,10 +3,12 @@ package com.dungeoncrawler.Scenes.Rooms;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
-import com.dungeoncrawler.GameObjects.Follower;
+import com.dungeoncrawler.Entities.Enemies.Follower;
+import com.dungeoncrawler.Entities.Enemies.Knight;
 
 public class Room extends GameScene {
     boolean isSpawnRoom = false;
+    boolean isBossRoom = false;
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor) {
         super("Room");
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
@@ -15,6 +17,13 @@ public class Room extends GameScene {
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, boolean isSpawnRoom) {
         super("Room");
         this.isSpawnRoom = isSpawnRoom;
+        CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
+    }
+
+    public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, boolean isSpawnRoom, boolean isBossRoom) {
+        super("Room");
+        this.isSpawnRoom = isSpawnRoom;
+        this.isBossRoom = isBossRoom;
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
     }
 
@@ -57,8 +66,13 @@ public class Room extends GameScene {
             add(new Wall(new Vector2(0,620), new Vector2(8.5, 1)));
             add(new Wall(new Vector2(660,620), new Vector2(8.5, 1)));
         }
-        if(!isSpawnRoom)
+        if(!isSpawnRoom && !isBossRoom)
             createEnemies(difficulty);
+
+        if(isBossRoom)
+        {
+            createBoss();
+        }
     }
 
     private void createEnemies(int difficulty) {
@@ -71,6 +85,10 @@ public class Room extends GameScene {
             add(new Follower(randomPosition));
 
         }
+    }
+
+    private void createBoss(){
+        add(new Knight(new Vector3(1150-300,300)));
     }
 
 }

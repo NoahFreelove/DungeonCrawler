@@ -1,15 +1,15 @@
-package com.dungeoncrawler.GameObjects;
+package com.dungeoncrawler.Entities.Enemies;
 
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
-import com.dungeoncrawler.GameObjects.Valueables.Gold;
+import com.dungeoncrawler.Entities.Player.PlayerController;
 
-public class PlayerCollider extends Collider_Comp {
-    PlayerController player;
-    public PlayerCollider(Vector3 initialOffset, float width, float height, GameObject parent) {
-        super(initialOffset, width, height, false, parent);
-        player = (PlayerController) parent;
+public class EnemyCollider extends Collider_Comp {
+    Enemy parent;
+    public EnemyCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
+        super(initialOffset, width, height, isTrigger, parent);
+        this.parent = (Enemy) parent;
     }
 
     @Override
@@ -38,19 +38,20 @@ public class PlayerCollider extends Collider_Comp {
      */
     @Override
     public boolean canMove(float xDisplacement, float yDisplacement) {
-        PlayerCollider tmpCollider = new PlayerCollider(getPosition(), getWidth(), getHeight(), getParent());
+        EnemyCollider tmpCollider = new EnemyCollider(getPosition(), getWidth(), getHeight(), false, getParent());
         tmpCollider.setPosition(new Vector3(getPosition().x + xDisplacement, getPosition().y + yDisplacement, getPosition().z));
         return !tmpCollider.isCollidingWithHard();
     }
 
     @Override
     public void onHit(Collider_Comp other) {
-        if(player == null)
-            return;
         switch (other.getParent().getIdentity().getTag()) {
-            case "gold" -> {
-                ((Gold)other.getParent()).pickup();
-                player.addGold(((Gold)other.getParent()).getValue());
+            case "player"->{
+                if(parent.canAttack())
+                {
+                    parent.attack();
+                    ((PlayerController)other.getParent()).takeDamage(parent.getDamage());
+                }
             }
         }
     }

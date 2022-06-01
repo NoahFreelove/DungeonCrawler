@@ -1,4 +1,4 @@
-package com.dungeoncrawler.GameObjects.Valueables;
+package com.dungeoncrawler.Entities.Valueables;
 
 import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Core.GameImage;

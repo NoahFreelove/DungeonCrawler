@@ -1,4 +1,4 @@
-package com.dungeoncrawler.GameObjects.Weapons;
+package com.dungeoncrawler.Entities.Weapons;
 
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;

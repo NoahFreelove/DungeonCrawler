@@ -1,11 +1,11 @@
-package com.dungeoncrawler.GameObjects.Weapons.Projectile;
+package com.dungeoncrawler.Entities.Weapons.Projectile;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.dungeoncrawler.GameObjects.PlayerController;
-import com.dungeoncrawler.GameObjects.Weapons.Weapon;
+import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Entities.Weapons.Weapon;
 import com.JEngine.Core.Position.SimpleDirection;
 
 public class Bow extends Weapon {

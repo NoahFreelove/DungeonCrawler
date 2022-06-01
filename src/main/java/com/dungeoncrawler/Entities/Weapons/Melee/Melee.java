@@ -1,10 +1,10 @@
-package com.dungeoncrawler.GameObjects.Weapons.Melee;
+package com.dungeoncrawler.Entities.Weapons.Melee;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Utility.GameMath;
-import com.dungeoncrawler.GameObjects.PlayerController;
-import com.dungeoncrawler.GameObjects.Weapons.Weapon;
+import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Entities.Weapons.Weapon;
 import com.JEngine.Core.Position.SimpleDirection;
 
 public class Melee extends Weapon {

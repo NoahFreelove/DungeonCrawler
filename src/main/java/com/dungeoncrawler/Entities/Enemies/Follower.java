@@ -1,9 +1,9 @@
-package com.dungeoncrawler.GameObjects;
+package com.dungeoncrawler.Entities.Enemies;
 
 import com.JEngine.Components.Pathfinding_Comp;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
-import com.JEngine.Utility.Misc.GenericMethod;
+import com.dungeoncrawler.Entities.Player.PlayerController;
 
 public class Follower extends Enemy{
     private Pathfinding_Comp pathfinding_comp;

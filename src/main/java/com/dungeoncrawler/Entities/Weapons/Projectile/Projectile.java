@@ -1,4 +1,4 @@
-package com.dungeoncrawler.GameObjects.Weapons.Projectile;
+package com.dungeoncrawler.Entities.Weapons.Projectile;
 
 import com.JEngine.Core.Component;
 import com.JEngine.Core.GameImage;

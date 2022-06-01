@@ -1,4 +1,4 @@
-package com.dungeoncrawler.GameObjects;
+package com.dungeoncrawler.Entities.Enemies;
 
 import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Core.Component;
@@ -10,8 +10,8 @@ import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.JEngine.Utility.Misc.GameUtility;
-import com.JEngine.Utility.Misc.GenericMethod;
-import com.dungeoncrawler.GameObjects.Valueables.Gold;
+import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Entities.Valueables.Gold;
 import javafx.scene.effect.ColorAdjust;
 
 public class Enemy extends Pawn {
@@ -23,6 +23,7 @@ public class Enemy extends Pawn {
     private int difficulty;
     protected boolean canMove;
     private GameImage sprite;
+
     public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty) {
         super(Transform.simpleTransform(initPos), newSprite, new Identity("enemy"));
         this.damage = damage;
@@ -30,11 +31,16 @@ public class Enemy extends Pawn {
         this.attackDelay = attackDelay;
         this.difficulty = difficulty;
         canAttack = true;
-        addCollider(new EnemyCollider(new Vector3(-newSprite.getWidth()/2f,-newSprite.getHeight()/2f,0), 128,128,true,this));
+        // attack range
+        addCollider(new EnemyCollider(new Vector3(-newSprite.getWidth()/4f,-newSprite.getHeight()/4f),
+                newSprite.getWidth()+ newSprite.getWidth()/2f, newSprite.getHeight()+ newSprite.getHeight()/2f, true,this));
+
+        // Actual hitbox
         addCollider(new BoxCollider_Comp(Vector3.emptyVector(), newSprite.getWidth(),newSprite.getHeight(), false, this));
         this.sprite = newSprite;
         startPos = initPos;
     }
+
     public void attack(){
         canAttack = false;
         GameUtility.waitForSeconds(attackDelay, args -> canAttack = true);
@@ -45,11 +51,7 @@ public class Enemy extends Pawn {
     }
     public void takeDamage(double damage){
         health -= damage;
-        GameTimer hurtEffect = new GameTimer(300, args -> {});
-        hurtEffect.setRunEvents(new GenericMethod[]{args -> {
-            sprite.setColorAdjust(new ColorAdjust());
-            hurtEffect.stop();
-        }});
+        GameTimer hurtEffect = new GameTimer(150, args -> sprite.setColorAdjust(new ColorAdjust()),true);
         sprite.setColorAdjust(new ColorAdjust(1,1,0.5,1));
         hurtEffect.start();
 
@@ -85,12 +87,13 @@ public class Enemy extends Pawn {
         canAttack = false;
     }
 
-    private void onDeath(){
+    protected void onDeath(){
         SceneManager.getActiveScene().remove(this);
         for (Component comp: getComponents()
         ) {
             comp.setActive(false);
         }
+        PlayerController.instance.addExp(1);
         SceneManager.getActiveScene().add(new Gold(getPosition(), difficulty*10));
     }
 }

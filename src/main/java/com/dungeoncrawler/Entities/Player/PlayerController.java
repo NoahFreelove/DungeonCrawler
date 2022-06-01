@@ -1,6 +1,5 @@
-package com.dungeoncrawler.GameObjects;
+package com.dungeoncrawler.Entities.Player;
 
-import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
@@ -9,16 +8,15 @@ import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Input;
-import com.dungeoncrawler.GameObjects.Weapons.*;
-import com.dungeoncrawler.GameObjects.Weapons.Melee.Sword;
-import com.dungeoncrawler.GameObjects.Weapons.Projectile.BarrettM82;
-import com.dungeoncrawler.GameObjects.Weapons.Projectile.Bow;
+import com.JEngine.Utility.Misc.GameTimer;
+import com.dungeoncrawler.Entities.Weapons.*;
 import com.dungeoncrawler.Main;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.JEngine.Core.Position.SimpleDirection;
 import javafx.application.Platform;
 import javafx.scene.Group;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.text.Text;
 
 public class PlayerController extends Player {
@@ -171,12 +169,12 @@ public class PlayerController extends Player {
         if(getPosition().x >= 1280)
         {
             RoomManager.switchRoom(1,0);
-            PlayerController.instance.setPosition(new Vector3(100,300,0));
+            PlayerController.instance.setPosition(new Vector3(100,330,0));
         }
         if(getPosition().y <=0 )
         {
             RoomManager.switchRoom(0,1);
-            PlayerController.instance.setPosition(new Vector3(580,600,0));
+            PlayerController.instance.setPosition(new Vector3(580,550,0));
         }
         if(getPosition().y >= 720)
         {
@@ -187,7 +185,6 @@ public class PlayerController extends Player {
 
     public void addGold(int amount) {
         gold += amount;
-        System.out.println("New Gold: " + gold);
     }
     public void removeGold(int amount) {
         gold -= amount;
@@ -207,7 +204,9 @@ public class PlayerController extends Player {
     }
     public void takeDamage(double amount) {
         health -= amount;
-        System.out.println("Player health: " + getHealth());
+        GameTimer hurtEffect = new GameTimer(150, args -> getSprite().setColorAdjust(new ColorAdjust()),true);
+        getSprite().setColorAdjust(new ColorAdjust(1,1,0.5,1));
+        hurtEffect.start();
     }
     public void heal(double amount) {
         health += amount;
@@ -324,5 +323,9 @@ public class PlayerController extends Player {
     }
     private void MoveRight(){
         Move(new Vector2(1,0), moveSpeed);
+    }
+
+    public Weapon getSelectedWeapon() {
+        return selectedWeapon;
     }
 }

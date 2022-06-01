@@ -1,4 +1,4 @@
-package com.dungeoncrawler.UI;
+package com.dungeoncrawler.Speech;
 
 public enum SpeechType {
     NORMAL,

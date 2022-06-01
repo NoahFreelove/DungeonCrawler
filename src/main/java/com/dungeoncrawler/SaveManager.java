@@ -1,7 +1,7 @@
 package com.dungeoncrawler;
 
 import com.JEngine.Utility.IO.FileOperations;
-import com.dungeoncrawler.GameObjects.PlayerController;
+import com.dungeoncrawler.Entities.Player.PlayerController;
 
 import java.io.File;
 

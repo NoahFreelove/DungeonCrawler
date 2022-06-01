@@ -1,4 +1,4 @@
-package com.dungeoncrawler.UI;
+package com.dungeoncrawler.Speech;
 
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;
@@ -6,7 +6,6 @@ import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
 import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.GameWindow;
-import com.JEngine.Game.Visual.Scenes.SceneManager;
 
 import com.JEngine.Components.UI.TextScroller;
 import com.dungeoncrawler.Scenes.ColorManager;
@@ -26,7 +25,7 @@ public class SpeechManager extends Player {
     private boolean textCanBeSkipped;
 
     public SpeechManager() {
-        super(Transform.simpleTransform(0,600,0), null, new Identity("SpeechManager"));
+        super(Transform.simpleTransform(0,600,100), null, new Identity("SpeechManager"));
 
         activeText = new Text();
         activeText.setTranslateX(30);

@@ -1,10 +1,10 @@
-package com.dungeoncrawler.GameObjects.Weapons.Projectile;
+package com.dungeoncrawler.Entities.Weapons.Projectile;
 
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
-import com.dungeoncrawler.GameObjects.Enemy;
-import com.dungeoncrawler.GameObjects.PlayerController;
+import com.dungeoncrawler.Entities.Enemies.Enemy;
+import com.dungeoncrawler.Entities.Player.PlayerController;
 
 public class ProjectileCollider extends Collider_Comp {
     Projectile parent;

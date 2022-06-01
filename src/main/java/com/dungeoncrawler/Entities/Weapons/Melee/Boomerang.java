@@ -1,4 +1,4 @@
-package com.dungeoncrawler.GameObjects.Weapons.Melee;
+package com.dungeoncrawler.Entities.Weapons.Melee;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
