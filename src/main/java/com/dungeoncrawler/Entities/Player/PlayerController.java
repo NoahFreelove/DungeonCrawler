@@ -28,8 +28,8 @@ public class PlayerController extends Player {
     private int level = 1;
     private int exp = 0;
     private int expToNextLevel = 10;
-    private double health = 10;
-    private int maxHealth = 10;
+    private double health = 20;
+    private int maxHealth = 20;
     private int roomsCleared = 0;
 
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
