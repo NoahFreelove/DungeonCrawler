@@ -44,6 +44,7 @@ public class PlayerController extends Player {
     private Group playerUI = new Group();
     private Text roomNumber = new Text("Room #:#");
     private Text healthText = new Text("Health: 15");
+    private Text goldText = new Text("Gold: 0");
 
 
     public PlayerController(Vector3 pos, String name, int initLevel, int initGold, int initExp, int roomsCleared) {
@@ -59,7 +60,7 @@ public class PlayerController extends Player {
         this.exp = initExp;
         this.expToNextLevel = 10*initLevel;
         this.roomsCleared = roomsCleared;
-        addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, false, this));
+        addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
     }
@@ -70,7 +71,7 @@ public class PlayerController extends Player {
             instance = this;
         else
             return;
-        addComponents(new DontDestroyOnLoad_Comp(), new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this));
+        addComponents(new DontDestroyOnLoad_Comp(), new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         setupUI();
 
 
@@ -186,6 +187,7 @@ public class PlayerController extends Player {
 
     public void addGold(int amount) {
         gold += amount;
+        System.out.println("New Gold: " + gold);
     }
     public void removeGold(int amount) {
         gold -= amount;
@@ -267,15 +269,24 @@ public class PlayerController extends Player {
         healthText.setFill(ColorManager.textColor);
         healthText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
+        goldText = new Text("Gold: "+ gold);
+        goldText.setTranslateX(320);
+        goldText.setTranslateY(40);
+        goldText.setFill(ColorManager.textColor);
+        goldText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
+
         playerUI.getChildren().add(healthText);
         playerUI.getChildren().add(roomNumber);
+        playerUI.getChildren().add(goldText);
         GameWindow.getInstance().addPermanentUI(healthText);
         GameWindow.getInstance().addPermanentUI(playerUI);
+        GameWindow.getInstance().addPermanentUI(goldText);
     }
 
     private void updateUI(){
         roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
         healthText.setText("Health: "+ health);
+        goldText.setText("Gold: " + gold);
     }
     public void setSelectedWeapon(Weapon w) {
         if(selectedWeapon != null)

@@ -58,6 +58,7 @@ public class SpeechManager extends Player {
                 case BOSS -> activeText.setFill(ColorManager.bossTextColor);
                 case PLAYER -> activeText.setFill(ColorManager.playerTextColor);
                 case NORMAL -> activeText.setFill(ColorManager.textColor);
+                case IMPORTANT -> activeText.setFill(ColorManager.importantText);
             }
             textCanBeSkipped = activeSpeech.skipable;
             if(activeScroller !=null)

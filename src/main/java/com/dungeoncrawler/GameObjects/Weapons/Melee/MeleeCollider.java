@@ -1,5 +1,6 @@
 package com.dungeoncrawler.GameObjects.Weapons.Melee;
 
+import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
@@ -40,7 +41,7 @@ public class MeleeCollider extends Collider_Comp {
      */
     @Override
     public boolean canMove(float xDisplacement, float yDisplacement) {
-        PlayerCollider tmpCollider = new PlayerCollider(getPosition(), getWidth(), getHeight(), false, getParent());
+        MeleeCollider tmpCollider = new MeleeCollider(getPosition(), getWidth(), getHeight(), getParent());
         tmpCollider.setPosition(new Vector3(getPosition().x + xDisplacement, getPosition().y + yDisplacement, getPosition().z));
         return !tmpCollider.isCollidingWithHard();
     }
@@ -56,7 +57,10 @@ public class MeleeCollider extends Collider_Comp {
                 if (PlayerController.instance.isAttacking())
                 {
                     ((Enemy)other.getParent()).takeDamage(parent.getDamage());
-                    PlayerController.instance.setAttacking(false);
+                    if(PlayerController.instance !=null)
+                    {
+                        PlayerController.instance.setAttacking(false);
+                    }
                 }
             }
         }

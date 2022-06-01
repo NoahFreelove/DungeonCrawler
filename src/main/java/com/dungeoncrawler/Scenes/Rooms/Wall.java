@@ -14,8 +14,8 @@ public class Wall extends Sprite {
         super(new Transform(new Vector3(pos), Vector3.emptyVector(), new Vector3(1,1,1)), null, new Identity("wall"));
         image = new GameImage("bin/wall.png", (int) (64*scale.x), (int) (64*scale.y));
         image.setTiled(true);
-        image.setTileX(64);
-        image.setTileY(64);
+        image.setTileSizeX(128);
+        image.setTileSizeY(128);
         setSprite(image);
         addCollider(new BoxCollider_Comp(Vector3.emptyVector(), scale.x*64, scale.y*64, false, this));
     }

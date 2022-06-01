@@ -67,6 +67,6 @@ public class Main extends Application {
         new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam")); // Create the main menu camera
         SceneManager.switchScene(mainMenu, true);
         // Create our window
-        window.setBackgroundColor(ColorManager.backgroundColor);
+        window.setBackgroundColor(ColorManager.mainMenuColor);
     }
 }
