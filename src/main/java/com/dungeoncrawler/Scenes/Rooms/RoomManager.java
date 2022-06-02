@@ -7,10 +7,9 @@ import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Boss;
 import com.dungeoncrawler.Entities.Enemies.Enemy;
-import com.dungeoncrawler.Entities.Enemies.Follower;
 import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Player.PlayerController;
-import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
+import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Speech.SpeechManager;
@@ -79,7 +78,7 @@ public class RoomManager {
             }
         }
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
-        PlayerController.instance.setSelectedWeapon(new Bow(PlayerController.instance.getPosition()));
+        PlayerController.instance.setSelectedWeapon(new BarrettM82(PlayerController.instance.getPosition()));
 
         rooms[0][0].add(speechManager);
         SceneManager.getWindow().setBackgroundColor(ColorManager.backgroundColor);
