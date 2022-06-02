@@ -5,10 +5,10 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.Misc.GameTimer;
-import com.dungeoncrawler.Entities.Enemies.Boss;
+import com.dungeoncrawler.Entities.Enemies.Bosses.Boss;
 import com.dungeoncrawler.Entities.Enemies.Enemy;
 import com.dungeoncrawler.Entities.Enemies.Follower;
-import com.dungeoncrawler.Entities.Enemies.Knight;
+import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
@@ -24,7 +24,7 @@ public class RoomManager {
     public static int width;
     public static int height;
     public static SpeechManager speechManager;
-    private static boolean inTutorial = false;
+    public static boolean inTutorial = false;
 
     public static void CreateRooms(int width, int height, int overallDifficulty) {
         currentRoomY = 0;
@@ -68,7 +68,6 @@ public class RoomManager {
                 }
                 if(i == 0 && j == 0) {
                     rooms[0][0] = new Room(randomNum, false, rightDoor, topDoor, false, true);
-                    System.out.println("spawn room");
                 }
                 else if(i == bossX && j == bossY) {
                     rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, false, true, i, j);
@@ -100,10 +99,10 @@ public class RoomManager {
         rooms[1][1] = new Room(0, true, false, false, false);
 
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
-        PlayerController.instance.setSelectedWeapon(new Sword(PlayerController.instance.getPosition()));
+        PlayerController.instance.setSelectedWeapon(new Bow(PlayerController.instance.getPosition()));
 
         rooms[0][0].add(speechManager);
-        Follower firstEnemy = new Follower(new Vector3(1150-300,300));
+        Shooter firstEnemy = new Shooter(new Vector3(1150-300,300));
         //firstEnemy.setCanAttack(false);
         rooms[0][1].add(firstEnemy);
 

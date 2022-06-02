@@ -1,9 +1,10 @@
-package com.dungeoncrawler.Entities.Enemies;
+package com.dungeoncrawler.Entities.Enemies.Bosses;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.dungeoncrawler.Entities.Enemies.Enemy;
 import com.dungeoncrawler.Scenes.Rooms.Room;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.Rooms.Wall;

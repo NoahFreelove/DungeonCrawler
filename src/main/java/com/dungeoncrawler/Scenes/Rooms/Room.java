@@ -4,7 +4,7 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.dungeoncrawler.Entities.Enemies.Follower;
-import com.dungeoncrawler.Entities.Enemies.Knight;
+import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 
 public class Room extends GameScene {
     boolean isSpawnRoom = false;
@@ -70,6 +70,9 @@ public class Room extends GameScene {
             add(new Wall(new Vector2(0,620), new Vector2(8.5, 1)));
             add(new Wall(new Vector2(660,620), new Vector2(8.5, 1)));
         }
+        if(RoomManager.inTutorial)
+            return;
+
         if(!isSpawnRoom && !isBossRoom)
             createEnemies(difficulty);
 

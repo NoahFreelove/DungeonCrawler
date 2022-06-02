@@ -1,4 +1,4 @@
-package com.dungeoncrawler.Entities.Enemies;
+package com.dungeoncrawler.Entities.Enemies.Bosses;
 
 import com.JEngine.Components.Pathfinding_Comp;
 import com.JEngine.Core.GameImage;
