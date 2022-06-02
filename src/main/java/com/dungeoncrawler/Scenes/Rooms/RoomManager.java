@@ -71,7 +71,7 @@ public class RoomManager {
                     System.out.println("spawn room");
                 }
                 else if(i == bossX && j == bossY) {
-                    rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, false, true);
+                    rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, false, true, i, j);
                     System.out.println("Boss Room: " + i + ", " + j);
                 }
                 else {

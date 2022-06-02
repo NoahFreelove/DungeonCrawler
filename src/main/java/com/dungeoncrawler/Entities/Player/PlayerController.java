@@ -164,12 +164,12 @@ public class PlayerController extends Player {
         if(getPosition().x <=0)
         {
             RoomManager.switchRoom(-1,0);
-            PlayerController.instance.setPosition(new Vector3(1100,300,0));
+            PlayerController.instance.setPosition(new Vector3(1100,310,0));
         }
         if(getPosition().x >= 1280)
         {
             RoomManager.switchRoom(1,0);
-            PlayerController.instance.setPosition(new Vector3(100,330,0));
+            PlayerController.instance.setPosition(new Vector3(150,310,0));
         }
         if(getPosition().y <=0 )
         {

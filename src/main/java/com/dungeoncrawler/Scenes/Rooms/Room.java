@@ -9,6 +9,8 @@ import com.dungeoncrawler.Entities.Enemies.Knight;
 public class Room extends GameScene {
     boolean isSpawnRoom = false;
     boolean isBossRoom = false;
+    int bossX = 0;
+    int bossY = 0;
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor) {
         super("Room");
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
@@ -20,10 +22,12 @@ public class Room extends GameScene {
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
     }
 
-    public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, boolean isSpawnRoom, boolean isBossRoom) {
+    public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, boolean isSpawnRoom, boolean isBossRoom, int x, int y) {
         super("Room");
         this.isSpawnRoom = isSpawnRoom;
         this.isBossRoom = isBossRoom;
+        this.bossX = x;
+        this.bossY = y;
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
     }
 
@@ -76,7 +80,7 @@ public class Room extends GameScene {
     }
 
     private void createEnemies(int difficulty) {
-        Vector3 randomPosition = new Vector3(0,0,0);
+        /*Vector3 randomPosition = new Vector3(0,0,0);
         for(int i = 0; i<difficulty; i++)
         {
             randomPosition.x = (float) (Math.random()*600)+400;
@@ -84,11 +88,12 @@ public class Room extends GameScene {
 
             add(new Follower(randomPosition));
 
-        }
+        }*/
+        add(new Follower(new Vector3((float) (Math.random()*600)+400,300,0)));
     }
 
     private void createBoss(){
-        add(new Knight(new Vector3(1150-300,300)));
+        add(new Knight(new Vector3(1150-300,300), bossX,bossY));
     }
 
 }

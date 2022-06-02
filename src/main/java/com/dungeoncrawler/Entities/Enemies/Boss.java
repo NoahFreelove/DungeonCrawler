@@ -4,6 +4,7 @@ import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.dungeoncrawler.Scenes.Rooms.Room;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.Rooms.Wall;
 import com.dungeoncrawler.Speech.SpeechStruct;
@@ -16,9 +17,13 @@ public class Boss extends Enemy {
     private Wall bottomWall = new Wall(new Vector2(0,620), new Vector2(20, 1));
     private boolean hasFought;
     private SpeechStruct speechStruct;
-    public Boss(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty, String startSpeech, float speechDuration) {
+    private int xRoom;
+    private int yRoom;
+    public Boss(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty, String startSpeech, float speechDuration, int roomX, int roomY) {
         super(initPos, newSprite, damage, health, attackDelay, difficulty);
         this.speechStruct = new SpeechStruct(SpeechType.BOSS, startSpeech, speechDuration);
+        this.xRoom = roomX;
+        this.yRoom = roomY;
     }
 
 
@@ -26,21 +31,24 @@ public class Boss extends Enemy {
         if(hasFought)
             return;
         hasFought = true;
-        SceneManager.getActiveScene().add(leftWall);
-        SceneManager.getActiveScene().add(rightWall);
-        SceneManager.getActiveScene().add(topWall);
-        SceneManager.getActiveScene().add(bottomWall);
+        RoomManager.rooms[xRoom][yRoom].add(leftWall);
+        RoomManager.rooms[xRoom][yRoom].add(rightWall);
+        RoomManager.rooms[xRoom][yRoom].add(topWall);
+        RoomManager.rooms[xRoom][yRoom].add(bottomWall);
         RoomManager.speechManager.addSpeech(speechStruct);
+        RoomManager.speechManager.startSpeech();
+        battleInit();
 
     }
-
+    protected void battleInit(){}
     @Override
     protected void onDeath(){
-        SceneManager.getActiveScene().remove(leftWall);
-        SceneManager.getActiveScene().remove(rightWall);
-        SceneManager.getActiveScene().remove(topWall);
-        SceneManager.getActiveScene().remove(bottomWall);
+        RoomManager.rooms[xRoom][yRoom].remove(leftWall);
+        RoomManager.rooms[xRoom][yRoom].remove(rightWall);
+        RoomManager.rooms[xRoom][yRoom].remove(topWall);
+        RoomManager.rooms[xRoom][yRoom].remove(bottomWall);
 
         super.onDeath();
     }
+
 }

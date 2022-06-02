@@ -12,7 +12,7 @@ public class Follower extends Enemy{
         pathfinding_comp = new Pathfinding_Comp(PlayerController.instance);
         pathfinding_comp.setMoveSpeed(3);
         pathfinding_comp.setSuccessRange(64);
-        pathfinding_comp.setMoveWhenSuccess(false);
+        pathfinding_comp.setMoveAfterSuccess(false);
         addComponent(pathfinding_comp);
     }
 
