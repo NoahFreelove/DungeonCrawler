@@ -93,7 +93,7 @@ public class Enemy extends Pawn {
         ) {
             comp.setActive(false);
         }
-        PlayerController.instance.addExp(1);
+        PlayerController.instance.addExp(difficulty);
         SceneManager.getActiveScene().add(new Gold(getPosition(), difficulty*10));
     }
 }

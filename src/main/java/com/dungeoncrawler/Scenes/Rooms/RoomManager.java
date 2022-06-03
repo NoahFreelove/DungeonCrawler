@@ -4,6 +4,7 @@ import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
+import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Boss;
 import com.dungeoncrawler.Entities.Enemies.Enemy;
@@ -12,9 +13,12 @@ import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Scenes.ColorManager;
+import com.dungeoncrawler.Scenes.MainMenu;
 import com.dungeoncrawler.Speech.SpeechManager;
 import com.dungeoncrawler.Speech.SpeechStruct;
 import com.dungeoncrawler.Speech.SpeechType;
+
+import java.io.File;
 
 public class RoomManager {
     public static Room[][] rooms;
@@ -77,7 +81,9 @@ public class RoomManager {
                 }
             }
         }
-        rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
+        String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
+        rooms[0][0].add(new PlayerController(new Vector3(200,300,0), saveData[0], Integer.parseInt(saveData[1]),
+                Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4])));
         PlayerController.instance.setSelectedWeapon(new BarrettM82(PlayerController.instance.getPosition()));
 
         rooms[0][0].add(speechManager);
@@ -127,14 +133,14 @@ public class RoomManager {
                 }
                 if(go instanceof Boss boss)
                 {
-                    System.out.println("start battle");
                     boss.startBattle();
                 }
             }
         }
-        //speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "You have entered a room.", 0.5f));
-        //speechManager.startSpeech();
+        tutorialSpeechCheck();
+    }
 
+    private static void tutorialSpeechCheck(){
         if(inTutorial) {
             if (currentRoomX == 0 && currentRoomY == 0) {
                 speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, true));
@@ -142,7 +148,7 @@ public class RoomManager {
             if (currentRoomX == 0 && currentRoomY == 1) {
                 speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("You can use Shift to attack using a selected weapon. This %s does %d damage a hit.\nThis enemy has 10 health",
                         PlayerController.instance.getSelectedWeapon().getClass().getSimpleName(),(int) PlayerController.instance.getSelectedWeapon().getDamage()
-                        ), 1.5f, false));
+                ), 1.5f, false));
             }
             if (currentRoomX == 1 && currentRoomY == 1) {
                 speechManager.addSpeech(new SpeechStruct(SpeechType.IMPORTANT, "You can find better weapons by killing bosses and buying them with gold\n" +

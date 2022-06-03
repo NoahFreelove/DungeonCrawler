@@ -52,4 +52,9 @@ public class Shooter extends Enemy{
     public void OnUnload(){
         shootTimer.stop();
     }
+
+    @Override
+    public void OnDestroy(){
+        shootTimer.stop();
+    }
 }

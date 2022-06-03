@@ -86,10 +86,10 @@ public class MainMenu extends GameScene {
         newGameButton.setTranslateY(200);
 
         newGameButton.setOnAction(actionEvent -> {
-            RoomManager.CreateTutorial();
             GameWindow.getInstance().setTargetFPS(60);
-            SceneManager.switchScene(RoomManager.rooms[0][0]);
             SaveManager.newGame();
+            RoomManager.CreateTutorial();
+            SceneManager.switchScene(RoomManager.rooms[0][0]);
 
         });
         newGameButton.setTextFill(ColorManager.buttonTextColor);
@@ -108,8 +108,9 @@ public class MainMenu extends GameScene {
             loadButton.setOnAction(actionEvent -> {
                 try {
                     int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
+                    int size = 4 + level/2;
                     //RoomManager.CreateRooms(5 + level,5 + level, level);
-                    RoomManager.CreateRooms(5,5, level);
+                    RoomManager.CreateRooms(size,size, level);
 
                     GameWindow.getInstance().setTargetFPS(60);
                     SceneManager.switchScene(RoomManager.rooms[0][0]);
@@ -120,5 +121,6 @@ public class MainMenu extends GameScene {
             loadButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
             addUI(loadButton);
         }
+
     }
 }

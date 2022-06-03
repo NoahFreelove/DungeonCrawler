@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
 public class Main extends Application {
+
     public static GameWindow window;
     public static Stage stage;
 
