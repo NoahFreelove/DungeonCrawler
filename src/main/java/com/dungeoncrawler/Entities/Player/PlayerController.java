@@ -268,7 +268,7 @@ public class PlayerController extends Player {
         healthText = new Text("Health: "+ health);
         healthText.setTranslateX(150);
         healthText.setTranslateY(40);
-        healthText.setFill(ColorManager.textColor);
+        healthText.setFill(ColorManager.boldText);
         healthText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
         goldText = new Text("Gold: "+ gold);
@@ -280,7 +280,7 @@ public class PlayerController extends Player {
         xpText = new Text(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
         xpText.setTranslateX(1080-200);
         xpText.setTranslateY(40);
-        xpText.setFill(ColorManager.importantText);
+        xpText.setFill(ColorManager.boldText);
         xpText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
         gameLevelText = new Text("Dungeon #"+gameLevel);
