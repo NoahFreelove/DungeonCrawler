@@ -197,7 +197,7 @@ public class PlayerController extends Player {
         if(exp >= expToNextLevel) {
             playerLevel++;
             expToNextLevel = expToNextLevel + 5;
-            maxHealth += 1;
+            maxHealth += 2;
             health = maxHealth;
             exp = 0;
         }

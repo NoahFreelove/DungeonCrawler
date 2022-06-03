@@ -8,6 +8,7 @@ import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Boss;
 import com.dungeoncrawler.Entities.Enemies.Enemy;
+import com.dungeoncrawler.Entities.Enemies.EnemyProjectile;
 import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
@@ -51,8 +52,9 @@ public class RoomManager {
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
-                // create random num 1-15
+
                 int randomNum = (int) (Math.random() * overallDifficulty) + 1;
+
                 boolean leftDoor = true;
                 boolean rightDoor = true;
                 boolean topDoor = true;
@@ -69,15 +71,20 @@ public class RoomManager {
                 if(j == height - 1) {
                     topDoor = false;
                 }
-                if(i == 0 && j == 0) {
-                    rooms[0][0] = new Room(randomNum, false, rightDoor, topDoor, false, true);
+                if(i == width/2 && j == height/2)
+                {
+                    rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, RoomType.SHOP, i,j);
+                    System.out.println("Shop Room: " + i + ", " + j);
+                }
+                else if(i == 0 && j == 0) {
+                    rooms[0][0] = new Room(randomNum, false, rightDoor, topDoor, false, RoomType.SPAWN, i,j);
                 }
                 else if(i == bossX && j == bossY) {
-                    rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, false, true, i, j);
+                    rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, RoomType.BOSS, i,j);
                     System.out.println("Boss Room: " + i + ", " + j);
                 }
                 else {
-                    rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor);
+                    rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, RoomType.NORMAL, i,j);
                 }
             }
         }
@@ -99,9 +106,9 @@ public class RoomManager {
         RoomManager.width = 2;
         RoomManager.height = 2;
         rooms = new Room[2][2];
-        rooms[0][0] = new Room(0, false, false, true, false);
-        rooms[0][1] = new Room(0, false, true, false, true);
-        rooms[1][1] = new Room(0, true, false, false, false);
+        rooms[0][0] = new Room(0, false, false, true, false, RoomType.NORMAL,0,0);
+        rooms[0][1] = new Room(0, false, true, false, true, RoomType.NORMAL,0,1);
+        rooms[1][1] = new Room(0, true, false, false, false, RoomType.NORMAL,1,1);
 
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
         PlayerController.instance.setSelectedWeapon(new Bow(PlayerController.instance.getPosition()));
@@ -122,7 +129,6 @@ public class RoomManager {
         if(currentRoomX+deltaX < width && currentRoomY+deltaY < height && currentRoomX+deltaX >= 0 && currentRoomY+deltaY >= 0) {
             currentRoomX = currentRoomX+deltaX;
             currentRoomY = currentRoomY+deltaY;
-            SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
             for (GameObject go: rooms[currentRoomX][currentRoomY].getObjects()) {
                 if(go instanceof Enemy enemy)
                 {
@@ -131,12 +137,19 @@ public class RoomManager {
                     GameTimer moveDelay = new GameTimer(500, args -> enemy.activate(), true);
                     moveDelay.start();
                 }
+                if(go instanceof EnemyProjectile ep)
+                {
+                    ep.onHit();
+                    rooms[currentRoomX][currentRoomY].remove(ep);
+                }
                 if(go instanceof Boss boss)
                 {
                     boss.startBattle();
                 }
             }
+            SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
         }
+
         tutorialSpeechCheck();
     }
 

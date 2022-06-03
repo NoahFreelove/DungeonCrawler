@@ -4,33 +4,25 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
-import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Enemies.Follower;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 import com.dungeoncrawler.Entities.Enemies.Shooter;
+import com.dungeoncrawler.Entities.Shop;
 
 public class Room extends GameScene {
     boolean isSpawnRoom = false;
     boolean isBossRoom = false;
-    int bossX = 0;
-    int bossY = 0;
-    public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor) {
-        super("Room");
-        CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
-    }
+    boolean isShopRoom = false;
+    int xPos = 0;
+    int yPos = 0;
 
-    public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, boolean isSpawnRoom) {
+    public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, RoomType roomType, int x, int y) {
         super("Room");
-        this.isSpawnRoom = isSpawnRoom;
-        CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
-    }
-
-    public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, boolean isSpawnRoom, boolean isBossRoom, int x, int y) {
-        super("Room");
-        this.isSpawnRoom = isSpawnRoom;
-        this.isBossRoom = isBossRoom;
-        this.bossX = x;
-        this.bossY = y;
+        this.isSpawnRoom = (roomType == RoomType.SPAWN);
+        this.isBossRoom = (roomType == RoomType.BOSS);
+        this.isShopRoom = (roomType == RoomType.SHOP);
+        this.xPos = x;
+        this.yPos = y;
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
     }
 
@@ -76,12 +68,16 @@ public class Room extends GameScene {
         if(RoomManager.inTutorial)
             return;
 
-        if(!isSpawnRoom && !isBossRoom)
+        if(!isSpawnRoom && !isBossRoom && !isShopRoom)
             createEnemies(difficulty);
 
         if(isBossRoom)
         {
             createBoss();
+        }
+        if(isShopRoom)
+        {
+            createShop();
         }
     }
 
@@ -128,7 +124,10 @@ public class Room extends GameScene {
     }
 
     private void createBoss(){
-        add(new Knight(new Vector3(1150-300,300), bossX,bossY));
+        add(new Knight(new Vector3(1150-300,300), xPos, yPos));
     }
 
+    private void createShop(){
+        add(new Shop());
+    }
 }

@@ -42,9 +42,6 @@ public class Main extends Application {
                     SceneManager.getActiveScene().remove(PlayerController.instance);
                     PlayerController.instance = null;
                 }
-                if(e.getCode()==KeyCode.F2) {
-                    SceneManager.switchScene(new Room(1, true, true, true, true));
-                }
             });
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
             createMainMenu();

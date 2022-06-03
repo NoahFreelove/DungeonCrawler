@@ -59,7 +59,7 @@ public class Enemy extends Pawn {
         {
             onDeath();
         }
-        System.out.println("enemy new health: " + health);
+        //System.out.println("enemy new health: " + health);
     }
 
     public boolean canAttack() {
