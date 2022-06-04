@@ -15,7 +15,7 @@ public class Room extends GameScene {
     boolean isShopRoom = false;
     int xPos = 0;
     int yPos = 0;
-
+    int enemyCount = 0;
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, RoomType roomType, int x, int y) {
         super("Room");
         this.isSpawnRoom = (roomType == RoomType.SPAWN);
@@ -74,6 +74,7 @@ public class Room extends GameScene {
         if(isBossRoom)
         {
             createBoss();
+            enemyCount++;
         }
         if(isShopRoom)
         {
@@ -82,7 +83,9 @@ public class Room extends GameScene {
     }
 
     private void createEnemies(int difficulty) {
-        for(int i = 0; i<difficulty; i++) {
+        int i = 0;
+        while(i<(difficulty/4 +1)){
+            enemyCount++;
             Vector3 pos = new Vector3(0, 300, 0);
             if (i == 0) {
                 pos.x = 400;
@@ -120,6 +123,7 @@ public class Room extends GameScene {
             {
                 add(new Shooter(pos));
             }
+            i++;
         }
     }
 
@@ -129,5 +133,14 @@ public class Room extends GameScene {
 
     private void createShop(){
         add(new Shop(this));
+    }
+
+    public int getEnemyCount() {
+        return enemyCount;
+    }
+
+    public void removeEnemy(){
+        enemyCount--;
+        RoomManager.checkIfDungeonClear();
     }
 }

@@ -14,11 +14,13 @@ import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
+import com.dungeoncrawler.Main;
+import com.dungeoncrawler.SaveManager;
 import com.dungeoncrawler.Scenes.ColorManager;
-import com.dungeoncrawler.Scenes.MainMenu;
 import com.dungeoncrawler.Speech.SpeechManager;
 import com.dungeoncrawler.Speech.SpeechStruct;
 import com.dungeoncrawler.Speech.SpeechType;
+import javafx.application.Platform;
 
 import java.io.File;
 
@@ -92,7 +94,7 @@ public class RoomManager {
         String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0), saveData[0], Integer.parseInt(saveData[1]),
                 Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4])));
-        PlayerController.instance.setSelectedWeapon(new BBGun(PlayerController.instance.getPosition()));
+        PlayerController.instance.setSelectedWeapon(new BarrettM82(PlayerController.instance.getPosition()));
 
         rooms[0][0].add(speechManager);
         SceneManager.getWindow().setBackgroundColor(ColorManager.backgroundColor);
@@ -130,24 +132,7 @@ public class RoomManager {
         if(currentRoomX+deltaX < width && currentRoomY+deltaY < height && currentRoomX+deltaX >= 0 && currentRoomY+deltaY >= 0) {
             currentRoomX = currentRoomX+deltaX;
             currentRoomY = currentRoomY+deltaY;
-            for (GameObject go: rooms[currentRoomX][currentRoomY].getObjects()) {
-                if(go instanceof Enemy enemy)
-                {
-                    enemy.setPosition(enemy.getStartPos());
-                    enemy.neutralize();
-                    GameTimer moveDelay = new GameTimer(500, args -> enemy.activate(rooms[currentRoomX][currentRoomY]), true);
-                    moveDelay.start();
-                }
-                if(go instanceof EnemyProjectile ep)
-                {
-                    ep.onHit();
-                    rooms[currentRoomX][currentRoomY].remove(ep);
-                }
-                if(go instanceof Boss boss)
-                {
-                    boss.startBattle();
-                }
-            }
+            initEnemies();
             SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
         }
 
@@ -171,5 +156,50 @@ public class RoomManager {
 
             speechManager.startSpeech();
         }
+    }
+
+    private static void initEnemies(){
+        for (GameObject go: rooms[currentRoomX][currentRoomY].getObjects()) {
+            if(go instanceof Enemy enemy)
+            {
+                enemy.setPosition(enemy.getStartPos());
+                enemy.neutralize();
+                GameTimer moveDelay = new GameTimer(500, args -> enemy.activate(rooms[currentRoomX][currentRoomY]), true);
+                moveDelay.start();
+            }
+            if(go instanceof EnemyProjectile ep)
+            {
+                ep.onHit();
+                rooms[currentRoomX][currentRoomY].remove(ep);
+            }
+            if(go instanceof Boss boss)
+            {
+                boss.startBattle();
+            }
+        }
+    }
+
+    public static void checkIfDungeonClear() {
+        boolean clear = true;
+        for (Room[] roomArr : rooms) {
+            for (Room room : roomArr) {
+                if (room.enemyCount > 0) {
+                    clear = false;
+                    break;
+                }
+            }
+        }
+        if (clear)
+        {
+            endDungeon();
+        }
+    }
+
+    private static void endDungeon(){
+        if(PlayerController.instance == null)
+            return;
+        SaveManager.saveGame(PlayerController.instance, true);
+        PlayerController.removePlayer();
+        Main.createMainMenu();
     }
 }

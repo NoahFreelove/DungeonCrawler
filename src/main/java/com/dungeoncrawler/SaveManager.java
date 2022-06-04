@@ -10,9 +10,18 @@ public class SaveManager {
 
     public static void saveGame(PlayerController player)
     {
+        saveGame(player, false);
+    }
+    public static void saveGame(PlayerController player, boolean incrementLevel)
+    {
+        int gameLevel = player.getGameLevel();
+        if(incrementLevel)
+        {
+            gameLevel++;
+        }
         String[] saveData = new String[6];
         saveData[0] = player.getName();
-        saveData[1] = "" + player.getGameLevel();
+        saveData[1] = "" + gameLevel;
         saveData[2] = "" + player.getPlayerLevel();
         saveData[3] = "" + player.getGold();
         saveData[4] = "" + player.getExp();

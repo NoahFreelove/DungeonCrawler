@@ -14,6 +14,9 @@ import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Valueables.Gold;
 import com.dungeoncrawler.Scenes.ColorManager;
+import com.dungeoncrawler.Scenes.Rooms.Room;
+import com.dungeoncrawler.Scenes.Rooms.RoomManager;
+import javafx.application.Platform;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.text.Text;
 
@@ -112,7 +115,10 @@ public class Enemy extends Pawn {
             comp.setActive(false);
         }
         PlayerController.instance.addExp(difficulty);
+        RoomManager.rooms[RoomManager.currentRoomX][RoomManager.currentRoomY].removeEnemy();
+
         SceneManager.getActiveScene().add(new Gold(getPosition(), (int) (difficulty*5*PlayerController.instance.getSelectedWeapon().getRewardMultiplier())));
+
         healthText.setVisible(false);
     }
 

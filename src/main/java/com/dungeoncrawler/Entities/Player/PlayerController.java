@@ -56,7 +56,8 @@ public class PlayerController extends Player {
             return;
         this.name = name;
         this.gameLevel = gameLevel;
-        this.maxHealth = 10+initLevel;
+        this.playerLevel = initLevel;
+        this.maxHealth = 10+(initLevel*2);
         this.health = maxHealth;
         this.gold = initGold;
         this.exp = initExp;
@@ -86,11 +87,7 @@ public class PlayerController extends Player {
         if(health<= 0)
         {
             health = 0;
-            Platform.runLater(() -> {
-                SceneManager.getActiveScene().remove(PlayerController.instance);
-                PlayerController.instance = null;
-                Main.createMainMenu();
-            });
+            removePlayer();
             return;
         }
 
@@ -376,5 +373,13 @@ public class PlayerController extends Player {
 
     public int getSkillPoints() {
         return skillPoints;
+    }
+
+    public static void removePlayer(){
+        Platform.runLater(() -> {
+            SceneManager.getActiveScene().remove(PlayerController.instance);
+            PlayerController.instance = null;
+            Main.createMainMenu();
+        });
     }
 }

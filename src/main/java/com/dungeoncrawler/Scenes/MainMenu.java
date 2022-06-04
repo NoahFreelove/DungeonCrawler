@@ -100,7 +100,7 @@ public class MainMenu extends GameScene {
         if(new File("bin/save.dat").exists())
         {
             String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
-            Button loadButton = new Button("Load Game: '" + saveData[0] + "'\n(level " + saveData[1] + ")");
+            Button loadButton = new Button("Load Game: '" + saveData[0] + "'\n(Dungeon #" + saveData[1] + ")");
             loadButton.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
             loadButton.setMinWidth(400);
             loadButton.setTranslateX(440);
@@ -109,7 +109,8 @@ public class MainMenu extends GameScene {
             loadButton.setOnAction(actionEvent -> {
                 try {
                     int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
-                    int size = 4 + level/2;
+                    int size = 2 + level/4;
+
                     //RoomManager.CreateRooms(5 + level,5 + level, level);
                     RoomManager.CreateRooms(size,size, level);
 
