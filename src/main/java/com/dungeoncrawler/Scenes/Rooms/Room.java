@@ -4,9 +4,8 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
-import com.dungeoncrawler.Entities.Enemies.Bosses.Gunner;
+import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
 import com.dungeoncrawler.Entities.Enemies.Follower;
-import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Shop;
 
@@ -125,7 +124,7 @@ public class Room extends GameScene {
     }
 
     private void createBoss(){
-        add(new Gunner(new Vector3(1150-300,300), xPos, yPos));
+        add(new Turret(new Vector3(1150-300,300), xPos, yPos));
     }
 
     private void createShop(){

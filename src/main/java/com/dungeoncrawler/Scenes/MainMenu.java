@@ -96,6 +96,7 @@ public class MainMenu extends GameScene {
         newGameButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
         addUI(newGameButton);
 
+
         if(new File("bin/save.dat").exists())
         {
             String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
@@ -120,6 +121,18 @@ public class MainMenu extends GameScene {
             loadButton.setTextFill(ColorManager.buttonTextColor);
             loadButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
             addUI(loadButton);
+
+            Button skillPointsButton = new Button("Skill Points");
+            skillPointsButton.setPrefWidth(200);
+            skillPointsButton.setTranslateX(10);
+            skillPointsButton.setTranslateY(600);
+
+            skillPointsButton.setOnAction(actionEvent -> {
+                SceneManager.switchScene(new SkillPointScreen());
+            });
+            skillPointsButton.setTextFill(ColorManager.buttonTextColor);
+            skillPointsButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
+            addUI(skillPointsButton);
         }
 
     }

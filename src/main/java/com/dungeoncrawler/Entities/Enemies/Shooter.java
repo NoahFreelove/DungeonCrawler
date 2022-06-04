@@ -2,6 +2,7 @@ package com.dungeoncrawler.Entities.Enemies;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
+import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 import com.JEngine.Utility.Misc.GameTimer;
@@ -14,10 +15,10 @@ public class Shooter extends Enemy{
     }
 
     @Override
-    public void activate(){
+    public void activate(GameScene room){
         shootTimer = new GameTimer(500, args -> shoot());
 
-        //super.activate();
+        super.activate(room);
     }
 
     @Override
@@ -34,18 +35,7 @@ public class Shooter extends Enemy{
         if(PlayerController.instance == null)
             return;
 
-        double rad;
-        Vector3 deltaPos = PlayerController.instance.getPosition().subtract(getPosition());
-
-        if(deltaPos.x<0)
-        {
-            rad = Math.atan(deltaPos.y/deltaPos.x)-(Math.PI);
-        }
-        else
-        {
-            rad = Math.atan(deltaPos.y/deltaPos.x);
-        }
-        SceneManager.getActiveScene().add(new EnemyProjectile(getPosition(), Math.toDegrees(rad), getDamage(), 8, new GameImage("bin/50bmg.png")));
+        SceneManager.getActiveScene().add(new EnemyProjectile(getPosition(), Math.toDegrees(playerPositionToRadians()), getDamage(), 8, new GameImage("bin/50bmg.png")));
     }
 
     @Override

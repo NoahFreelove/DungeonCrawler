@@ -7,12 +7,15 @@ import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
+import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Valueables.Gold;
+import com.dungeoncrawler.Scenes.ColorManager;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.text.Text;
 
 public class Enemy extends Pawn {
     private final double damage;
@@ -23,7 +26,8 @@ public class Enemy extends Pawn {
     private final int difficulty;
     protected boolean canMove;
     private final GameImage sprite;
-
+    private boolean addedHealthUI;
+    private Text healthText = new Text("health");
     public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty) {
         super(Transform.simpleTransform(initPos), newSprite, new Identity("enemy"));
         this.damage = damage;
@@ -41,7 +45,7 @@ public class Enemy extends Pawn {
         startPos = initPos;
     }
 
-    public void attack(){
+    public void attack() {
         canAttack = false;
         GameUtility.waitForSeconds(attackDelay, args -> canAttack = true);
     }
@@ -62,6 +66,14 @@ public class Enemy extends Pawn {
         //System.out.println("enemy new health: " + health);
     }
 
+    @Override
+    public void Update(){
+        super.Update();
+        healthText.setText("health: " + health);
+        healthText.setX(getPosition().x);
+        healthText.setY(getPosition().y - 10);
+    }
+
     public boolean canAttack() {
         return canAttack;
     }
@@ -76,9 +88,15 @@ public class Enemy extends Pawn {
 
     public int getDifficulty(){return difficulty;}
 
-    public void activate(){
+    public void activate(GameScene room){
         canMove = true;
         canAttack = true;
+        if (!addedHealthUI)
+        {
+            healthText.setFill(ColorManager.textColor);
+            room.addUI(healthText);
+            addedHealthUI = true;
+        }
     }
 
 
@@ -95,5 +113,35 @@ public class Enemy extends Pawn {
         }
         PlayerController.instance.addExp(difficulty);
         SceneManager.getActiveScene().add(new Gold(getPosition(), (int) (difficulty*5*PlayerController.instance.getSelectedWeapon().getRewardMultiplier())));
+        healthText.setVisible(false);
+    }
+
+    protected double playerPositionToRadians(){
+        double rad;
+        Vector3 deltaPos = PlayerController.instance.getPosition().subtract(getPosition());
+
+        if(deltaPos.x<0)
+        {
+            rad = Math.atan(deltaPos.y/deltaPos.x)-(Math.PI);
+        }
+        else
+        {
+            rad = Math.atan(deltaPos.y/deltaPos.x);
+        }
+        return rad;
+    }
+
+    protected double facePlayer(){
+        Vector3 deltaPos = PlayerController.instance.getPosition().subtract(getPosition());
+        double deg;
+        if(deltaPos.x<0)
+        {
+            deg = Math.toDegrees(Math.atan(deltaPos.y/deltaPos.x)-(Math.PI/2));
+        }
+        else
+        {
+            deg = Math.toDegrees(Math.atan(deltaPos.y/deltaPos.x)+(Math.PI/2));
+        }
+        return deg;
     }
 }

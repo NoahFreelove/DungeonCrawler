@@ -18,21 +18,10 @@ public class Follower extends Enemy{
 
     @Override
     public void Update(){
+        super.Update();
         if(!canMove)
             return;
-        super.Update();
         pathfinding_comp.setTarget(PlayerController.instance);
-        // face player
-        Vector3 deltaPos = PlayerController.instance.getPosition().subtract(getPosition());
-        double deg;
-        if(deltaPos.x<0)
-        {
-            deg = Math.toDegrees(Math.atan(deltaPos.y/deltaPos.x)-(Math.PI/2));
-        }
-        else
-        {
-            deg = Math.toDegrees(Math.atan(deltaPos.y/deltaPos.x)+(Math.PI/2));
-        }
-        setRotation(new Vector3((float) deg,0,0));
+        setRotation(new Vector3((float) facePlayer(),0,0));
     }
 }

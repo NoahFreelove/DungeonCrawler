@@ -29,6 +29,7 @@ public class PlayerController extends Player {
     private int playerLevel = 1;
     private int exp = 0;
     private int expToNextLevel = 10;
+    private int skillPoints = 0;
     private double health = 20;
     private int maxHealth = 20;
     private int roomsCleared = 0;
@@ -196,6 +197,7 @@ public class PlayerController extends Player {
         exp += amount;
         if(exp >= expToNextLevel) {
             playerLevel++;
+            skillPoints++;
             expToNextLevel = expToNextLevel + 5;
             maxHealth += 2;
             health = maxHealth;
@@ -370,5 +372,9 @@ public class PlayerController extends Player {
     public void buyItem(int itemCost)
     {
         this.gold -= itemCost;
+    }
+
+    public int getSkillPoints() {
+        return skillPoints;
     }
 }

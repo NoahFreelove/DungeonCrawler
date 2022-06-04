@@ -135,7 +135,7 @@ public class RoomManager {
                 {
                     enemy.setPosition(enemy.getStartPos());
                     enemy.neutralize();
-                    GameTimer moveDelay = new GameTimer(500, args -> enemy.activate(), true);
+                    GameTimer moveDelay = new GameTimer(500, args -> enemy.activate(rooms[currentRoomX][currentRoomY]), true);
                     moveDelay.start();
                 }
                 if(go instanceof EnemyProjectile ep)

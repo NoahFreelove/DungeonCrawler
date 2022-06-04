@@ -44,6 +44,7 @@ public class EnemyProjectile extends Pawn {
         SceneManager.getActiveScene().remove(this);
         setActive(false);
         ec.setActive(false);
+        life = 0;
     }
 
     public double getDamage() {
