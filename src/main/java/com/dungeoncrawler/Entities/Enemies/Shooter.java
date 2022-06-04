@@ -45,7 +45,7 @@ public class Shooter extends Enemy{
         {
             rad = Math.atan(deltaPos.y/deltaPos.x);
         }
-        SceneManager.getActiveScene().add(new EnemyProjectile(getPosition(), Math.toDegrees(rad), getDamage()));
+        SceneManager.getActiveScene().add(new EnemyProjectile(getPosition(), Math.toDegrees(rad), getDamage(), 8, new GameImage("bin/50bmg.png")));
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.dungeoncrawler.Entities.Enemies.Enemy;
 import com.dungeoncrawler.Entities.Enemies.EnemyProjectile;
 import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Scenes.ColorManager;
@@ -91,7 +92,7 @@ public class RoomManager {
         String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0), saveData[0], Integer.parseInt(saveData[1]),
                 Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4])));
-        PlayerController.instance.setSelectedWeapon(new BarrettM82(PlayerController.instance.getPosition()));
+        PlayerController.instance.setSelectedWeapon(new BBGun(PlayerController.instance.getPosition()));
 
         rooms[0][0].add(speechManager);
         SceneManager.getWindow().setBackgroundColor(ColorManager.backgroundColor);

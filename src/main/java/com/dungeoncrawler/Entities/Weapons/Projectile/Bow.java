@@ -10,7 +10,7 @@ import com.JEngine.Core.Position.SimpleDirection;
 
 public class Bow extends Weapon {
     public Bow(Vector3 pos) {
-        super(3, 1, pos, new GameImage("bin/bow.png"));
+        super(5, 0.75f, pos, new GameImage("bin/bow.png"), 0.5);
     }
 
     @Override

@@ -284,8 +284,8 @@ public class PlayerController extends Player {
         xpText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
         gameLevelText = new Text("Dungeon #"+gameLevel);
-        gameLevelText.setTranslateX(10);
-        gameLevelText.setTranslateY(720-60);
+        gameLevelText.setTranslateX(1080-10);
+        gameLevelText.setTranslateY(40);
         gameLevelText.setFill(ColorManager.textColor);
         gameLevelText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 

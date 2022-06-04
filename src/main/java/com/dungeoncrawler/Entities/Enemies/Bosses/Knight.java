@@ -13,7 +13,7 @@ public class Knight extends Boss {
     private GameTimer chargeDelay = new GameTimer(5000, args -> charge(), false);
     public Knight(Vector3 initPos, int x, int y) {
         super(initPos, new GameImage(GenerateSolidTexture.generateImage(96,96,0xFF6E6E6E))
-                , 8, 35, 0.5, 5, "I definitely wont charge at you", 1f, x,y);
+                , 8, 50, 0.5, 5, "I definitely wont charge at you", 1f, x,y);
         chargePathfind = new Pathfinding_Comp(this);
         chargePathfind.setMoveSpeed(10);
         chargePathfind.setMoveAfterSuccess(false);

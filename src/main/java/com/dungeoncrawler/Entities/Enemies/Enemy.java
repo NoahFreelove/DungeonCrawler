@@ -15,14 +15,14 @@ import com.dungeoncrawler.Entities.Valueables.Gold;
 import javafx.scene.effect.ColorAdjust;
 
 public class Enemy extends Pawn {
-    private double damage;
+    private final double damage;
     private double health;
-    private double attackDelay;
+    private final double attackDelay;
     private boolean canAttack;
-    private Vector3 startPos;
-    private int difficulty;
+    private final Vector3 startPos;
+    private final int difficulty;
     protected boolean canMove;
-    private GameImage sprite;
+    private final GameImage sprite;
 
     public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty) {
         super(Transform.simpleTransform(initPos), newSprite, new Identity("enemy"));
@@ -94,6 +94,6 @@ public class Enemy extends Pawn {
             comp.setActive(false);
         }
         PlayerController.instance.addExp(difficulty);
-        SceneManager.getActiveScene().add(new Gold(getPosition(), difficulty*10));
+        SceneManager.getActiveScene().add(new Gold(getPosition(), (int) (difficulty*5*PlayerController.instance.getSelectedWeapon().getRewardMultiplier())));
     }
 }

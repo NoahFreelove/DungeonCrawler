@@ -16,8 +16,9 @@ public class Melee extends Weapon {
     private Vector3 posWhenThrown = new Vector3(0,0,0);
     private boolean isAttacking;
     private boolean isThrowable;
+
     public Melee(Vector3 pos, float damage, double attackDelay, GameImage sprite, float attackDistance, float animationSpeed, boolean isThrowable) {
-        super(damage, attackDelay, pos, sprite);
+        super(damage, attackDelay, pos, sprite, 2);
         this.attackDistance = attackDistance;
         this.animationSpeed = animationSpeed;
         this.isThrowable = isThrowable;
@@ -57,4 +58,6 @@ public class Melee extends Weapon {
             case RIGHT -> targetWeaponOffset = new Vector3(attackDistance+32, 0, 0);
         }
     }
+
+
 }

@@ -7,17 +7,21 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Scenes.ColorManager;
+
 import javafx.scene.text.Text;
 
 public class WeaponSpawn extends Pawn {
     private final WeaponSpawnCollider weaponSpawnCollider;
-    private boolean hasBeenPickedUp = false;
     private final boolean toBeBought;
     private final int cost;
     private final Weapon weapon;
     private final Text priceTag;
+
+    private boolean hasBeenPickedUp = false;
+
     public WeaponSpawn(Vector3 pos, GameImage newSprite, Weapon parent, boolean toBeBought, int cost, GameScene scene) {
         super(Transform.simpleTransform(pos), newSprite, new Identity("weapon spawn " + parent.getClass().getSimpleName()));
         this.toBeBought = toBeBought;

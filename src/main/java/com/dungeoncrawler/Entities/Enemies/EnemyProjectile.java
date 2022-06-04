@@ -10,15 +10,16 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 
 public class EnemyProjectile extends Pawn {
     Vector2 direction;
-    int life = 180;
-    float moveSpeed = 5;
-    double damage;
+    private int life = 180;
+    private float moveSpeed;
+    private final double damage;
 
     // Make collider a bit smaller than the bullet because it's hard to dodge them all
     EnemyProjectileCollider ec = new EnemyProjectileCollider(Vector3.emptyVector(), 24,24,true,this);
-    public EnemyProjectile(Vector3 initPos, double angle, double damage) {
-        super(new Transform(initPos,new Vector3((float) angle+90,0,0), new Vector3(0.5f,0.5f,0)), new GameImage("bin/50bmg.png"), new Identity("EnemyProjectile"));
+    public EnemyProjectile(Vector3 initPos, double angle, double damage, float moveSpeed, GameImage sprite) {
+        super(new Transform(initPos,new Vector3((float) angle+90,0,0), new Vector3(0.5f,0.5f,0)), sprite, new Identity("EnemyProjectile"));
         this.direction = angleToVector(Math.toRadians(angle));
+        this.moveSpeed = moveSpeed;
         addCollider(ec);
         this.damage = damage;
     }
@@ -47,5 +48,13 @@ public class EnemyProjectile extends Pawn {
 
     public double getDamage() {
         return damage;
+    }
+
+    public float getMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public void setMoveSpeed(float moveSpeed) {
+        this.moveSpeed = moveSpeed;
     }
 }

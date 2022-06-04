@@ -15,11 +15,12 @@ public abstract class Weapon extends Sprite {
     protected float damage;
     protected double attackDelay;
     protected boolean ableToAttack;
+    private double rewardMultiplier;
 
-    public Weapon(float damage, double attackDelay, Vector3 pos, GameImage sprite) {
+    public Weapon(float damage, double attackDelay, Vector3 pos, GameImage sprite, double rewardMultiplier) {
         super(Transform.simpleTransform(pos), sprite, new Identity("Weapon", "weapon"));
         addComponent(new DontDestroyOnLoad_Comp());
-
+        this.rewardMultiplier = rewardMultiplier;
         this.damage = damage;
         this.attackDelay = attackDelay;
         this.ableToAttack = true;
@@ -48,5 +49,9 @@ public abstract class Weapon extends Sprite {
 
     public boolean isAbleToAttack() {
         return ableToAttack;
+    }
+
+    public double getRewardMultiplier() {
+        return rewardMultiplier;
     }
 }
