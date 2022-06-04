@@ -61,7 +61,7 @@ public class PlayerController extends Player {
         this.health = maxHealth;
         this.gold = initGold;
         this.exp = initExp;
-        this.expToNextLevel = 10*initLevel;
+        this.expToNextLevel = 5*initLevel;
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
@@ -195,7 +195,7 @@ public class PlayerController extends Player {
         if(exp >= expToNextLevel) {
             playerLevel++;
             skillPoints++;
-            expToNextLevel = expToNextLevel + 5;
+            expToNextLevel = 5*playerLevel;
             maxHealth += 2;
             health = maxHealth;
             exp = 0;

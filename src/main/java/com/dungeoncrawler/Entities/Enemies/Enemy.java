@@ -14,15 +14,19 @@ import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Valueables.Gold;
 import com.dungeoncrawler.Scenes.ColorManager;
-import com.dungeoncrawler.Scenes.Rooms.Room;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
-import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.text.Text;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 public class Enemy extends Pawn {
     private final double damage;
     private double health;
+    private double maxHealth;
     private final double attackDelay;
     private boolean canAttack;
     private final Vector3 startPos;
@@ -30,11 +34,12 @@ public class Enemy extends Pawn {
     protected boolean canMove;
     private final GameImage sprite;
     private boolean addedHealthUI;
-    private Text healthText = new Text("health");
+    private ProgressBar healthBar = new ProgressBar();
     public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty) {
         super(Transform.simpleTransform(initPos), newSprite, new Identity("enemy"));
         this.damage = damage;
         this.health = health;
+        this.maxHealth = health;
         this.attackDelay = attackDelay;
         this.difficulty = difficulty;
         canAttack = true;
@@ -72,9 +77,9 @@ public class Enemy extends Pawn {
     @Override
     public void Update(){
         super.Update();
-        healthText.setText("health: " + health);
-        healthText.setX(getPosition().x);
-        healthText.setY(getPosition().y - 10);
+        healthBar.setProgress(health/maxHealth);
+        healthBar.setLayoutX(getPosition().x);
+        healthBar.setLayoutY(getPosition().y - 10);
     }
 
     public boolean canAttack() {
@@ -96,8 +101,10 @@ public class Enemy extends Pawn {
         canAttack = true;
         if (!addedHealthUI)
         {
-            healthText.setFill(ColorManager.textColor);
-            room.addUI(healthText);
+            healthBar.setStyle("-fx-accent: red");
+            healthBar.setPrefHeight(15);
+            healthBar.setPrefWidth(70);
+            room.addUI(healthBar);
             addedHealthUI = true;
         }
     }
@@ -119,7 +126,7 @@ public class Enemy extends Pawn {
 
         SceneManager.getActiveScene().add(new Gold(getPosition(), (int) (difficulty*5*PlayerController.instance.getSelectedWeapon().getRewardMultiplier())));
 
-        healthText.setVisible(false);
+        healthBar.setVisible(false);
     }
 
     protected double playerPositionToRadians(){
