@@ -128,6 +128,6 @@ public class Room extends GameScene {
     }
 
     private void createShop(){
-        add(new Shop());
+        add(new Shop(this));
     }
 }

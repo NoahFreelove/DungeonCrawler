@@ -363,4 +363,12 @@ public class PlayerController extends Player {
     public void incrementGameLevel(){
         this.gameLevel++;
     }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+    public void buyItem(int itemCost)
+    {
+        this.gold -= itemCost;
+    }
 }

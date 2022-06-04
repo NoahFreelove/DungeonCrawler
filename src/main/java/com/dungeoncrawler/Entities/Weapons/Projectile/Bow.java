@@ -34,7 +34,7 @@ public class Bow extends Weapon {
             }
         }
 
-        Projectile projectile = new Projectile(getPosition(), rot, dir, 5, 10f, new GameImage("bin/arrow.png"));
+        Projectile projectile = new Projectile(getPosition(), rot, dir, 5, 20f, new GameImage("bin/arrow.png"));
         SceneManager.getActiveScene().add(projectile);
 
     }
