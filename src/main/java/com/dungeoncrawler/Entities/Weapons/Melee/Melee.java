@@ -41,7 +41,7 @@ public class Melee extends Weapon {
             isAttacking = false;
             animationTime = 0f;
             targetWeaponOffset = Vector3.emptyVector();
-            PlayerController.instance.setAttacking(false);
+            PlayerController.instance.setAttacking(true);
         }
     }
 

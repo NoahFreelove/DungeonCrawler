@@ -93,9 +93,7 @@ public class RoomManager {
         }
         String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0), saveData[0], Integer.parseInt(saveData[1]),
-                Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4])));
-        PlayerController.instance.setSelectedWeapon(new BarrettM82(PlayerController.instance.getPosition()));
-
+                Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4]), saveData[6]));
         rooms[0][0].add(speechManager);
         SceneManager.getWindow().setBackgroundColor(ColorManager.backgroundColor);
     }
@@ -114,7 +112,6 @@ public class RoomManager {
         rooms[1][1] = new Room(0, true, false, false, false, RoomType.NORMAL,1,1);
 
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
-        PlayerController.instance.setSelectedWeapon(new Bow(PlayerController.instance.getPosition()));
 
         rooms[0][0].add(speechManager);
         Shooter firstEnemy = new Shooter(new Vector3(1150-300,300));

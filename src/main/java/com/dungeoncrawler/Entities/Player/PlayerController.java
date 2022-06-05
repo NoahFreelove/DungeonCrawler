@@ -10,6 +10,11 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Input;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Weapons.*;
+import com.dungeoncrawler.Entities.Weapons.Melee.Boomerang;
+import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
+import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
+import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
+import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Main;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
@@ -48,7 +53,7 @@ public class PlayerController extends Player {
     private Text xpText = new Text("Level 1 (0/10)");
     private Text gameLevelText = new Text("Dungeon #1");
 
-    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp) {
+    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon) {
         super(Transform.simpleTransform(pos), new GameImage("bin/player.png"), new Identity("PlayerController", "player"));
         if(instance == null)
             instance = this;
@@ -62,6 +67,16 @@ public class PlayerController extends Player {
         this.gold = initGold;
         this.exp = initExp;
         this.expToNextLevel = 5*initLevel;
+
+        switch (initWeapon)
+        {
+            case "Sword"-> setSelectedWeapon(new Sword(getPosition()));
+            case "Boomerang"-> setSelectedWeapon(new Boomerang(getPosition()));
+            case "BBGun"-> setSelectedWeapon(new BBGun(getPosition()));
+            case "Bow" -> setSelectedWeapon(new Bow(getPosition()));
+            case "BarrettM82" -> setSelectedWeapon(new BarrettM82(getPosition()));
+        }
+
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
@@ -75,8 +90,7 @@ public class PlayerController extends Player {
             return;
         addComponents(new DontDestroyOnLoad_Comp(), new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         setupUI();
-
-
+        setSelectedWeapon(new Sword(getPosition()));
         SceneManager.getActiveScene().add(selectedWeapon);
     }
 

@@ -20,6 +20,9 @@ public class Turret extends Boss{
     @Override
     public void battleInit(){
         shootDelay = new GameTimer(2000, args -> {
+            if(!isAlive)
+                return;
+
             if (shootTick.isRunning()){
                 shootTick.stop();
                 shootDelay.setInterval(2000);
@@ -57,6 +60,7 @@ public class Turret extends Boss{
 
     @Override
     public void OnUnload(){
+        System.out.println("unload");
         isAlive = false;
         shootDelay.stop();
         shootTick.stop();

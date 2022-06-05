@@ -129,7 +129,8 @@ public class MainMenu extends GameScene {
             skillPointsButton.setTranslateY(600);
 
             skillPointsButton.setOnAction(actionEvent -> {
-                SceneManager.switchScene(new SkillPointScreen());
+                SkillPointScreen skillPointScreen = new SkillPointScreen();
+                SceneManager.switchScene(skillPointScreen);
             });
             skillPointsButton.setTextFill(ColorManager.buttonTextColor);
             skillPointsButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");

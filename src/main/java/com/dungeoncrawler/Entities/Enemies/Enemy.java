@@ -15,6 +15,7 @@ import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Valueables.Gold;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
@@ -77,9 +78,11 @@ public class Enemy extends Pawn {
     @Override
     public void Update(){
         super.Update();
-        healthBar.setProgress(health/maxHealth);
-        healthBar.setLayoutX(getPosition().x);
-        healthBar.setLayoutY(getPosition().y - 10);
+        Platform.runLater(() -> {
+            healthBar.setProgress(health/maxHealth);
+            healthBar.setLayoutX(getPosition().x);
+            healthBar.setLayoutY(getPosition().y - 10);
+        });
     }
 
     public boolean canAttack() {

@@ -17,11 +17,11 @@ public class ProjectileCollider extends Collider_Comp {
     public void onHit(Collider_Comp other) {
         if(parent == null)
             return;
-        switch (other.getParent().getIdentity().getTag()) {
-            case "enemy" -> {
-                ((Enemy)other.getParent()).takeDamage(parent.getDamage());
+        if ("enemy".equals(other.getParent().getIdentity().getTag())) {
+            ((Enemy) other.getParent()).takeDamage(parent.getDamage());
+            parent.destroySelf();
+            if (PlayerController.instance != null) {
                 PlayerController.instance.setAttacking(false);
-                parent.destroySelf();
             }
         }
     }
