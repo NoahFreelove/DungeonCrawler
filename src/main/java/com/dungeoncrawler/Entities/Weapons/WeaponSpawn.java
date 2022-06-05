@@ -33,7 +33,10 @@ public class WeaponSpawn extends Pawn {
         priceTag.setFill(ColorManager.importantText);
         priceTag.setX(pos.x-10);
         priceTag.setY(pos.y-10);
-        scene.addUI(priceTag);
+        if(toBeBought)
+        {
+            scene.addUI(priceTag);
+        }
     }
 
     public void Buy(){

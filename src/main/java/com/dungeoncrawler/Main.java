@@ -38,9 +38,8 @@ public class Main extends Application {
                     GameUtility.exitApp();
                 }
                 if(e.getCode() == KeyCode.F1){
+                    PlayerController.removePlayer();
                     createMainMenu();
-                    SceneManager.getActiveScene().remove(PlayerController.instance);
-                    PlayerController.instance = null;
                 }
             });
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
@@ -55,9 +54,8 @@ public class Main extends Application {
     static void setupGameInfo(){
         GameInfo.setAppName("Dungeon Crawler");
         GameInfo.setAppVersionMajor(0);
-        GameInfo.setAppVersionMinor(1);
+        GameInfo.setAppVersionMinor(5);
         GameInfo.setAuthors(new String[]{"Noah Freelove"});
-        EnginePrefs.logExtra = false;
     }
 
     public static void createMainMenu(){

@@ -6,6 +6,8 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Enemies.EnemyProjectile;
 import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
+import com.dungeoncrawler.Entities.Weapons.WeaponSpawn;
 
 public class Turret extends Boss{
     private GameTimer shootDelay = new GameTimer(2000, null, false);
@@ -47,6 +49,7 @@ public class Turret extends Boss{
         shootTick.stop();
         isAlive = false;
         super.onDeath();
+        SceneManager.getActiveScene().add(new WeaponSpawn(new Vector3(getPosition().x,getPosition().y,25), new GameImage("bin/bbgun.png",64,64), new BBGun(new Vector3(getPosition().x,getPosition().y,25)), false, 0, SceneManager.getActiveScene()));
     }
 
     private void shoot(){
@@ -60,7 +63,6 @@ public class Turret extends Boss{
 
     @Override
     public void OnUnload(){
-        System.out.println("unload");
         isAlive = false;
         shootDelay.stop();
         shootTick.stop();

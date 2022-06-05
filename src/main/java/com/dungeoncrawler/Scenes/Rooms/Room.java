@@ -141,6 +141,8 @@ public class Room extends GameScene {
 
     public void removeEnemy(){
         enemyCount--;
+        if(RoomManager.inTutorial)
+            return;
         RoomManager.checkIfDungeonClear();
     }
 }

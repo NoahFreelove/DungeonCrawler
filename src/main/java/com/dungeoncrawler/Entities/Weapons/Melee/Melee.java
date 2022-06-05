@@ -16,6 +16,7 @@ public class Melee extends Weapon {
     private Vector3 posWhenThrown = new Vector3(0,0,0);
     private boolean isAttacking;
     private boolean isThrowable;
+    protected boolean alwaysAttacking;
 
     public Melee(Vector3 pos, float damage, double attackDelay, GameImage sprite, float attackDistance, float animationSpeed, boolean isThrowable) {
         super(damage, attackDelay, pos, sprite, 2);
@@ -28,6 +29,9 @@ public class Melee extends Weapon {
     @Override
     public void Update(){
         super.Update();
+        if(PlayerController.instance == null)
+            return;
+
         if(isAttacking && isThrowable){
             setPosition(posWhenThrown.add(weaponOffset));
         }
@@ -41,12 +45,14 @@ public class Melee extends Weapon {
             isAttacking = false;
             animationTime = 0f;
             targetWeaponOffset = Vector3.emptyVector();
-            PlayerController.instance.setAttacking(true);
+            PlayerController.instance.setAttacking(alwaysAttacking);
         }
     }
 
     @Override
     protected void attack(SimpleDirection direction) {
+        if(PlayerController.instance == null)
+            return;
         isAttacking = true;
         animationTime = 0;
         PlayerController.instance.setAttacking(true);

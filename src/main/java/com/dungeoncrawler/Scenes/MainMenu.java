@@ -49,7 +49,7 @@ public class MainMenu extends GameScene {
         scroller.play();
 
         // Create author text
-        Text authorText = new Text("Made by Noah Freelove");
+        Text authorText = new Text("Made by " + GameInfo.getAuthors()[0]);
         authorText.setStyle("-fx-font-size: 13px;");
         authorText.setFill(ColorManager.titleTextColor);
         authorText.setTranslateX(640 - authorText.getLayoutBounds().getWidth()/1.5f);
@@ -107,17 +107,7 @@ public class MainMenu extends GameScene {
             loadButton.setTranslateY(300);
             loadButton.setMaxWidth(400);
             loadButton.setOnAction(actionEvent -> {
-                try {
-                    int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
-                    int size = 2 + level/4;
-
-                    //RoomManager.CreateRooms(5 + level,5 + level, level);
-                    RoomManager.CreateRooms(size,size, level);
-
-                    GameWindow.getInstance().setTargetFPS(60);
-                    SceneManager.switchScene(RoomManager.rooms[0][0]);
-
-                }catch (Exception ignored){}
+                loadGame();
             });
             loadButton.setTextFill(ColorManager.buttonTextColor);
             loadButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
@@ -137,5 +127,20 @@ public class MainMenu extends GameScene {
             addUI(skillPointsButton);
         }
 
+    }
+
+    public static void loadGame(){
+        String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
+        try {
+            int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
+            int size = 2 + level/4;
+
+            //RoomManager.CreateRooms(5 + level,5 + level, level);
+            RoomManager.CreateRooms(size,size, level);
+
+            GameWindow.getInstance().setTargetFPS(60);
+            SceneManager.switchScene(RoomManager.rooms[0][0]);
+
+        }catch (Exception ignored){}
     }
 }

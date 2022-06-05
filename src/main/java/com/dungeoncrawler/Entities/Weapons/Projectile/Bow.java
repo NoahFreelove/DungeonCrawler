@@ -42,6 +42,8 @@ public class Bow extends Weapon {
     @Override
     public void Update(){
         super.Update();
+        if(PlayerController.instance == null)
+            return;
         setPosition(PlayerController.instance.getPosition().add(new Vector3(32,0,0)));
     }
 }

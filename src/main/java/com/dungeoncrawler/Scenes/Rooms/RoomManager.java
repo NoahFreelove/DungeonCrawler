@@ -6,17 +6,17 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameTimer;
+import com.dungeoncrawler.Entities.Enemies.*;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Boss;
-import com.dungeoncrawler.Entities.Enemies.Enemy;
-import com.dungeoncrawler.Entities.Enemies.EnemyProjectile;
-import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Entities.Stairs;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Main;
 import com.dungeoncrawler.SaveManager;
 import com.dungeoncrawler.Scenes.ColorManager;
+import com.dungeoncrawler.Scenes.MainMenu;
 import com.dungeoncrawler.Speech.SpeechManager;
 import com.dungeoncrawler.Speech.SpeechStruct;
 import com.dungeoncrawler.Speech.SpeechType;
@@ -32,6 +32,7 @@ public class RoomManager {
     public static int height;
     public static SpeechManager speechManager;
     public static boolean inTutorial = false;
+    private static Enemy tutorialEnemy = new Follower(new Vector3(0,0,0));
 
     public static void CreateRooms(int width, int height, int overallDifficulty) {
         currentRoomY = 0;
@@ -106,7 +107,7 @@ public class RoomManager {
 
         RoomManager.width = 2;
         RoomManager.height = 2;
-        rooms = new Room[2][2];
+        rooms = new Room[width][height];
         rooms[0][0] = new Room(0, false, false, true, false, RoomType.NORMAL,0,0);
         rooms[0][1] = new Room(0, false, true, false, true, RoomType.NORMAL,0,1);
         rooms[1][1] = new Room(0, true, false, false, false, RoomType.NORMAL,1,1);
@@ -114,7 +115,8 @@ public class RoomManager {
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0)));
 
         rooms[0][0].add(speechManager);
-        Shooter firstEnemy = new Shooter(new Vector3(1150-300,300));
+        Frog firstEnemy = new Frog(new Vector3(1150-300,300));
+        tutorialEnemy = firstEnemy;
         //firstEnemy.setCanAttack(false);
         rooms[0][1].add(firstEnemy);
 
@@ -142,13 +144,14 @@ public class RoomManager {
                 speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, true));
             }
             if (currentRoomX == 0 && currentRoomY == 1) {
-                speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("You can use Shift to attack using a selected weapon. This %s does %d damage a hit.\nThis enemy has 10 health",
-                        PlayerController.instance.getSelectedWeapon().getClass().getSimpleName(),(int) PlayerController.instance.getSelectedWeapon().getDamage()
+                speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("You can use Shift to attack using a selected weapon. This %s does %d damage a hit.\nThis %s has %d health",
+                        PlayerController.instance.getSelectedWeapon().getClass().getSimpleName(),(int)
+                                PlayerController.instance.getSelectedWeapon().getDamage(), tutorialEnemy.getClass().getSimpleName(), (int)tutorialEnemy.getHealth()
                 ), 1.5f, false));
             }
             if (currentRoomX == 1 && currentRoomY == 1) {
                 speechManager.addSpeech(new SpeechStruct(SpeechType.IMPORTANT, "You can find better weapons by killing bosses and buying them with gold\n" +
-                        "You can also heal by purchasing or finding health packs", 1.5f, false));
+                        "You can also heal by purchasing or finding health packs. Pickup/Interact with objects with Control", 1.5f, false));
             }
 
             speechManager.startSpeech();
@@ -188,15 +191,15 @@ public class RoomManager {
         }
         if (clear)
         {
-            endDungeon();
+            rooms[currentRoomX][currentRoomY].add(new Stairs());
         }
     }
 
-    private static void endDungeon(){
+    public static void endDungeon(){
         if(PlayerController.instance == null)
             return;
         SaveManager.saveGame(PlayerController.instance, true);
         PlayerController.removePlayer();
-        Main.createMainMenu();
+        MainMenu.loadGame();
     }
 }

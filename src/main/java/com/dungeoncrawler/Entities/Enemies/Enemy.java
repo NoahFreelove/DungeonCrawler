@@ -160,4 +160,8 @@ public class Enemy extends Pawn {
         }
         return deg;
     }
+
+    public double getHealth() {
+        return health;
+    }
 }

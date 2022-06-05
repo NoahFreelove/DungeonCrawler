@@ -32,15 +32,15 @@ public class Shop extends Pawn {
         parent.add(boomerangSpawn);
         parent.add(swordSpawn);
         parent.add(barrettSpawn);
-        parent.add(bbGunSpawn);
+        //parent.add(bbGunSpawn);
     }
 
     public static void regenerateSpawns(){
-        bowSpawn = new WeaponSpawn(new Vector3(200,200), new GameImage("bin/bow.png"), new Bow(new Vector3(200,200)), true, 400, parent);
+        bowSpawn = new WeaponSpawn(new Vector3(200,200), new GameImage("bin/bow.png"), new Bow(new Vector3(200,200)), true, 200, parent);
         boomerangSpawn = new WeaponSpawn(new Vector3(900,200), new GameImage("bin/boomerang.png"), new Boomerang(new Vector3(900,200)), true, 250, parent);
         swordSpawn = new WeaponSpawn(new Vector3(900,400), new GameImage("bin/sword.png"), new Sword(new Vector3(900,400)), true, 30, parent);
         barrettSpawn = new WeaponSpawn(new Vector3(200,400), new GameImage("bin/barrett.png", 128, 128), new BarrettM82(new Vector3(200,400)), true, 3000, parent);
-        bbGunSpawn = new WeaponSpawn(new Vector3(550,400), new GameImage("bin/bbGun.png",64,64), new BBGun(new Vector3(550,400)), true, 500, parent);
+        //bbGunSpawn = new WeaponSpawn(new Vector3(550,400), new GameImage("bin/bbGun.png",64,64), new BBGun(new Vector3(550,400)), true, 500, parent);
 
     }
 }
