@@ -8,7 +8,6 @@ import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.Misc.GameUtility;
-import com.JEngine.Utility.Settings.EnginePrefs;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;

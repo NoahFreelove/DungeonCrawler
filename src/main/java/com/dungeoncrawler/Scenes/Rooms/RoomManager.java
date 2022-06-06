@@ -10,6 +10,7 @@ import com.dungeoncrawler.Entities.Enemies.*;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Boss;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Stairs.Stairs;
+import com.dungeoncrawler.Main;
 import com.dungeoncrawler.SaveManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
@@ -114,6 +115,7 @@ public class RoomManager {
         tutorialEnemy = firstEnemy;
         //firstEnemy.setCanAttack(false);
         rooms[0][1].add(firstEnemy);
+        rooms[1][1].add(new Stairs());
 
         speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, String.format("Welcome to %s!\nControls: Move using WASD/Arrow Keys", GameInfo.getAppName()), 1.5f, true));
         speechManager.startSpeech();
@@ -190,11 +192,17 @@ public class RoomManager {
         }
     }
 
-    public static void endDungeon(){
-        if(PlayerController.instance == null)
+    public static void endDungeon(boolean loadNextOne) {
+        if (PlayerController.instance == null)
             return;
         SaveManager.saveGame(PlayerController.instance, true);
         PlayerController.removePlayer();
-        MainMenu.loadGame();
+        if (loadNextOne)
+        {
+            MainMenu.loadGame();
+        }
+        else {
+            Main.createMainMenu();
+        }
     }
 }

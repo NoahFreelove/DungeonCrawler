@@ -11,14 +11,16 @@ import com.JEngine.Utility.Misc.GameTimer;
 import com.JEngine.Utility.Misc.GenericMethod;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 
+import static com.dungeoncrawler.Entities.EnemyStats.*;
+
 public class Frog extends Enemy{
     private Pathfinding_Comp pathfinding_comp;
-    private GameTimer jumpTimer = new GameTimer(2000, args -> jump());
-    private float magnetToPlayerDistance = 400f;
+    private GameTimer jumpTimer = new GameTimer((long)FROG_ATTACK_DELAY*1000, args -> jump());
+    private float magnetToPlayerDistance = FROG_MAGNET_DISTANCE;
     public Frog(Vector3 initPos) {
-        super(initPos, new GameImage("bin/frog.png"), 5, 15, 1,1);
+        super(initPos, new GameImage(FROG_IMAGE_PATH), FROG_DAMAGE, FROG_MAX_HEALTH, FROG_ATTACK_DELAY,FROG_DIFFICULTY);
         pathfinding_comp = new Pathfinding_Comp(null);
-        pathfinding_comp.setMoveSpeed(15);
+        pathfinding_comp.setMoveSpeed(FROG_SPEED);
         pathfinding_comp.setSuccessRange(64);
         pathfinding_comp.setMoveAfterSuccess(false);
         addComponent(pathfinding_comp);

@@ -5,12 +5,14 @@ import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 
+import static com.dungeoncrawler.Entities.EnemyStats.*;
+
 public class Follower extends Enemy{
-    private Pathfinding_Comp pathfinding_comp;
+    private final Pathfinding_Comp pathfinding_comp;
     public Follower(Vector3 initPos) {
-        super(initPos, new GameImage("bin/follower.png"), 5, 25, 3,1);
+        super(initPos, new GameImage(FOLLOWER_IMAGE_PATH), FOLLOWER_DAMAGE, FOLLOWER_MAX_HEALTH, FOLLOWER_ATTACK_DELAY,FOLLOWER_DIFFICULTY);
         pathfinding_comp = new Pathfinding_Comp(PlayerController.instance);
-        pathfinding_comp.setMoveSpeed(3);
+        pathfinding_comp.setMoveSpeed(FOLLOWER_SPEED);
         pathfinding_comp.setSuccessRange(64);
         pathfinding_comp.setMoveAfterSuccess(false);
         addComponent(pathfinding_comp);

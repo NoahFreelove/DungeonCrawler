@@ -164,4 +164,8 @@ public class Enemy extends Pawn {
     public double getHealth() {
         return health;
     }
+
+    public double getAttackDelay() {
+        return attackDelay;
+    }
 }

@@ -22,7 +22,13 @@ public class StairsCollider extends Collider_Comp {
                 if(!parent.usedStairs)
                 {
                     parent.usedStairs = true;
-                    RoomManager.endDungeon();
+                    if(RoomManager.inTutorial)
+                    {
+                        RoomManager.endDungeon(false);
+                    }
+                    else {
+                        RoomManager.endDungeon(true);
+                    }
                 }
             }
         }
