@@ -7,10 +7,8 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.dungeoncrawler.Entities.Weapons.Melee.Boomerang;
 import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
-import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
-import com.dungeoncrawler.Entities.Weapons.Weapon;
 import com.dungeoncrawler.Entities.Weapons.WeaponSpawn;
 import com.dungeoncrawler.Scenes.Rooms.Room;
 

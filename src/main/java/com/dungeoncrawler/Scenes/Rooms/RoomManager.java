@@ -9,18 +9,13 @@ import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Enemies.*;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Boss;
 import com.dungeoncrawler.Entities.Player.PlayerController;
-import com.dungeoncrawler.Entities.Stairs;
-import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
-import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
-import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
-import com.dungeoncrawler.Main;
+import com.dungeoncrawler.Entities.Stairs.Stairs;
 import com.dungeoncrawler.SaveManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
 import com.dungeoncrawler.Speech.SpeechManager;
 import com.dungeoncrawler.Speech.SpeechStruct;
 import com.dungeoncrawler.Speech.SpeechType;
-import javafx.application.Platform;
 
 import java.io.File;
 

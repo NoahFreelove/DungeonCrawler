@@ -1,13 +1,9 @@
-package com.dungeoncrawler;
+package com.dungeoncrawler.Entities.Stairs;
 
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Utility.Input;
-import com.dungeoncrawler.Entities.Player.PlayerCollider;
-import com.dungeoncrawler.Entities.Player.PlayerController;
-import com.dungeoncrawler.Entities.Stairs;
-import com.dungeoncrawler.Entities.Valueables.Gold;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 
 public class StairsCollider extends Collider_Comp {

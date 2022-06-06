@@ -8,4 +8,8 @@ module com.dungeoncrawler {
     exports com.dungeoncrawler;
     exports com.JEngine.Core.Position;
     opens com.JEngine.Core.Position to javafx.fxml;
+    exports com.dungeoncrawler.Entities;
+    opens com.dungeoncrawler.Entities to javafx.fxml;
+    exports com.dungeoncrawler.Entities.Stairs;
+    opens com.dungeoncrawler.Entities.Stairs to javafx.fxml;
 }
