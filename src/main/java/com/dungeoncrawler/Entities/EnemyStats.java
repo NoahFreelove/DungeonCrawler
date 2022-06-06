@@ -54,4 +54,6 @@ public record EnemyStats() {
     public static final String TURRET_IMAGE_PATH = "bin/turret.png";
     public static final int TURRET_DIFFICULTY = 5;
     //endregion
+
+
 }

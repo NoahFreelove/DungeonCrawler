@@ -18,8 +18,8 @@ public class Melee extends Weapon {
     private boolean isThrowable;
     protected boolean alwaysAttacking;
 
-    public Melee(Vector3 pos, float damage, double attackDelay, GameImage sprite, float attackDistance, float animationSpeed, boolean isThrowable) {
-        super(damage, attackDelay, pos, sprite, 2);
+    public Melee(Vector3 pos, float damage, double attackDelay, GameImage sprite, float attackDistance, float animationSpeed, boolean isThrowable, double rewardMultiplier) {
+        super(damage, attackDelay, pos, sprite, rewardMultiplier);
         this.attackDistance = attackDistance;
         this.animationSpeed = animationSpeed;
         this.isThrowable = isThrowable;
