@@ -9,28 +9,30 @@ import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
 import com.dungeoncrawler.Entities.Weapons.WeaponSpawn;
 
+import static com.dungeoncrawler.Entities.EnemyStats.*;
+
 public class Turret extends Boss{
-    private GameTimer shootDelay = new GameTimer(2000, null, false);
-    private GameTimer shootTick = new GameTimer(50, args -> shoot());
+    private GameTimer shootDelay = new GameTimer((long) (TURRET_IDLE_DURATION*1000), null, false);
+    private GameTimer shootTick = new GameTimer((long) (TURRET_SHOOT_DELAY*1000), args -> shoot());
     private boolean isAlive;
     public Turret(Vector3 initPos, int x, int y) {
-        super(initPos, new GameImage("bin/turret.png")
-                , 2, 35, 0.5, 5, "pew pew", 1f, x,y);
+        super(initPos, new GameImage(TURRET_IMAGE_PATH)
+                , TURRET_DAMAGE, TURRET_MAX_HEALTH, 0.5, TURRET_DIFFICULTY, "pew pew", 1f, x,y);
         isAlive = true;
     }
 
     @Override
     public void battleInit(){
-        shootDelay = new GameTimer(2000, args -> {
+        shootDelay = new GameTimer((long) TURRET_IDLE_DURATION*1000, args -> {
             if(!isAlive)
                 return;
 
             if (shootTick.isRunning()){
                 shootTick.stop();
-                shootDelay.setInterval(2000);
+                shootDelay.setInterval((long) TURRET_IDLE_DURATION*1000);
             }
             else{
-                shootDelay.setInterval(5000);
+                shootDelay.setInterval((long) TURRET_SHOOT_DURATION*1000);
                 shootTick.start();
             }
         });
@@ -58,7 +60,7 @@ public class Turret extends Boss{
         if(!isAlive)
             return;
 
-        SceneManager.getActiveScene().add(new EnemyProjectile(new Vector3(getPosition().x + 48, getPosition().y + 48, getPosition().z), Math.toDegrees(playerPositionToRadians()), 3, 5, new GameImage("bin/bbpellet.png")));
+        SceneManager.getActiveScene().add(new EnemyProjectile(new Vector3(getPosition().x + 48, getPosition().y + 48, getPosition().z), Math.toDegrees(playerPositionToRadians()), TURRET_DAMAGE, TURRET_PROJECTILE_SPEED, new GameImage(TURRET_PROJECTILE_IMAGE_PATH)));
     }
 
     @Override

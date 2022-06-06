@@ -8,21 +8,24 @@ import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import javafx.scene.effect.ColorAdjust;
 
+import static com.dungeoncrawler.Entities.EnemyStats.*;
+
 public class Knight extends Boss {
     private Pathfinding_Comp chargePathfind;
-    private GameTimer chargeDelay = new GameTimer(5000, args -> charge(), false);
+    private GameTimer chargeDelay = new GameTimer((long) (KNIGHT_CHARGE_DELAY*1000), args -> charge(), false);
+
     public Knight(Vector3 initPos, int x, int y) {
-        super(initPos, new GameImage(GenerateSolidTexture.generateImage(96,96,0xFF6E6E6E))
-                , 8, 50, 0.5, 5, "I definitely wont charge at you", 1f, x,y);
+        super(initPos, new GameImage(KNIGHT_IMAGE_PATH)
+                , KNIGHT_DAMAGE, KNIGHT_MAX_HEALTH, KNIGHT_ATTACK_DELAY, KNIGHT_DIFFICULTY, "I definitely wont charge at you", 1f, x,y);
         chargePathfind = new Pathfinding_Comp(this);
-        chargePathfind.setMoveSpeed(10);
+        chargePathfind.setMoveSpeed(KNIGHT_CHARGE_SPEED);
         chargePathfind.setMoveAfterSuccess(false);
         chargePathfind.setSuccessRange(25);
         addComponent(chargePathfind);
     }
 
     private void startCharge(){
-        chargeDelay = new GameTimer(3000, args -> {
+        chargeDelay = new GameTimer((long) (KNIGHT_CHARGE_DELAY*1000), args -> {
             charge();
         }, false);
         chargeDelay.start();
