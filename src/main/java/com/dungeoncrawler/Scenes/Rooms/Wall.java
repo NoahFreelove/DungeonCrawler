@@ -9,10 +9,9 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
 
 public class Wall extends Sprite {
-    private GameImage image;
     public Wall(Vector2 pos, Vector2 scale) {
         super(new Transform(new Vector3(pos,0), Vector3.emptyVector(), new Vector3(1,1,1)), null, new Identity("wall"));
-        image = new GameImage("bin/wall.png", (int) (64*scale.x), (int) (64*scale.y));
+        GameImage image = new GameImage("bin/wall.png", (int) (64 * scale.x), (int) (64 * scale.y));
         image.setTiled(true);
         image.setTileSizeX(128);
         image.setTileSizeY(128);

@@ -8,8 +8,10 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.ImageProcessingEffects.GameLight;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
+import javafx.scene.paint.Color;
 
 public class Projectile extends Pawn {
     float moveSpeed;
@@ -19,17 +21,21 @@ public class Projectile extends Pawn {
     ProjectileCollider collider;
     Light.Point projectileLight;
     Lighting lightSource;
+    GameLight gl;
     public Projectile(Vector3 pos, Vector3 rot, Vector2 moveDirection, double damage, float moveSpeed, GameImage sprite) {
-        super(new Transform(pos, rot, Vector3.oneVector()), sprite, new Identity("arrow"));
+        super(new Transform(pos, rot, Vector3.oneVector()), sprite, new Identity("projectile"));
         this.direction = moveDirection;
         this.damage = damage;
         collider = new ProjectileCollider(Vector3.emptyVector(), 32,32, this);
         this.moveSpeed = moveSpeed;
         addComponent(collider);
         projectileLight = new Light.Point();
-        projectileLight.setColor(javafx.scene.paint.Color.WHITE);
-        projectileLight.setX(pos.x);
-        projectileLight.setY(pos.y);
+        projectileLight.setColor(Color.web("#FFD580"));
+
+        double xOffset = getPosition().x/256*128;
+        double yOffset = getPosition().y/256*128;
+        projectileLight.setX(getPosition().x+xOffset+moveSpeed);
+        projectileLight.setY(getPosition().y+yOffset+moveSpeed);
         projectileLight.setZ(50);
         lightSource = new Lighting();
 
@@ -38,8 +44,8 @@ public class Projectile extends Pawn {
         lightSource.setDiffuseConstant(0.5);
         lightSource.setSpecularConstant(0.5);
         lightSource.setSurfaceScale(0.5);
-
-        SceneManager.getActiveScene().addLight(lightSource);
+        gl = new GameLight(lightSource, false);
+        SceneManager.getActiveScene().addLight(gl);
     }
 
     @Override
@@ -71,6 +77,6 @@ public class Projectile extends Pawn {
                 comp.setActive(false);
             }
         }
-        SceneManager.getActiveScene().removeLight(lightSource);
+        SceneManager.getActiveScene().removeLight(gl);
     }
 }

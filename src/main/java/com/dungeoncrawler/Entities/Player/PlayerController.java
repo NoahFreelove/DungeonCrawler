@@ -39,6 +39,8 @@ public class PlayerController extends Player {
     private double health = 20;
     private int maxHealth = 20;
     private int roomsCleared = 0;
+    private boolean hasShield = true;
+    private Shield shieldInstance;
 
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private float moveSpeed = 15f;
@@ -81,6 +83,7 @@ public class PlayerController extends Player {
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         addComponent(new DontDestroyOnLoad_Comp());
         setupUI();
+
     }
 
     public PlayerController(Vector3 pos) {
@@ -220,6 +223,15 @@ public class PlayerController extends Player {
         exp -= amount;
     }
     public void takeDamage(double amount) {
+        if(hasShield)
+        {
+            if(shieldInstance != null)
+            {
+                shieldInstance.destroy();
+                hasShield = false;
+                return;
+            }
+        }
         health -= amount;
         GameTimer hurtEffect = new GameTimer(150, args -> getSprite().setColorAdjust(new ColorAdjust()),true);
         getSprite().setColorAdjust(new ColorAdjust(1,1,0.5,1));
@@ -398,5 +410,15 @@ public class PlayerController extends Player {
             PlayerController.instance = null;
             Main.createMainMenu();
         });
+    }
+
+    public void addShield(Shield instance) {
+        this.hasShield = true;
+        this.shieldInstance = instance;
+        SceneManager.getActiveScene().add(instance);
+    }
+
+    public boolean hasShield() {
+        return hasShield;
     }
 }

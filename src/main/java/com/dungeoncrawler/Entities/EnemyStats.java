@@ -4,7 +4,7 @@ public record EnemyStats() {
     //region Follower
     public static final float FOLLOWER_SPEED = 3;
     public static final double FOLLOWER_DAMAGE = 5;
-    public static final double FOLLOWER_ATTACK_DELAY = 5;
+    public static final double FOLLOWER_ATTACK_DELAY = 3;
     public static final double FOLLOWER_MAX_HEALTH = 25;
     public static final String FOLLOWER_IMAGE_PATH = "bin/follower.png";
     public static final int FOLLOWER_DIFFICULTY = 1;
@@ -13,7 +13,7 @@ public record EnemyStats() {
     //region Shooter
     public static final float SHOOTER_PROJECTILE_SPEED = 8;
     public static final double SHOOTER_DAMAGE = 5;
-    public static final double SHOOTER_ATTACK_DELAY = 1;
+    public static final double SHOOTER_ATTACK_DELAY = 1.5f;
     public static final double SHOOTER_MAX_HEALTH = 15;
     public static final String SHOOTER_IMAGE_PATH = "bin/shooter.png";
     public static final String SHOOTER_PROJECTILE_IMAGE_PATH = "bin/50bmg.png";

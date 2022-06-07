@@ -10,6 +10,7 @@ import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.ImageProcessingEffects.ShakeScreen;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Entities.Player.Shield;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
 import javafx.application.Application;
@@ -34,15 +35,22 @@ public class Main extends Application {
 
             Main.stage = stage;
             stage.addEventHandler(KEY_PRESSED, (e) -> {
-                if(e.getCode() == KeyCode.ESCAPE){
+                if (e.getCode() == KeyCode.ESCAPE) {
                     GameUtility.exitApp();
                 }
-                if(e.getCode() == KeyCode.F1){
+                if (e.getCode() == KeyCode.F1) {
                     PlayerController.removePlayer();
                     createMainMenu();
                 }
-                if(e.getCode() == KeyCode.F2){
+                if (e.getCode() == KeyCode.F2) {
                     ShakeScreen.shake(50, 2);
+                }
+                if (e.getCode() == KeyCode.F3)
+                {
+                    if(PlayerController.instance !=null)
+                    {
+                        PlayerController.instance.addShield(new Shield());
+                    }
                 }
             });
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);

@@ -31,6 +31,7 @@ public class Shooter extends Enemy{
             shootTimer.start();
         }
         super.Update();
+        setRotation(new Vector3((float) facePlayer(),0,0));
     }
 
     private void shoot(){
