@@ -43,7 +43,7 @@ public class Main extends Application {
                     createMainMenu();
                 }
                 if (e.getCode() == KeyCode.F2) {
-                    ShakeScreen.shake(50, 2);
+                    SceneManager.getActiveScene().generateLightEffect();
                 }
                 if (e.getCode() == KeyCode.F3)
                 {

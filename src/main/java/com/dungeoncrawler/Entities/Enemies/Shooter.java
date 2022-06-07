@@ -11,6 +11,7 @@ import static com.dungeoncrawler.Entities.EnemyStats.*;
 
 public class Shooter extends Enemy{
     GameTimer shootTimer = new GameTimer((long) (SHOOTER_ATTACK_DELAY*1000), args -> shoot(), true);
+    private boolean inRoom;
     public Shooter(Vector3 initPos) {
         super(initPos, new GameImage(SHOOTER_IMAGE_PATH),
                 SHOOTER_DAMAGE, SHOOTER_MAX_HEALTH, SHOOTER_ATTACK_DELAY, SHOOTER_DIFFICULTY);
@@ -19,7 +20,7 @@ public class Shooter extends Enemy{
     @Override
     public void activate(GameScene room){
         shootTimer = new GameTimer((long) (SHOOTER_ATTACK_DELAY*1000), args -> shoot());
-
+        inRoom = true;
         super.activate(room);
     }
 
@@ -37,13 +38,15 @@ public class Shooter extends Enemy{
     private void shoot(){
         if(PlayerController.instance == null)
             return;
-
+        if(!inRoom)
+            return;
         SceneManager.getActiveScene().add(new EnemyProjectile(getPosition(), Math.toDegrees(playerPositionToRadians()), SHOOTER_DAMAGE, SHOOTER_PROJECTILE_SPEED, new GameImage(SHOOTER_PROJECTILE_IMAGE_PATH)));
     }
 
     @Override
     public void OnUnload(){
         shootTimer.stop();
+        inRoom = false;
     }
 
     @Override

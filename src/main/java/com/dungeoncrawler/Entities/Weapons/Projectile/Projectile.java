@@ -32,8 +32,8 @@ public class Projectile extends Pawn {
         projectileLight = new Light.Point();
         projectileLight.setColor(Color.web("#FFD580"));
 
-        double xOffset = getPosition().x/256*128;
-        double yOffset = getPosition().y/256*128;
+        double xOffset = 0;
+        double yOffset = 0;
         projectileLight.setX(getPosition().x+xOffset+moveSpeed);
         projectileLight.setY(getPosition().y+yOffset+moveSpeed);
         projectileLight.setZ(50);
@@ -60,10 +60,10 @@ public class Projectile extends Pawn {
         }
 
         Move(direction, moveSpeed);
-        double xOffset = getPosition().x/256*128;
-        double yOffset = getPosition().y/256*128;
-        projectileLight.setX(getPosition().x+xOffset+moveSpeed);
-        projectileLight.setY(getPosition().y+yOffset+moveSpeed);
+        double xOffset = 0;
+        double yOffset =0;
+        projectileLight.setX(getPosition().x+xOffset);
+        projectileLight.setY(getPosition().y+yOffset);
     }
 
     public double getDamage(){ return damage;}

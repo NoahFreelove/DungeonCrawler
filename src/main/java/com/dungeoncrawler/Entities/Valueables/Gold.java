@@ -30,10 +30,8 @@ public class Gold extends Pawn {
         goldLight.setColor(Color.YELLOW);
         Lighting lightSource;
 
-        double xOffset = getPosition().x/256*128;
-        double yOffset = getPosition().y/256*128;
-        goldLight.setX(getPosition().x+xOffset+16);
-        goldLight.setY(getPosition().y+yOffset+16);
+        goldLight.setX(getPosition().x+16);
+        goldLight.setY(getPosition().y+16);
         goldLight.setZ(50);
         lightSource = new Lighting();
 

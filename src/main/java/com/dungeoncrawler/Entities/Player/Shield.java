@@ -21,10 +21,8 @@ public class Shield extends Sprite {
         projectileLight = new Light.Point();
         projectileLight.setColor(Color.CYAN);
 
-        double xOffset = getPosition().x/256*128;
-        double yOffset = getPosition().y/256*128;
-        projectileLight.setX(getPosition().x+xOffset);
-        projectileLight.setY(getPosition().y+yOffset);
+        projectileLight.setX(getPosition().x);
+        projectileLight.setY(getPosition().y);
         projectileLight.setZ(50);
         lightSource = new Lighting();
 
@@ -40,9 +38,7 @@ public class Shield extends Sprite {
 
     public void destroy(){
         SceneManager.getActiveScene().removeLight(gl);
-        gl.keepOnSceneSwitch = false;
-        gl = null;
-        lightSource = null;
+        lightSource = new Lighting(null);
         setActive(false);
     }
 
@@ -52,9 +48,9 @@ public class Shield extends Sprite {
             return;
         super.Update();
         setPosition(PlayerController.instance.getPosition().add(-16));
-        double xOffset = PlayerController.instance.getPosition().x/256*128;
-        double yOffset = PlayerController.instance.getPosition().y/256*128;
-        projectileLight.setX(PlayerController.instance.getPosition().x+xOffset+32);
-        projectileLight.setY(PlayerController.instance.getPosition().y+yOffset+32);
+        /*double xOffset = PlayerController.instance.getPosition().x/256*128;
+        double yOffset = PlayerController.instance.getPosition().y/256*128;*/
+        projectileLight.setX(PlayerController.instance.getPosition().x+0+32);
+        projectileLight.setY(PlayerController.instance.getPosition().y+0+32);
     }
 }
