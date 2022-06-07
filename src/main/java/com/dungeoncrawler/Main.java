@@ -7,6 +7,7 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
+import com.JEngine.Utility.ImageProcessingEffects.ShakeScreen;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Scenes.ColorManager;
@@ -40,6 +41,9 @@ public class Main extends Application {
                     PlayerController.removePlayer();
                     createMainMenu();
                 }
+                if(e.getCode() == KeyCode.F2){
+                    ShakeScreen.shake(50, 2);
+                }
             });
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
             createMainMenu();
@@ -60,6 +64,7 @@ public class Main extends Application {
     public static void createMainMenu(){
         window.setTargetFPS(30);
         MainMenu mainMenu = new MainMenu();
+
         new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam")); // Create the main menu camera
         SceneManager.switchScene(mainMenu, true);
         // Create our window

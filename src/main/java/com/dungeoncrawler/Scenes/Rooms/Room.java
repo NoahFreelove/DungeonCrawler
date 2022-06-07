@@ -1,7 +1,11 @@
 package com.dungeoncrawler.Scenes.Rooms;
 
+import com.JEngine.Core.GameImage;
+import com.JEngine.Core.Identity;
+import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
+import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
@@ -10,11 +14,11 @@ import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Shop;
 
 public class Room extends GameScene {
-    boolean isSpawnRoom = false;
-    boolean isBossRoom = false;
-    boolean isShopRoom = false;
-    int xPos = 0;
-    int yPos = 0;
+    boolean isSpawnRoom;
+    boolean isBossRoom;
+    boolean isShopRoom;
+    int xPos;
+    int yPos;
     int enemyCount = 0;
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, RoomType roomType, int x, int y) {
         super("Room");
@@ -23,7 +27,13 @@ public class Room extends GameScene {
         this.isShopRoom = (roomType == RoomType.SHOP);
         this.xPos = x;
         this.yPos = y;
+        GameImage floor = new GameImage("bin/floor.png", 1280,720);
+        floor.setTiled(true);
+        floor.setTileSizeX(128);
+        floor.setTileSizeY(128);
+        add(new Sprite(Transform.simpleTransform(0,0,-500),floor, new Identity("floor")));
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
+        setEnableLighting(true);
     }
 
     public void CreateRoom(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor){

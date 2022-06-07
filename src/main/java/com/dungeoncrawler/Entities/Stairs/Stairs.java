@@ -5,13 +5,13 @@ import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
-import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 
 public class Stairs extends Pawn {
     public boolean usedStairs = false;
     public Stairs() {
         super(Transform.simpleTransform(500,350,-500), new GameImage("bin/stairs.png"), new Identity("stairs"));
         addCollider(new StairsCollider(Vector3.emptyVector(), 64,64, this));
+
     }
 
     @Override

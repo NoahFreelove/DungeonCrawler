@@ -3,7 +3,6 @@ package com.dungeoncrawler.Entities.Enemies.Bosses;
 import com.JEngine.Components.Pathfinding_Comp;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
-import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import javafx.scene.effect.ColorAdjust;

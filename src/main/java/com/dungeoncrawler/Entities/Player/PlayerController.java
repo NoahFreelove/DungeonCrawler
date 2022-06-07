@@ -7,6 +7,7 @@ import com.JEngine.Core.Position.*;
 import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.ImageProcessingEffects.ShakeScreen;
 import com.JEngine.Utility.Input;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Weapons.*;
@@ -223,6 +224,8 @@ public class PlayerController extends Player {
         GameTimer hurtEffect = new GameTimer(150, args -> getSprite().setColorAdjust(new ColorAdjust()),true);
         getSprite().setColorAdjust(new ColorAdjust(1,1,0.5,1));
         hurtEffect.start();
+        ShakeScreen.shake(25, 0.150);
+
     }
     public void heal(double amount) {
         health += amount;

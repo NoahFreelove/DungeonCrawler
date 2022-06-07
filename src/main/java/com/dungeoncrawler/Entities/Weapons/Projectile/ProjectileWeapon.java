@@ -7,14 +7,15 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Weapons.Weapon;
-
-import static com.dungeoncrawler.Entities.Weapons.WeaponStats.*;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
 
 public class ProjectileWeapon extends Weapon {
 
     private float projectileSpeed;
     private GameImage projectileImage;
     private Vector2 offset;
+
     public ProjectileWeapon(Vector3 pos, Vector2 offset, float damage, double shootDelay, GameImage image, double rewardMultiplier, float projectileSpeed, GameImage projectileImage) {
         super(damage, shootDelay, pos, image, rewardMultiplier);
         this.projectileImage = projectileImage;
