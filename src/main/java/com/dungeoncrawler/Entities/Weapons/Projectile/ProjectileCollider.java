@@ -22,6 +22,7 @@ public class ProjectileCollider extends Collider_Comp {
             parent.destroySelf();
             if (PlayerController.instance != null) {
                 PlayerController.instance.setAttacking(false);
+                PlayerController.instance.onHurtEnemy();
             }
         }
     }

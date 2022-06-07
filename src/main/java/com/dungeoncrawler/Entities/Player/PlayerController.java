@@ -7,6 +7,7 @@ import com.JEngine.Core.Position.*;
 import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.ImageProcessingEffects.ShakeScreen;
 import com.JEngine.Utility.Input;
 import com.JEngine.Utility.Misc.GameTimer;
@@ -23,6 +24,7 @@ import com.JEngine.Core.Position.SimpleDirection;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 
 public class PlayerController extends Player {
@@ -32,6 +34,7 @@ public class PlayerController extends Player {
     private String name = "Player";
     private int gold = 0;
     private int gameLevel = 1;
+    public static int gameLevelToWin = 20;
     private int playerLevel = 1;
     private int exp = 0;
     private int expToNextLevel = 10;
@@ -47,6 +50,9 @@ public class PlayerController extends Player {
     private boolean isAttacking;
     private Weapon selectedWeapon;
     private boolean wasdMovement = true;
+
+    private double superCharge = 1;
+    private SuperAbilityType superAbility = SuperAbilityType.FIRE;
 
     // UI
     private Group playerUI = new Group();
@@ -237,6 +243,7 @@ public class PlayerController extends Player {
         getSprite().setColorAdjust(new ColorAdjust(1,1,0.5,1));
         hurtEffect.start();
         ShakeScreen.shake(25, 0.150);
+        addSuperCharge(0.05);
 
     }
     public void heal(double amount) {
@@ -311,7 +318,7 @@ public class PlayerController extends Player {
         xpText.setFill(ColorManager.boldText);
         xpText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
-        gameLevelText = new Text("Dungeon #"+gameLevel);
+        gameLevelText = new Text("Floor "+ (PlayerController.gameLevelToWin - gameLevel));
         gameLevelText.setTranslateX(1080-10);
         gameLevelText.setTranslateY(40);
         gameLevelText.setFill(ColorManager.textColor);
@@ -335,7 +342,7 @@ public class PlayerController extends Player {
         healthText.setText("Health: "+ health);
         goldText.setText("Gold: " + gold);
         xpText.setText(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
-        gameLevelText.setText("Dungeon #"+ gameLevel);
+        gameLevelText.setText("Floor "+ (PlayerController.gameLevelToWin - gameLevel));
 
     }
     public void setSelectedWeapon(Weapon w) {
@@ -347,8 +354,11 @@ public class PlayerController extends Player {
         SceneManager.getActiveScene().add(w);
     }
 
-    private void setWeaponAnimatePos(){
-
+    @Override
+    public void onKeyReleased(KeyCode key) {
+        if(key == KeyCode.ENTER || key == KeyCode.Q){
+            useSuper();
+        }
     }
 
     public boolean isAttacking() {
@@ -418,7 +428,28 @@ public class PlayerController extends Player {
         SceneManager.getActiveScene().add(instance);
     }
 
-    public boolean hasShield() {
-        return hasShield;
+    private void useSuper(){
+        if(superCharge>=1) {
+            if (superAbility != null)
+            {
+                switch (superAbility)
+                {
+                    case FIRE-> new FireAbility();
+                    case ICE-> new IceAbility();
+                }
+                superCharge = 0;
+            }
+        }
+    }
+    private void addSuperCharge(double amount) {
+        superCharge += GameMath.clamp(0, 1, (float) amount);
+        if (superCharge > 1)
+        {
+            superCharge = 1;
+        }
+    }
+
+    public void onHurtEnemy(){
+        addSuperCharge(0.02);
     }
 }

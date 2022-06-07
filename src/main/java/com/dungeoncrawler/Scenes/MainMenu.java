@@ -14,8 +14,12 @@ import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameUtility;
+import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.SaveManager;
+import com.dungeoncrawler.Scenes.Rooms.Room;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
+import com.dungeoncrawler.Speech.DungeonStartSpeeches;
+import com.dungeoncrawler.Speech.SpeechManager;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
@@ -100,7 +104,7 @@ public class MainMenu extends GameScene {
         if(new File("bin/save.dat").exists())
         {
             String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
-            Button loadButton = new Button("Load Game: '" + saveData[0] + "'\n(Dungeon #" + saveData[1] + ")");
+            Button loadButton = new Button("Load Game: '" + saveData[0] + "'\n(Floor " + (PlayerController.gameLevelToWin+1-Integer.parseInt(saveData[1])) + ")");
             loadButton.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
             loadButton.setMinWidth(400);
             loadButton.setTranslateX(440);
@@ -140,6 +144,8 @@ public class MainMenu extends GameScene {
 
             GameWindow.getInstance().setTargetFPS(60);
             SceneManager.switchScene(RoomManager.rooms[0][0]);
+            RoomManager.speechManager.addSpeech(DungeonStartSpeeches.speeches[GameMath.clamp(1, DungeonStartSpeeches.speeches.length-1,level)]);
+            RoomManager.speechManager.startSpeech();
 
         }catch (Exception ignored){}
     }

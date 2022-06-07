@@ -38,6 +38,7 @@ public class Main extends Application {
                 if (e.getCode() == KeyCode.ESCAPE) {
                     GameUtility.exitApp();
                 }
+
                 if (e.getCode() == KeyCode.F1) {
                     PlayerController.removePlayer();
                     createMainMenu();
