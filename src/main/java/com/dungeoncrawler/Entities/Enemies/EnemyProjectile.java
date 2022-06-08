@@ -13,6 +13,7 @@ public class EnemyProjectile extends Pawn {
     private int life = 180;
     private float moveSpeed;
     private final double damage;
+    public boolean canMove;
 
     // Make collider a bit smaller than the bullet because it's hard to dodge them all
     EnemyProjectileCollider ec = new EnemyProjectileCollider(Vector3.emptyVector(), 24,24,true,this);
@@ -22,6 +23,7 @@ public class EnemyProjectile extends Pawn {
         this.moveSpeed = moveSpeed;
         addCollider(ec);
         this.damage = damage;
+        this.canMove = true;
     }
 
     private Vector2 angleToVector(double radian){
@@ -30,6 +32,8 @@ public class EnemyProjectile extends Pawn {
 
     @Override
     public void Update() {
+        if(!canMove)
+            return;
         life--;
         if (life <= 0)
         {

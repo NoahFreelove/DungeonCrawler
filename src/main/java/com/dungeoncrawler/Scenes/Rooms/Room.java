@@ -8,10 +8,13 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
+import com.JEngine.Utility.IO.FileOperations;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
 import com.dungeoncrawler.Entities.Enemies.Follower;
 import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Shop;
+
+import java.io.File;
 
 public class Room extends GameScene {
     boolean isSpawnRoom;
@@ -142,7 +145,9 @@ public class Room extends GameScene {
     }
 
     private void createShop(){
-        add(new Shop(this));
+        String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
+        int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
+        add(new Shop(this, level));
     }
 
     public int getEnemyCount() {

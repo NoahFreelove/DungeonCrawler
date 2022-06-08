@@ -47,6 +47,8 @@ public class EnemyProjectileCollider extends Collider_Comp {
     public void onHit(Collider_Comp other) {
         switch (other.getParent().getIdentity().getTag()) {
             case "player"->{
+                if(!parent.canMove)
+                    return;
                 parent.onHit();
                 ((PlayerController)other.getParent()).takeDamage(parent.getDamage());
             }

@@ -11,6 +11,10 @@ import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.ImageProcessingEffects.ShakeScreen;
 import com.JEngine.Utility.Input;
 import com.JEngine.Utility.Misc.GameTimer;
+import com.dungeoncrawler.Entities.Player.Abilities.FireAbility;
+import com.dungeoncrawler.Entities.Player.Abilities.IceAbility;
+import com.dungeoncrawler.Entities.Player.Abilities.Shield;
+import com.dungeoncrawler.Entities.Player.Abilities.AbilityType;
 import com.dungeoncrawler.Entities.Weapons.*;
 import com.dungeoncrawler.Entities.Weapons.Melee.Boomerang;
 import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
@@ -26,6 +30,8 @@ import javafx.scene.Group;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
+
+import static com.dungeoncrawler.Entities.Player.Abilities.AbilityStats.SHIELD_STRENGTH;
 
 public class PlayerController extends Player {
     public static PlayerController instance;
@@ -52,7 +58,7 @@ public class PlayerController extends Player {
     private boolean wasdMovement = true;
 
     private double superCharge = 1;
-    private SuperAbilityType superAbility = SuperAbilityType.FIRE;
+    private AbilityType superAbility = AbilityType.SHIELD;
 
     // UI
     private Group playerUI = new Group();
@@ -234,17 +240,19 @@ public class PlayerController extends Player {
             if(shieldInstance != null)
             {
                 shieldInstance.destroy();
-                hasShield = false;
                 return;
             }
         }
         health -= amount;
+
+        playHitEffect();
+    }
+    public void playHitEffect(){
         GameTimer hurtEffect = new GameTimer(150, args -> getSprite().setColorAdjust(new ColorAdjust()),true);
         getSprite().setColorAdjust(new ColorAdjust(1,1,0.5,1));
         hurtEffect.start();
         ShakeScreen.shake(25, 0.150);
         addSuperCharge(0.05);
-
     }
     public void heal(double amount) {
         health += amount;
@@ -427,6 +435,10 @@ public class PlayerController extends Player {
         this.shieldInstance = instance;
         SceneManager.getActiveScene().add(instance);
     }
+    public void removeShield(){
+        this.hasShield = false;
+        this.shieldInstance = null;
+    }
 
     private void useSuper(){
         if(superCharge>=1) {
@@ -436,8 +448,9 @@ public class PlayerController extends Player {
                 {
                     case FIRE-> new FireAbility();
                     case ICE-> new IceAbility();
+                    case SHIELD -> addShield(new Shield(SHIELD_STRENGTH));
                 }
-                superCharge = 0;
+                //superCharge = 0;
             }
         }
     }
@@ -447,6 +460,11 @@ public class PlayerController extends Player {
         {
             superCharge = 1;
         }
+    }
+
+    public void setSuperAbility(AbilityType ability)
+    {
+        this.superAbility = ability;
     }
 
     public void onHurtEnemy(){

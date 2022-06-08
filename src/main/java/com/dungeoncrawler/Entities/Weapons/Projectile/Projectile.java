@@ -9,6 +9,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessingEffects.GameLight;
+import javafx.scene.Scene;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;

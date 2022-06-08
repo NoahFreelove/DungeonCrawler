@@ -42,6 +42,8 @@ public class Turret extends Boss{
     @Override
     public void Update(){
         super.Update();
+        if(!canMove)
+            return;
         setRotation(new Vector3((float) facePlayer(),0,0));
     }
 
@@ -59,7 +61,8 @@ public class Turret extends Boss{
             return;
         if(!isAlive)
             return;
-
+        if(!canAttack())
+            return;
         SceneManager.getActiveScene().add(new EnemyProjectile(new Vector3(getPosition().x + 48, getPosition().y + 48, getPosition().z), Math.toDegrees(playerPositionToRadians()), TURRET_DAMAGE, TURRET_PROJECTILE_SPEED, new GameImage(TURRET_PROJECTILE_IMAGE_PATH)));
     }
 

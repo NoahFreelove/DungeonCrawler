@@ -7,10 +7,9 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
-import com.JEngine.Utility.ImageProcessingEffects.ShakeScreen;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
-import com.dungeoncrawler.Entities.Player.Shield;
+import com.dungeoncrawler.Entities.Player.Abilities.Shield;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
 import javafx.application.Application;
@@ -50,7 +49,7 @@ public class Main extends Application {
                 {
                     if(PlayerController.instance !=null)
                     {
-                        PlayerController.instance.addShield(new Shield());
+                        PlayerController.instance.addShield(new Shield(1));
                     }
                 }
             });

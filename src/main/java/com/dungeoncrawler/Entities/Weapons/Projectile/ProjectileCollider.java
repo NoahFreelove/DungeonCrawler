@@ -25,5 +25,8 @@ public class ProjectileCollider extends Collider_Comp {
                 PlayerController.instance.onHurtEnemy();
             }
         }
+        if("wall".equals(other.getParent().getIdentity().getTag())){
+            parent.destroySelf();
+        }
     }
 }

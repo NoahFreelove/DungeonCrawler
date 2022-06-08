@@ -29,6 +29,7 @@ public class RoomManager {
     public static SpeechManager speechManager;
     public static boolean inTutorial = false;
     private static Enemy tutorialEnemy = new Follower(new Vector3(0,0,0));
+    public static Room currentRoom;
 
     public static void CreateRooms(int width, int height, int overallDifficulty) {
         currentRoomY = 0;
@@ -93,6 +94,7 @@ public class RoomManager {
                 Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4]), saveData[6]));
         rooms[0][0].add(speechManager);
         SceneManager.getWindow().setBackgroundColor(ColorManager.backgroundColor);
+        currentRoom = rooms[currentRoomX][currentRoomY];
     }
 
     public static void CreateTutorial(){
@@ -133,6 +135,7 @@ public class RoomManager {
         }
 
         tutorialSpeechCheck();
+        currentRoom = rooms[currentRoomX][currentRoomY];
     }
 
     private static void tutorialSpeechCheck(){

@@ -22,7 +22,11 @@ public class Follower extends Enemy{
     public void Update(){
         super.Update();
         if(!canMove)
+        {
+            pathfinding_comp.setMoveSpeed(0);
             return;
+        }
+        pathfinding_comp.setMoveSpeed(FOLLOWER_SPEED);
         pathfinding_comp.setTarget(PlayerController.instance);
         setRotation(new Vector3((float) facePlayer(),0,0));
     }

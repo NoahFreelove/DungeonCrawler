@@ -1,4 +1,4 @@
-package com.dungeoncrawler.Entities.Player;
+package com.dungeoncrawler.Entities.Player.Abilities;
 
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;
@@ -8,6 +8,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessingEffects.GameLight;
+import com.dungeoncrawler.Entities.Player.PlayerController;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
@@ -17,7 +18,8 @@ public class Shield extends Sprite {
     Light.Point projectileLight;
     Lighting lightSource;
     private GameLight gl;
-    public Shield() {
+    private int hits = 1;
+    public Shield(int hits) {
         super(Transform.simpleTransform(new Vector3(0,0,0)), new GameImage("bin/shield.png"), new Identity("shield"));
         projectileLight = new Light.Point();
         projectileLight.setColor(Color.CYAN);
@@ -32,16 +34,20 @@ public class Shield extends Sprite {
         lightSource.setDiffuseConstant(3);
         lightSource.setSpecularConstant(0.5);
         lightSource.setSurfaceScale(0.5);
+        this.hits = hits;
         gl = new GameLight(lightSource,true);
         SceneManager.getActiveScene().addLight(gl);
-        Rectangle rect = new Rectangle(640-32,360-32,64,64);
-        rect.setFill(Color.RED);
-        SceneManager.getActiveScene().addUI(rect);
+
         addComponent(new DontDestroyOnLoad_Comp());
     }
 
     public void destroy(){
+        hits--;
+        PlayerController.instance.playHitEffect();
+        if(hits>=1)
+            return;
         SceneManager.getActiveScene().removeLight(gl);
+        PlayerController.instance.removeShield();
         lightSource = new Lighting(null);
         setActive(false);
     }
@@ -52,12 +58,10 @@ public class Shield extends Sprite {
             return;
         super.Update();
         setPosition(PlayerController.instance.getPosition().add(-16));
-        /*double xOffset = PlayerController.instance.getPosition().x/256*128;
-        double yOffset = PlayerController.instance.getPosition().y/256*128;*/
-        /*projectileLight.setX(PlayerController.instance.getPosition().x+0+32);
-        projectileLight.setY(PlayerController.instance.getPosition().y+0+32);*/
-        System.out.println(projectileLight.getX() + " : " + projectileLight.getY());
-        projectileLight.setX(640);
-        projectileLight.setY(360);
+        double xOffset = PlayerController.instance.getPosition().x/256*128;
+        double yOffset = PlayerController.instance.getPosition().y/256*128;
+        projectileLight.setX(PlayerController.instance.getPosition().x+0+32);
+        projectileLight.setY(PlayerController.instance.getPosition().y+0+32);
+
     }
 }
