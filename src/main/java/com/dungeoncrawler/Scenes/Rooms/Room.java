@@ -9,8 +9,10 @@ import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
+import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
 import com.dungeoncrawler.Entities.Enemies.Follower;
+import com.dungeoncrawler.Entities.Enemies.Frog;
 import com.dungeoncrawler.Entities.Enemies.Shooter;
 import com.dungeoncrawler.Entities.Shop;
 
@@ -128,7 +130,7 @@ public class Room extends GameScene {
                 pos.x = 1000;
                 pos.y = 450;
             }
-            int rand = GameMath.randRangeInclusive(0,1);
+            int rand = GameMath.randRangeInclusive(0,2);
             if(rand == 0){
                 add(new Follower(pos));
             }
@@ -136,12 +138,22 @@ public class Room extends GameScene {
             {
                 add(new Shooter(pos));
             }
+            else if(rand == 2)
+            {
+                add(new Frog(pos));
+            }
             i++;
         }
     }
 
     private void createBoss(){
-        add(new Turret(new Vector3(1150-300,300), xPos, yPos));
+        int rand = GameMath.randRangeInclusive(0,1);
+        //System.out.println(rand);
+        switch (rand)
+        {
+            case 0 -> add(new Knight(new Vector3(1150-300,300), xPos, yPos));
+            case 1 -> add(new Turret(new Vector3(1150-300,300), xPos, yPos));
+        }
     }
 
     private void createShop(){

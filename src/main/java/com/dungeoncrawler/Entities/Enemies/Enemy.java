@@ -12,17 +12,11 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
-import com.dungeoncrawler.Entities.Valueables.Gold;
-import com.dungeoncrawler.Scenes.ColorManager;
+import com.dungeoncrawler.Entities.Items.Gold;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 
 public class Enemy extends Pawn {
     private final double damage;

@@ -9,6 +9,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessingEffects.GameLight;
+import com.dungeoncrawler.Main;
 import javafx.scene.Scene;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
@@ -63,6 +64,11 @@ public class Projectile extends Pawn {
         Move(direction, moveSpeed);
         double xOffset = 0;
         double yOffset =0;
+        if(Main.lightingOffset)
+        {
+            yOffset = getPosition().y/256*128;
+            xOffset = getPosition().x/256*128;
+        }
         projectileLight.setX(getPosition().x+xOffset);
         projectileLight.setY(getPosition().y+yOffset);
     }

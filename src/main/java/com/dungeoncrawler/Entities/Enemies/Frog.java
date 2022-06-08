@@ -30,7 +30,11 @@ public class Frog extends Enemy{
     public void Update(){
         super.Update();
         if(!canMove)
+        {
+            pathfinding_comp.setMoveSpeed(0);
             return;
+        }
+        pathfinding_comp.setMoveSpeed(FROG_SPEED);
         setRotation(new Vector3((float) facePlayer(),0,0));
     }
 

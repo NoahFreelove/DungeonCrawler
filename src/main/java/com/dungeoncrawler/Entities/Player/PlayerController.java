@@ -58,7 +58,7 @@ public class PlayerController extends Player {
     private boolean wasdMovement = true;
 
     private double superCharge = 1;
-    private AbilityType superAbility = AbilityType.SHIELD;
+    private AbilityType superAbility = AbilityType.ICE;
 
     // UI
     private Group playerUI = new Group();
@@ -137,55 +137,63 @@ public class PlayerController extends Player {
     }
 
     private void checkInput() {
-        if (Input.UArrow_Pressed) {
-            MoveUp();
-            if (wasdMovement) {
-                directionFacing = SimpleDirection.UP;
-            }
-        }
-        if (Input.DArrow_Pressed) {
-            MoveDown();
-            if (wasdMovement) {
-                directionFacing = SimpleDirection.DOWN;
-            }
-        }
-
-        if (Input.LArrow_Pressed) {
-            MoveLeft();
-            if (wasdMovement) {
-                directionFacing = SimpleDirection.LEFT;
-            }
-        }
-
-        if (Input.RArrow_Pressed) {
-            MoveRight();
-            if (wasdMovement) {
-                directionFacing = SimpleDirection.RIGHT;
-            }
-        }
-        if (Input.W_Pressed) {
-            directionFacing = SimpleDirection.UP;
-            if (wasdMovement) {
-
+        if (Input.Up) {
+            if (Input.UArrow_Pressed) {
                 MoveUp();
+                if (wasdMovement) {
+                    directionFacing = SimpleDirection.UP;
+                }
+            }
+            else if (Input.W_Pressed) {
+                directionFacing = SimpleDirection.UP;
+                if (wasdMovement) {
+
+                    MoveUp();
+                }
             }
         }
-        if (Input.S_Pressed) {
-            directionFacing = SimpleDirection.DOWN;
-            if (wasdMovement) {
+        if(Input.Down)
+        {
+            if (Input.DArrow_Pressed) {
                 MoveDown();
+                if (wasdMovement) {
+                    directionFacing = SimpleDirection.DOWN;
+                }
+            }
+            else if (Input.S_Pressed) {
+                directionFacing = SimpleDirection.DOWN;
+                if (wasdMovement) {
+                    MoveDown();
+                }
             }
         }
-        if (Input.A_Pressed) {
-            directionFacing = SimpleDirection.LEFT;
-            if (wasdMovement) {
+        if(Input.Left)
+        {
+            if (Input.LArrow_Pressed) {
                 MoveLeft();
+                if (wasdMovement) {
+                    directionFacing = SimpleDirection.LEFT;
+                }
+            }else if (Input.A_Pressed) {
+                directionFacing = SimpleDirection.LEFT;
+                if (wasdMovement) {
+                    MoveLeft();
+                }
             }
         }
-        if (Input.D_Pressed) {
-            directionFacing = SimpleDirection.RIGHT;
-            if (wasdMovement) {
+
+        if(Input.Right){
+            if (Input.RArrow_Pressed) {
                 MoveRight();
+                if (wasdMovement) {
+                    directionFacing = SimpleDirection.RIGHT;
+                }
+            }
+            else if (Input.D_Pressed) {
+                directionFacing = SimpleDirection.RIGHT;
+                if (wasdMovement) {
+                    MoveRight();
+                }
             }
         }
     }
@@ -441,6 +449,10 @@ public class PlayerController extends Player {
     }
 
     private void useSuper(){
+        if(gameLevel<6)
+        {
+            return;
+        }
         if(superCharge>=1) {
             if (superAbility != null)
             {

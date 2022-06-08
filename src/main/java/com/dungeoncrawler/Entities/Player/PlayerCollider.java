@@ -3,7 +3,7 @@ package com.dungeoncrawler.Entities.Player;
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
-import com.dungeoncrawler.Entities.Valueables.Gold;
+import com.dungeoncrawler.Entities.Items.Gold;
 
 public class PlayerCollider extends Collider_Comp {
     PlayerController player;

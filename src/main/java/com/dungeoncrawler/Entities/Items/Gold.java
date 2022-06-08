@@ -1,4 +1,4 @@
-package com.dungeoncrawler.Entities.Valueables;
+package com.dungeoncrawler.Entities.Items;
 
 import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Core.GameImage;
@@ -8,6 +8,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessingEffects.GameLight;
+import com.dungeoncrawler.Main;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
@@ -30,8 +31,16 @@ public class Gold extends Pawn {
         goldLight.setColor(Color.YELLOW);
         Lighting lightSource;
 
-        goldLight.setX(getPosition().x+16);
-        goldLight.setY(getPosition().y+16);
+        double xOffset = 0;
+        double yOffset =0;
+        if(Main.lightingOffset)
+        {
+            yOffset = getPosition().y/256*128;
+            xOffset = getPosition().x/256*128;
+        }
+
+        goldLight.setX(getPosition().x+16 + xOffset);
+        goldLight.setY(getPosition().y+16 + yOffset);
         goldLight.setZ(50);
         lightSource = new Lighting();
 

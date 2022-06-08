@@ -9,6 +9,7 @@ import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessingEffects.GameLight;
 import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Main;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
@@ -20,7 +21,7 @@ public class Shield extends Sprite {
     private GameLight gl;
     private int hits = 1;
     public Shield(int hits) {
-        super(Transform.simpleTransform(new Vector3(0,0,0)), new GameImage("bin/shield.png"), new Identity("shield"));
+        super(Transform.simpleTransform(new Vector3(0,0,0)), new GameImage("bin/shieldItem.png"), new Identity("shield"));
         projectileLight = new Light.Point();
         projectileLight.setColor(Color.CYAN);
 
@@ -57,11 +58,15 @@ public class Shield extends Sprite {
         if(PlayerController.instance == null)
             return;
         super.Update();
-        setPosition(PlayerController.instance.getPosition().add(-16));
-        double xOffset = PlayerController.instance.getPosition().x/256*128;
-        double yOffset = PlayerController.instance.getPosition().y/256*128;
-        projectileLight.setX(PlayerController.instance.getPosition().x+0+32);
-        projectileLight.setY(PlayerController.instance.getPosition().y+0+32);
+        setPosition(PlayerController.instance.getPosition().add(8));
+        double xOffset = 0;
+        double yOffset = 0;
+        if(Main.lightingOffset){
+            yOffset = PlayerController.instance.getPosition().y/256*128;
+            xOffset = PlayerController.instance.getPosition().x/256*128;
+        }
+        projectileLight.setX(PlayerController.instance.getPosition().x+xOffset+32);
+        projectileLight.setY(PlayerController.instance.getPosition().y+yOffset+32);
 
     }
 }

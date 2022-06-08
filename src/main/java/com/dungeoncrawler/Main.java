@@ -7,6 +7,7 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
+import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Player.Abilities.Shield;
@@ -22,6 +23,7 @@ public class Main extends Application {
 
     public static GameWindow window;
     public static Stage stage;
+    public static boolean lightingOffset = true; // some machines have issues with position based lights, so this is a hacky fix
 
     public static void main(String[] args) {
         launch();
