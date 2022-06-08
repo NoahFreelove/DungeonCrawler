@@ -11,6 +11,7 @@ import com.JEngine.Utility.ImageProcessingEffects.GameLight;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class Shield extends Sprite {
     Light.Point projectileLight;
@@ -33,6 +34,9 @@ public class Shield extends Sprite {
         lightSource.setSurfaceScale(0.5);
         gl = new GameLight(lightSource,true);
         SceneManager.getActiveScene().addLight(gl);
+        Rectangle rect = new Rectangle(640-32,360-32,64,64);
+        rect.setFill(Color.RED);
+        SceneManager.getActiveScene().addUI(rect);
         addComponent(new DontDestroyOnLoad_Comp());
     }
 
@@ -50,7 +54,10 @@ public class Shield extends Sprite {
         setPosition(PlayerController.instance.getPosition().add(-16));
         /*double xOffset = PlayerController.instance.getPosition().x/256*128;
         double yOffset = PlayerController.instance.getPosition().y/256*128;*/
-        projectileLight.setX(PlayerController.instance.getPosition().x+0+32);
-        projectileLight.setY(PlayerController.instance.getPosition().y+0+32);
+        /*projectileLight.setX(PlayerController.instance.getPosition().x+0+32);
+        projectileLight.setY(PlayerController.instance.getPosition().y+0+32);*/
+        System.out.println(projectileLight.getX() + " : " + projectileLight.getY());
+        projectileLight.setX(640);
+        projectileLight.setY(360);
     }
 }
