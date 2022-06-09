@@ -19,6 +19,11 @@ public class Shooter extends Enemy{
 
     @Override
     public void activate(GameScene room){
+        if(getHealth()<=0)
+        {
+            shootTimer.stop();
+            return;
+        }
         shootTimer = new GameTimer((long) (SHOOTER_ATTACK_DELAY*1000), args -> shoot());
         inRoom = true;
         super.activate(room);

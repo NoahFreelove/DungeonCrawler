@@ -3,19 +3,16 @@ package com.dungeoncrawler.Entities.Player.Abilities;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.JEngine.Utility.ImageProcessingEffects.GameLight;
 import com.dungeoncrawler.Entities.Enemies.Enemy;
 import com.dungeoncrawler.Entities.Enemies.EnemyProjectile;
 import com.dungeoncrawler.Entities.Player.PlayerController;
-import javafx.scene.effect.Light;
-import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
 
 import static com.dungeoncrawler.Entities.Player.Abilities.AbilityStats.FREEZE_DURATION;
 
-public class IceAbility extends Ability {
+public class FreezeAbility extends Ability {
         GameScene sceneStartedIn;
-    public IceAbility(){
+    public FreezeAbility(){
         super(PlayerController.instance.getPosition(), FREEZE_DURATION, Color.CYAN);
     }
 

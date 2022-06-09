@@ -455,7 +455,7 @@ public class PlayerController extends Player {
                 switch (superAbility)
                 {
                     case FIRE-> new FireAbility();
-                    case FREEZE -> new IceAbility();
+                    case FREEZE -> new FreezeAbility();
                     case SHIELD -> new ShieldAbility();
                 }
                 //superCharge = 0;

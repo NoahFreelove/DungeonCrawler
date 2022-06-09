@@ -15,6 +15,7 @@ import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
 import com.dungeoncrawler.Entities.Enemies.Follower;
 import com.dungeoncrawler.Entities.Enemies.Frog;
 import com.dungeoncrawler.Entities.Enemies.Shooter;
+import com.dungeoncrawler.Entities.Enemies.Skeleton;
 import com.dungeoncrawler.Entities.Shop;
 
 import java.io.File;
@@ -131,7 +132,7 @@ public class Room extends GameScene {
                 pos.x = 1000;
                 pos.y = 450;
             }
-            int rand = GameMath.randRangeInclusive(0,2);
+            int rand = GameMath.randRangeInclusive(0,3);
             if(rand == 0){
                 add(new Follower(pos));
             }
@@ -143,12 +144,18 @@ public class Room extends GameScene {
             {
                 add(new Frog(pos));
             }
+            else if (rand == 3)
+            {
+                // Skeletons are weak, so spawn them in pairs
+                add(new Skeleton(pos, false));
+                add(new Skeleton(pos.add(50),false));
+            }
             i++;
         }
     }
 
     private void createBoss(){
-        int rand = GameMath.randRangeInclusive(0,0);
+        int rand = GameMath.randRangeInclusive(0,2);
         //System.out.println(rand);
         Vector3 bossPos = new Vector3(1150-300,300);
         switch (rand)

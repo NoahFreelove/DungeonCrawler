@@ -46,6 +46,14 @@ public class Knight extends Boss {
     @Override
     public void Update(){
         super.Update();
+        if(!canMove || !canAttack())
+        {
+            chargePathfind.setMoveSpeed(0);
+            return;
+        }
+        else {
+            chargePathfind.setMoveSpeed(KNIGHT_CHARGE_SPEED);
+        }
     }
 
     @Override

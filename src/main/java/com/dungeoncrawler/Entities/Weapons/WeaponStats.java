@@ -46,7 +46,7 @@ public record WeaponStats() {
     //endregion
 
     //region Bow
-    public static final float BOW_DAMAGE = 5;
+    public static final float BOW_DAMAGE = 8;
     public static final double BOW_SHOOT_DELAY = 0.75f;
     public static final float BOW_PROJECTILE_SPEED = 20;
     public static final String BOW_PROJECTILE_IMAGE_PATH = "bin/arrow.png";
