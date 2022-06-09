@@ -1,6 +1,7 @@
 package com.dungeoncrawler.Entities.Enemies.Bosses;
 
 import com.JEngine.Core.GameImage;
+import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
@@ -53,7 +54,7 @@ public class Turret extends Boss{
         shootTick.stop();
         isAlive = false;
         super.onDeath();
-        SceneManager.getActiveScene().add(new WeaponSpawn(new Vector3(getPosition().x,getPosition().y,25), new GameImage("bin/bbgun.png",64,64), new BBGun(new Vector3(getPosition().x,getPosition().y,25)), false, 0, SceneManager.getActiveScene()));
+        SceneManager.getActiveScene().add(new WeaponSpawn(new Vector3(getPosition().x,getPosition().y,25), new GameImage("bin/bbgun.png",64,64), new BBGun(new Vector3(getPosition().x,getPosition().y,25)), false, 0, SceneManager.getActiveScene(), new Vector2(-50,0)));
     }
 
     private void shoot(){

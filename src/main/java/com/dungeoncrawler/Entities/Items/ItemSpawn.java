@@ -3,6 +3,7 @@ package com.dungeoncrawler.Entities.Items;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
+import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.GameScene;
@@ -24,8 +25,8 @@ public class ItemSpawn extends Pawn {
 
     private boolean hasBeenPickedUp = false;
 
-    public ItemSpawn(Vector3 pos, GameImage newSprite, ItemType parent, boolean toBeBought, int cost, GameScene scene, int quantity, String name) {
-        super(Transform.simpleTransform(pos), newSprite, new Identity("item spawn " + name));
+    public ItemSpawn(Vector3 pos, GameImage newSprite, ItemType parent, boolean toBeBought, int cost, GameScene scene, int quantity, String name, Vector2 offsetFromPrice) {
+        super(Transform.simpleTransform(pos.add(offsetFromPrice)), newSprite, new Identity("item spawn " + name));
         this.toBeBought = toBeBought;
         this.cost = cost;
         this.itemType = parent;
@@ -34,7 +35,7 @@ public class ItemSpawn extends Pawn {
         itemSpawnCollider = new ItemSpawnCollider(Vector3.emptyVector(), newSprite.getWidth(), newSprite.getHeight(), this);
         addCollider(itemSpawnCollider);
         priceTag = new Text(name + " : Price: "  + cost);
-        priceTag.setFill(ColorManager.importantText);
+        priceTag.setFill(ColorManager.textColor);
         priceTag.setX(pos.x-10);
         priceTag.setY(pos.y-10);
         if(toBeBought)
@@ -85,8 +86,8 @@ public class ItemSpawn extends Pawn {
                     case "Fire Ability" -> {
                         PlayerController.instance.setSuperAbility(AbilityType.FIRE);
                     }
-                    case "Ice Ability" -> {
-                        PlayerController.instance.setSuperAbility(AbilityType.ICE);
+                    case "Freeze Ability" -> {
+                        PlayerController.instance.setSuperAbility(AbilityType.FREEZE);
                     }
                     case "Shield Ability" -> {
                         PlayerController.instance.setSuperAbility(AbilityType.SHIELD);

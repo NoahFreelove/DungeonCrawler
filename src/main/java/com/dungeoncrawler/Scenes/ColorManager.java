@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 public class ColorManager {
     public static Color titleTextColor = Color.WHITE;
-    public static Color mainMenuColor = Color.web("#b55521");
+    public static Color mainMenuColor = Color.web("#3b3b3b");
     public static Color backgroundColor = Color.web("#515255");
     public static Color importantText = Color.web("#bd2a58");
     public static Color textColor = Color.WHITE;
@@ -12,6 +12,6 @@ public class ColorManager {
     public static Color boldText = Color.RED;
     public static Color playerTextColor = Color.LIGHTGREEN;
     public static Color buttonTextColor = Color.web("#FFFFFF");
-    public static Color buttonColor = Color.web("#548b99");
+    public static Color buttonColor = Color.web("#000000");
 
 }

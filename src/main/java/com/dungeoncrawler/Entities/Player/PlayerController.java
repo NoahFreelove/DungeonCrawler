@@ -58,7 +58,7 @@ public class PlayerController extends Player {
     private boolean wasdMovement = true;
 
     private double superCharge = 1;
-    private AbilityType superAbility = AbilityType.ICE;
+    private AbilityType superAbility = AbilityType.FIRE;
 
     // UI
     private Group playerUI = new Group();
@@ -66,7 +66,7 @@ public class PlayerController extends Player {
     private Text healthText = new Text("Health: 15");
     private Text goldText = new Text("Gold: 0");
     private Text xpText = new Text("Level 1 (0/10)");
-    private Text gameLevelText = new Text("Dungeon #1");
+    private Text gameLevelText = new Text("Floor 20");
 
     public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon) {
         super(Transform.simpleTransform(pos), new GameImage("bin/player.png"), new Identity("PlayerController", "player"));
@@ -329,7 +329,7 @@ public class PlayerController extends Player {
         goldText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
         xpText = new Text(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
-        xpText.setTranslateX(1080-200);
+        xpText.setTranslateX(1080-250);
         xpText.setTranslateY(40);
         xpText.setFill(ColorManager.boldText);
         xpText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
@@ -459,7 +459,7 @@ public class PlayerController extends Player {
                 switch (superAbility)
                 {
                     case FIRE-> new FireAbility();
-                    case ICE-> new IceAbility();
+                    case FREEZE -> new IceAbility();
                     case SHIELD -> addShield(new Shield(SHIELD_STRENGTH));
                 }
                 //superCharge = 0;

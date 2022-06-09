@@ -3,6 +3,7 @@ package com.dungeoncrawler.Entities;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
+import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.dungeoncrawler.Entities.Items.ItemSpawn;
@@ -25,7 +26,11 @@ public class Shop extends Pawn {
     private static WeaponSpawn bbGunSpawn;
     private static ItemSpawn healthSpawn;
     private static ItemSpawn shieldSpawn;
+
     private static ItemSpawn fireAbilitySpawn;
+    private static ItemSpawn iceAbilitySpawn;
+    private static ItemSpawn shieldAbilitySpawn;
+
     private static Room parent;
     public Shop(Room parent, int floor) {
         super(Transform.simpleTransform(new Vector3(500,300)), null, new Identity("Shop"));
@@ -43,6 +48,8 @@ public class Shop extends Pawn {
             return;
 
         parent.add(fireAbilitySpawn);
+        parent.add(iceAbilitySpawn);
+        parent.add(shieldAbilitySpawn);
     }
 
     public static void regenerateSpawns(int floor){
@@ -60,18 +67,28 @@ public class Shop extends Pawn {
         itemTitleText.setFill(Color.WHITE);
         parent.addUI(itemTitleText);
 
-        bowSpawn = new WeaponSpawn(new Vector3(200,200), new GameImage("bin/bow.png"), new Bow(new Vector3(200,200)), true, (floor%5 ==0)? 100 : 200, parent);
-        boomerangSpawn = new WeaponSpawn(new Vector3(550,200), new GameImage("bin/boomerang.png"), new Boomerang(new Vector3(900,200)), true, (floor%5 ==0)? 125 : 250, parent);
-        swordSpawn = new WeaponSpawn(new Vector3(550,400), new GameImage("bin/sword.png"), new Sword(new Vector3(900,400)), true, (floor%5 ==0)? 5 : 30, parent);
-        barrettSpawn = new WeaponSpawn(new Vector3(200,400), new GameImage("bin/barrett.png", 128, 128), new BarrettM82(new Vector3(200,400)), true, (floor%5 ==0)? 2000 : 3000, parent);
+        Text abilityText = new Text("Abilities");
+        abilityText.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        abilityText.setX(900);
+        abilityText.setY(350);
+        abilityText.setFill(Color.WHITE);
+        parent.addUI(abilityText);
 
-        healthSpawn = new ItemSpawn(new Vector3(800,200), new GameImage("bin/heart.png"), ItemType.HEALTH, true, 50, parent, 15, "15 Health");
-        shieldSpawn= new ItemSpawn(new Vector3(1000,200), new GameImage("bin/shieldItem.png"), ItemType.SHIELD, true, 100, parent, 2, "2-Hit Shield");
+        // Weapons:
+        bowSpawn = new WeaponSpawn(new Vector3(200,200), new GameImage("bin/bow.png"), new Bow(new Vector3(200,200)), true, (floor%5 ==0)? 100 : 200, parent, new Vector2(-10,0));
+        boomerangSpawn = new WeaponSpawn(new Vector3(500,200), new GameImage("bin/boomerang.png"), new Boomerang(new Vector3(900,200)), true, (floor%5 ==0)? 125 : 250, parent, new Vector2(-8,-5));
+        swordSpawn = new WeaponSpawn(new Vector3(500,400), new GameImage("bin/sword.png"), new Sword(new Vector3(900,400)), true, (floor%5 ==0)? 5 : 30, parent, new Vector2(0,0));
+        barrettSpawn = new WeaponSpawn(new Vector3(200,400), new GameImage("bin/barrett.png", 128, 128), new BarrettM82(new Vector3(200,400)), true, (floor%5 ==0)? 2000 : 3000, parent, new Vector2(-40,-50));
+
+        // Items:
+        healthSpawn = new ItemSpawn(new Vector3(800,200), new GameImage("bin/heart.png"), ItemType.HEALTH, true, 50, parent, 15, "15 Health", new Vector2(10,0) );
+        shieldSpawn= new ItemSpawn(new Vector3(1000,200), new GameImage("bin/shieldItem.png"), ItemType.SHIELD, true, 100, parent, 2, "2-Hit Shield", new Vector2(15,0));
         if(floor<6)
             return;
 
-        fireAbilitySpawn = new ItemSpawn(new Vector3(1000,400), new GameImage("bin/fireball.png"), ItemType.ABILITY, true, 300, parent, 1, "Fire Ability");
-
+        fireAbilitySpawn = new ItemSpawn(new Vector3(1000,400), new GameImage("bin/fireball.png"), ItemType.ABILITY, true, 300, parent, 1, "Fire Ability", new Vector2(-10,0));
+        iceAbilitySpawn = new ItemSpawn(new Vector3(800,400), new GameImage("bin/snowflake.png"), ItemType.ABILITY, true, 350, parent, 1, "Freeze Ability", new Vector2(25,0));
+        shieldAbilitySpawn = new ItemSpawn(new Vector3(900,500), new GameImage("bin/shieldAbility.png"), ItemType.ABILITY, true, 500, parent, 1, "Shield Ability", new Vector2(25,0));
         //bbGunSpawn = new WeaponSpawn(new Vector3(550,400), new GameImage("bin/bbGun.png",64,64), new BBGun(new Vector3(550,400)), true, 500, parent);
 
     }

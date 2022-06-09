@@ -11,7 +11,7 @@ import static com.dungeoncrawler.Entities.Player.Abilities.AbilityStats.FIRE_DAM
 public class FireAbility extends Ability {
 
     public FireAbility(){
-        super(PlayerController.instance.getPosition(), 1, Color.RED);    }
+        super(PlayerController.instance.getPosition(), 0.8f, Color.RED);    }
 
     @Override
     protected void StartEffect(){

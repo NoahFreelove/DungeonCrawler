@@ -9,6 +9,7 @@ import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
+import com.dungeoncrawler.Entities.Enemies.Bosses.Graveyard;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
 import com.dungeoncrawler.Entities.Enemies.Follower;
@@ -26,7 +27,7 @@ public class Room extends GameScene {
     int yPos;
     int enemyCount = 0;
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, RoomType roomType, int x, int y) {
-        super("Room");
+        super(200,"Room");
         this.isSpawnRoom = (roomType == RoomType.SPAWN);
         this.isBossRoom = (roomType == RoomType.BOSS);
         this.isShopRoom = (roomType == RoomType.SHOP);
@@ -147,12 +148,14 @@ public class Room extends GameScene {
     }
 
     private void createBoss(){
-        int rand = GameMath.randRangeInclusive(0,1);
+        int rand = GameMath.randRangeInclusive(0,0);
         //System.out.println(rand);
+        Vector3 bossPos = new Vector3(1150-300,300);
         switch (rand)
         {
-            case 0 -> add(new Knight(new Vector3(1150-300,300), xPos, yPos));
-            case 1 -> add(new Turret(new Vector3(1150-300,300), xPos, yPos));
+            case 0 -> add(new Graveyard(bossPos, xPos, yPos));
+            case 1 -> add(new Knight(bossPos, xPos, yPos));
+            case 2 -> add(new Turret(bossPos, xPos, yPos));
         }
     }
 

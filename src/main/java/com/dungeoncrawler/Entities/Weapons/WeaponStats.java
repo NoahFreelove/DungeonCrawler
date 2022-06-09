@@ -16,7 +16,7 @@ public record WeaponStats() {
     //region Sword
     public static final float SWORD_DAMAGE = 10;
     public static final double SWORD_ATTACK_DELAY = 0.5;
-    public static final float SWORD_ATTACK_DISTANCE = 64f;
+    public static final float SWORD_ATTACK_DISTANCE = 128;
     public static final float SWORD_ANIMATION_SPEED = 1f;
     public static final boolean SWORD_IS_THROWABLE = false;
     public static final String SWORD_IMAGE_PATH = "bin/sword.png";

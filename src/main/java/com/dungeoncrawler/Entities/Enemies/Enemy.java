@@ -25,7 +25,7 @@ public class Enemy extends Pawn {
     private final double attackDelay;
     private boolean canAttack;
     private final Vector3 startPos;
-    private final int difficulty;
+    private int difficulty;
     protected boolean canMove;
     private final GameImage sprite;
     private boolean addedHealthUI;
@@ -92,6 +92,7 @@ public class Enemy extends Pawn {
     }
 
     public int getDifficulty(){return difficulty;}
+    public void setDifficulty(int difficulty){this.difficulty = difficulty;}
 
     public void activate(GameScene room){
         canMove = true;
@@ -121,8 +122,11 @@ public class Enemy extends Pawn {
         PlayerController.instance.addExp(difficulty);
         RoomManager.rooms[RoomManager.currentRoomX][RoomManager.currentRoomY].removeEnemy();
 
-        SceneManager.getActiveScene().add(new Gold(getPosition(), (int) (difficulty*5*PlayerController.instance.getSelectedWeapon().getRewardMultiplier())));
+        if(difficulty > 0)
+        {
+            SceneManager.getActiveScene().add(new Gold(getPosition(), (int) (difficulty*5*PlayerController.instance.getSelectedWeapon().getRewardMultiplier())));
 
+        }
         healthBar.setVisible(false);
     }
 

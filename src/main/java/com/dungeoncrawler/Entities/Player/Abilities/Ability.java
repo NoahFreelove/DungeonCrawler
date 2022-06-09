@@ -20,7 +20,7 @@ public class Ability extends GameObject {
 
     public Ability(Vector3 pos, double duration, Color lightColor) {
         super(Transform.simpleTransform(pos), new Identity("ability"));
-        GameTimer effectTimer = new GameTimer((long) duration * 1000, args -> EndEffect(), true);
+        GameTimer effectTimer = new GameTimer((long) (1000*duration), args -> EndEffect(), true);
         effectTimer.start();
 
         abilityLight = new Light.Distant();

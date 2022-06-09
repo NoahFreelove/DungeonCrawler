@@ -3,6 +3,7 @@ package com.dungeoncrawler.Entities.Weapons;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
+import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.GameScene;
@@ -22,15 +23,15 @@ public class WeaponSpawn extends Pawn {
 
     private boolean hasBeenPickedUp = false;
 
-    public WeaponSpawn(Vector3 pos, GameImage newSprite, Weapon parent, boolean toBeBought, int cost, GameScene scene) {
-        super(Transform.simpleTransform(pos), newSprite, new Identity("weapon spawn " + parent.getClass().getSimpleName()));
+    public WeaponSpawn(Vector3 pos, GameImage newSprite, Weapon parent, boolean toBeBought, int cost, GameScene scene, Vector2 offsetFromPrice) {
+        super(Transform.simpleTransform(pos.add(offsetFromPrice)), newSprite, new Identity("weapon spawn " + parent.getClass().getSimpleName()));
         this.toBeBought = toBeBought;
         this.cost = cost;
         this.weapon = parent;
         weaponSpawnCollider = new WeaponSpawnCollider(Vector3.emptyVector(), newSprite.getWidth(), newSprite.getHeight(), this);
         addCollider(weaponSpawnCollider);
         priceTag = new Text("Price: "  + cost);
-        priceTag.setFill(ColorManager.importantText);
+        priceTag.setFill(ColorManager.textColor);
         priceTag.setX(pos.x-10);
         priceTag.setY(pos.y-10);
         if(toBeBought)
