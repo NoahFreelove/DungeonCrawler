@@ -96,4 +96,10 @@ public class Doctor extends Boss{
             setCanAttack(true);
         }
     }
+
+    @Override
+    public void onDeath(){
+        super.onDeath();
+        SceneManager.getActiveScene().add(new ItemSpawn(new Vector3(getPosition().x,getPosition().y,25), new GameImage("bin/heart.png",64,64), ItemType.HEALTH, false, 0, SceneManager.getActiveScene(), 20, "Health", new Vector2(-50,0)));
+    }
 }
