@@ -4,7 +4,7 @@ import com.JEngine.Core.Position.Vector2;
 
 public record WeaponStats() {
     //region Boomerang
-    public static final float BOOMERANG_DAMAGE = 5;
+    public static final float BOOMERANG_DAMAGE = 10;
     public static final double BOOMERANG_ATTACK_DELAY = 1;
     public static final float BOOMERANG_THROW_DISTANCE = 256;
     public static final float BOOMERANG_ANIMATION_SPEED = 0.25f;
@@ -46,8 +46,8 @@ public record WeaponStats() {
     //endregion
 
     //region Bow
-    public static final float BOW_DAMAGE = 8;
-    public static final double BOW_SHOOT_DELAY = 0.75f;
+    public static final float BOW_DAMAGE = 6;
+    public static final double BOW_SHOOT_DELAY = 0.5f;
     public static final float BOW_PROJECTILE_SPEED = 20;
     public static final String BOW_PROJECTILE_IMAGE_PATH = "bin/arrow.png";
     public static final String BOW_IMAGE_PATH = "bin/bow.png";

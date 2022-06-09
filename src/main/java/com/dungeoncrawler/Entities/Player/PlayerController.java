@@ -56,12 +56,7 @@ public class PlayerController extends Player {
     private AbilityType superAbility = AbilityType.SHIELD;
 
     // UI
-    private Group playerUI = new Group();
-    private Text roomNumber = new Text("Room #:#");
-    private Text healthText = new Text("Health: 15");
-    private Text goldText = new Text("Gold: 0");
-    private Text xpText = new Text("Level 1 (0/10)");
-    private Text gameLevelText = new Text("Floor 20");
+    PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel);
 
     public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon) {
         super(Transform.simpleTransform(pos), new GameImage("bin/player.png"), new Identity("PlayerController", "player"));
@@ -89,8 +84,6 @@ public class PlayerController extends Player {
 
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         addComponent(new DontDestroyOnLoad_Comp());
-        setupUI();
-
     }
 
     public PlayerController(Vector3 pos) {
@@ -100,7 +93,6 @@ public class PlayerController extends Player {
         else
             return;
         addComponents(new DontDestroyOnLoad_Comp(), new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
-        setupUI();
         setSelectedWeapon(new Sword(getPosition()));
         SceneManager.getActiveScene().add(selectedWeapon);
     }
@@ -117,7 +109,7 @@ public class PlayerController extends Player {
         }
 
         checkInput();
-        updateUI();
+        playerUI.UpdateUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel);
 
         if (selectedWeapon != null)
         {
@@ -238,6 +230,10 @@ public class PlayerController extends Player {
         exp -= amount;
     }
     public void takeDamage(double amount) {
+        if(amount <= 0)
+        {
+            return;
+        }
         if(hasShield)
         {
             if(shieldInstance != null)
@@ -304,58 +300,6 @@ public class PlayerController extends Player {
         return String.format("Player: %s\nLevel: %d\nGold: %d\nExp: %d\nExp to next level: %d\nHealth: %d/%d\nRooms cleared: %d", name, playerLevel, gold, exp, expToNextLevel, (int)health, maxHealth, roomsCleared);
     }
 
-    private void setupUI(){
-        roomNumber = new Text();
-        roomNumber.setTranslateX(10);
-        roomNumber.setTranslateY(40);
-        roomNumber.setFill(ColorManager.textColor);
-        roomNumber.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
-
-        healthText = new Text("Health: "+ health);
-        healthText.setTranslateX(150);
-        healthText.setTranslateY(40);
-        healthText.setFill(ColorManager.boldText);
-        healthText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
-
-        goldText = new Text("Gold: "+ gold);
-        goldText.setTranslateX(320);
-        goldText.setTranslateY(40);
-        goldText.setFill(ColorManager.textColor);
-        goldText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
-
-        xpText = new Text(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
-        xpText.setTranslateX(1080-250);
-        xpText.setTranslateY(40);
-        xpText.setFill(ColorManager.boldText);
-        xpText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
-
-        gameLevelText = new Text("Floor "+ (PlayerController.gameLevelToWin - gameLevel));
-        gameLevelText.setTranslateX(1080-10);
-        gameLevelText.setTranslateY(40);
-        gameLevelText.setFill(ColorManager.textColor);
-        gameLevelText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
-
-        playerUI.getChildren().add(healthText);
-        playerUI.getChildren().add(roomNumber);
-        playerUI.getChildren().add(goldText);
-        playerUI.getChildren().add(xpText);
-        playerUI.getChildren().add(gameLevelText);
-
-        GameWindow.getInstance().addPermanentUI(healthText);
-        GameWindow.getInstance().addPermanentUI(playerUI);
-        GameWindow.getInstance().addPermanentUI(goldText);
-        GameWindow.getInstance().addPermanentUI(xpText);
-        GameWindow.getInstance().addPermanentUI(gameLevelText);
-    }
-
-    private void updateUI(){
-        roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
-        healthText.setText("Health: "+ health);
-        goldText.setText("Gold: " + gold);
-        xpText.setText(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
-        gameLevelText.setText("Floor "+ (PlayerController.gameLevelToWin - gameLevel));
-
-    }
     public void setSelectedWeapon(Weapon w) {
         if(selectedWeapon != null)
         {

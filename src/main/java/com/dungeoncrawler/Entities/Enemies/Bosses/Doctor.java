@@ -5,9 +5,13 @@ import com.JEngine.Core.GameImage;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
+import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
+import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.JEngine.Utility.Misc.GenericMethod;
+import com.dungeoncrawler.Entities.Items.ItemSpawn;
+import com.dungeoncrawler.Entities.Items.ItemType;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 
@@ -20,6 +24,8 @@ public class Doctor extends Boss{
     private Pathfinding_Comp pathfinding_comp;
     private GameObject healSpot;
     private final GameTimer healTimer = new GameTimer(200, args -> Heal());
+    private GameTimer healDelay = new GameTimer(1000, args -> healTimer.start(), true);
+
     public Doctor(Vector3 initPos, int x, int y) {
         super(initPos, new GameImage(DOCTOR_IMAGE_PATH)
                 , DOCTOR_DAMAGE, DOCTOR_BASE_HEALTH, DOCTOR_ATTACK_DELAY, DOCTOR_DIFFICULTY, "needle goes stab stab", 0.5f, x,y);
@@ -50,15 +56,22 @@ public class Doctor extends Boss{
             pathfinding_comp.setTarget(PlayerController.instance);
             pathfinding_comp.setMoveSpeed(DOCTOR_MOVE_SPEED);
         }
-
-        if(getMaxHealth() > DOCTOR_BASE_HEALTH)
+        if(getHealth() >= DOCTOR_MAX_HEALTH)
+        {
+            healthBar.setStyle("-fx-accent: yellow");
+        }
+        else if(getHealth() > DOCTOR_BASE_HEALTH + 50)
+        {
+            healthBar.setStyle("-fx-accent: green");
+        }
+        else if(getHealth() > DOCTOR_BASE_HEALTH)
         {
             healthBar.setStyle("-fx-accent: blue");
         }
         else {
             healthBar.setStyle("-fx-accent: red");
         }
-        System.out.println(getHealth());
+
         super.Update();
     }
 
@@ -67,7 +80,9 @@ public class Doctor extends Boss{
         if(getHealth()>=DOCTOR_BASE_HEALTH)
         {
             healTimer.stop();
+            healDelay.stop();
             currentlyHealing = false;
+            runningToHealSpot = false;
             setCanAttack(true);
         }
         super.takeDamage(damage);
@@ -78,7 +93,7 @@ public class Doctor extends Boss{
         if(!runningToHealSpot)
             return;
         // Have short delay after reaching heal spot to give player fair chance to kill
-        new GameTimer(1000, args -> healTimer.start(), true, true);
+        healDelay.start();
     }
     private void Heal() {
         currentlyHealing = true;
@@ -93,6 +108,7 @@ public class Doctor extends Boss{
         {
             currentlyHealing = false;
             healTimer.stop();
+            healDelay.stop();
             setCanAttack(true);
         }
     }

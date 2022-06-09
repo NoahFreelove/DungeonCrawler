@@ -151,6 +151,7 @@ public class Room extends GameScene {
                 // Skeletons are weak, so spawn them in pairs
                 add(new Skeleton(pos, false));
                 add(new Skeleton(pos.add(50),false));
+                enemyCount++;
             }
             i++;
         }

@@ -14,7 +14,7 @@ public class Shooter extends Enemy{
     private boolean inRoom;
     public Shooter(Vector3 initPos) {
         super(initPos, new GameImage(SHOOTER_IMAGE_PATH),
-                SHOOTER_DAMAGE, SHOOTER_MAX_HEALTH, SHOOTER_ATTACK_DELAY, SHOOTER_DIFFICULTY);
+                (int)(SHOOTER_DAMAGE/2), SHOOTER_MAX_HEALTH, SHOOTER_ATTACK_DELAY, SHOOTER_DIFFICULTY);
     }
 
     @Override
