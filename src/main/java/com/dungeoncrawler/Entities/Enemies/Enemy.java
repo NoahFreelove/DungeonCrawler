@@ -29,7 +29,7 @@ public class Enemy extends Pawn {
     protected boolean canMove;
     private final GameImage sprite;
     private boolean addedHealthUI;
-    private ProgressBar healthBar = new ProgressBar();
+    protected ProgressBar healthBar = new ProgressBar();
     public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty) {
         super(Transform.simpleTransform(initPos), newSprite, new Identity("enemy"));
         this.damage = damage;
@@ -58,9 +58,8 @@ public class Enemy extends Pawn {
     }
     public void takeDamage(double damage){
         health -= damage;
-        GameTimer hurtEffect = new GameTimer(150, args -> sprite.setColorAdjust(new ColorAdjust()),true);
+        new GameTimer(150, args -> sprite.setColorAdjust(new ColorAdjust()),true, true);
         sprite.setColorAdjust(new ColorAdjust(1,1,0.5,1));
-        hurtEffect.start();
 
         if(health<=0)
         {
@@ -165,5 +164,17 @@ public class Enemy extends Pawn {
 
     public double getAttackDelay() {
         return attackDelay;
+    }
+
+    public double getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(double maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
     }
 }

@@ -7,7 +7,7 @@ public record EnemyStats() {
     public static final double FOLLOWER_ATTACK_DELAY = 3;
     public static final double FOLLOWER_MAX_HEALTH = 25;
     public static final String FOLLOWER_IMAGE_PATH = "bin/follower.png";
-    public static final int FOLLOWER_DIFFICULTY = 1;
+    public static final int FOLLOWER_DIFFICULTY = 2;
     //endregion
 
     //region Shooter
@@ -17,7 +17,7 @@ public record EnemyStats() {
     public static final double SHOOTER_MAX_HEALTH = 15;
     public static final String SHOOTER_IMAGE_PATH = "bin/shooter.png";
     public static final String SHOOTER_PROJECTILE_IMAGE_PATH = "bin/50bmg.png";
-    public static final int SHOOTER_DIFFICULTY = 2;
+    public static final int SHOOTER_DIFFICULTY = 3;
     //endregion
 
     //region Frog
@@ -27,7 +27,7 @@ public record EnemyStats() {
     public static final double FROG_MAX_HEALTH = 15;
     public static final float FROG_MAGNET_DISTANCE = 400f;
     public static final String FROG_IMAGE_PATH = "bin/frog.png";
-    public static final int FROG_DIFFICULTY = 1;
+    public static final int FROG_DIFFICULTY = 2;
     //endregion
 
     //region Knight
@@ -62,7 +62,7 @@ public record EnemyStats() {
     public static final double GRAVEYARD_SPAWN_DELAY = 6;
 
     public static final String GRAVEYARD_IMAGE_PATH = "bin/skeleton.png";
-    public static final int GRAVEYARD_DIFFICULTY = 6;
+    public static final int GRAVEYARD_DIFFICULTY = 7;
     //endregion
 
     //region Skeleton
@@ -74,6 +74,21 @@ public record EnemyStats() {
 
     public static final String SKELETON_IMAGE_PATH = "bin/gravestone.png";
     public static final int SKELETON_DIFFICULTY = 1;
+    //endregion
+
+    //region Doctor
+    public static final double DOCTOR_DAMAGE = 7;
+    public static final float DOCTOR_MOVE_SPEED = 3;
+    public static final float DOCTOR_RUN_SPEED = 6;
+    public static final double DOCTOR_ATTACK_DELAY = 0.5;
+    public static final double DOCTOR_BASE_HEALTH = 50;
+    public static final double DOCTOR_MAX_HEALTH = 150;
+    public static final double DOCTOR_HEAL_THRESHOLD = 15;
+    public static final double DOCTOR_HEAL_RATE = 5;
+
+    public static final String DOCTOR_IMAGE_PATH = "bin/doctor.png";
+    public static final int DOCTOR_DIFFICULTY = 8;
+
     //endregion
 
 

@@ -9,6 +9,8 @@ import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
+import com.JEngine.Utility.Misc.Do;
+import com.dungeoncrawler.Entities.Enemies.Bosses.Doctor;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Graveyard;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
@@ -155,14 +157,15 @@ public class Room extends GameScene {
     }
 
     private void createBoss(){
-        int rand = GameMath.randRangeInclusive(0,2);
+        int rand = GameMath.randRangeInclusive(0,0);
         //System.out.println(rand);
         Vector3 bossPos = new Vector3(1150-300,300);
         switch (rand)
         {
-            case 0 -> add(new Graveyard(bossPos, xPos, yPos));
-            case 1 -> add(new Knight(bossPos, xPos, yPos));
-            case 2 -> add(new Turret(bossPos, xPos, yPos));
+            case 0 -> add(new Doctor(bossPos, xPos, yPos));
+            case 1 -> add(new Graveyard(bossPos, xPos, yPos));
+            case 2 -> add(new Knight(bossPos, xPos, yPos));
+            case 3 -> add(new Turret(bossPos, xPos, yPos));
         }
     }
 
