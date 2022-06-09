@@ -162,6 +162,8 @@ public class RoomManager {
         for (GameObject go: rooms[currentRoomX][currentRoomY].getObjects()) {
             if(go instanceof Enemy enemy)
             {
+                if(enemy.isQueuedForDeletion() || !enemy.getActive())
+                    continue;
                 enemy.setPosition(enemy.getStartPos());
                 enemy.neutralize();
                 GameTimer moveDelay = new GameTimer(500, args -> enemy.activate(rooms[currentRoomX][currentRoomY]), true);

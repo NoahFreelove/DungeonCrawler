@@ -55,6 +55,10 @@ public class Graveyard extends Boss {
 
     @Override
     public void activate(GameScene room){
+        if(getHealth()<=0)
+        {
+            return;
+        }
         spawnSpookyMen();
         super.activate(room);
     }
