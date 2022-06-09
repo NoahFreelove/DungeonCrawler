@@ -13,7 +13,6 @@ import com.dungeoncrawler.Main;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class Shield extends Sprite {
     Light.Point projectileLight;
@@ -22,6 +21,13 @@ public class Shield extends Sprite {
     private int hits = 1;
     public Shield(int hits) {
         super(Transform.simpleTransform(new Vector3(0,0,0)), new GameImage("bin/shieldItem.png"), new Identity("shield"));
+        if(PlayerController.instance !=null)
+        {
+            if(PlayerController.instance.shieldInstance !=null)
+            {
+                PlayerController.instance.removeShield();
+            }
+        }
         projectileLight = new Light.Point();
         projectileLight.setColor(Color.CYAN);
 
@@ -42,13 +48,17 @@ public class Shield extends Sprite {
         addComponent(new DontDestroyOnLoad_Comp());
     }
 
-    public void destroy(){
+    public void hit(){
         hits--;
         PlayerController.instance.playHitEffect();
         if(hits>=1)
             return;
-        SceneManager.getActiveScene().removeLight(gl);
+        destroy();
         PlayerController.instance.removeShield();
+
+    }
+    public void destroy(){
+        SceneManager.getActiveScene().removeLight(gl);
         lightSource = new Lighting(null);
         setActive(false);
     }

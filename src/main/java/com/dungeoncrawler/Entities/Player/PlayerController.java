@@ -11,10 +11,7 @@ import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.ImageProcessingEffects.ShakeScreen;
 import com.JEngine.Utility.Input;
 import com.JEngine.Utility.Misc.GameTimer;
-import com.dungeoncrawler.Entities.Player.Abilities.FireAbility;
-import com.dungeoncrawler.Entities.Player.Abilities.IceAbility;
-import com.dungeoncrawler.Entities.Player.Abilities.Shield;
-import com.dungeoncrawler.Entities.Player.Abilities.AbilityType;
+import com.dungeoncrawler.Entities.Player.Abilities.*;
 import com.dungeoncrawler.Entities.Weapons.*;
 import com.dungeoncrawler.Entities.Weapons.Melee.Boomerang;
 import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
@@ -30,8 +27,6 @@ import javafx.scene.Group;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
-
-import static com.dungeoncrawler.Entities.Player.Abilities.AbilityStats.SHIELD_STRENGTH;
 
 public class PlayerController extends Player {
     public static PlayerController instance;
@@ -49,7 +44,7 @@ public class PlayerController extends Player {
     private int maxHealth = 20;
     private int roomsCleared = 0;
     private boolean hasShield = true;
-    private Shield shieldInstance;
+    public Shield shieldInstance;
 
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private float moveSpeed = 15f;
@@ -58,7 +53,7 @@ public class PlayerController extends Player {
     private boolean wasdMovement = true;
 
     private double superCharge = 1;
-    private AbilityType superAbility = AbilityType.FIRE;
+    private AbilityType superAbility = AbilityType.SHIELD;
 
     // UI
     private Group playerUI = new Group();
@@ -247,7 +242,7 @@ public class PlayerController extends Player {
         {
             if(shieldInstance != null)
             {
-                shieldInstance.destroy();
+                shieldInstance.hit();
                 return;
             }
         }
@@ -445,6 +440,7 @@ public class PlayerController extends Player {
     }
     public void removeShield(){
         this.hasShield = false;
+        this.shieldInstance.destroy();
         this.shieldInstance = null;
     }
 
@@ -460,7 +456,7 @@ public class PlayerController extends Player {
                 {
                     case FIRE-> new FireAbility();
                     case FREEZE -> new IceAbility();
-                    case SHIELD -> addShield(new Shield(SHIELD_STRENGTH));
+                    case SHIELD -> new ShieldAbility();
                 }
                 //superCharge = 0;
             }
