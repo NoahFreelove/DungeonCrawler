@@ -89,6 +89,19 @@ public record EnemyStats() {
 
     public static final String DOCTOR_IMAGE_PATH = "bin/doctor.png";
     public static final int DOCTOR_DIFFICULTY = 8;
+    //endregion
+
+    //region Wizard
+    public static final double WIZARD_DAMAGE = 0;
+    public static final float WIZARD_MAX_HEALTH = 20;
+    public static final double WIZARD_TELEPORT_DELAY = 2.5;
+    public static final double WIZARD_ATTACK_DELAY = 1;
+    public static final String WIZARD_IMAGE_PATH = "bin/wizard.png";
+    public static final int WIZARD_DIFFICULTY = 3;
+
+    public static final float WIZARD_MAGIC_MOVE_SPEED = 6;
+    public static final double WIZARD_MAGIC_DAMAGE = 6;
+    public static final String WIZARD_MAGIC_IMAGE_PATH = "bin/wizardMagic.png";
 
     //endregion
 

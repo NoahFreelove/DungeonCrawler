@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.io.File;
 
@@ -19,35 +20,43 @@ public class PlayerUI {
     private Text goldText;
     private Text xpText;
     private Text gameLevelText;
-
+    private ImageView healthIcon = new ImageView(new File("bin/heart.png").getAbsolutePath());
 
     public PlayerUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel) {
+        Font font = Font.font("Arial", FontWeight.BOLD, 25);
+
         roomNumber = new Text();
         roomNumber.setTranslateX(10);
         roomNumber.setTranslateY(40);
         roomNumber.setFill(ColorManager.textColor);
         roomNumber.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
-        ImageView healthIcon = new ImageView(new File("bin/heart.png").getAbsolutePath());
         healthIcon.setFitHeight(32);
         healthIcon.setFitWidth(32);
         healthIcon.setLayoutX(15);
         healthIcon.setLayoutY(410);
 
         healthText = new Text(""+ health);
-
         healthText.setTranslateX(10);
         healthText.setTranslateY(470);
         healthText.setFill(ColorManager.boldText);
-        Font font = Font.font("Arial", FontWeight.BOLD, 25);
         healthText.setFont(font);
         healthText.setStroke(Color.WHITE);
         healthText.setStrokeWidth(1);
-        goldText = new Text("Gold: "+ gold);
-        goldText.setTranslateX(320);
-        goldText.setTranslateY(40);
+
+
+        ImageView goldIcon = new ImageView(new File("bin/gold.png").getAbsolutePath());
+        goldIcon.setFitHeight(32);
+        goldIcon.setFitWidth(32);
+        goldIcon.setLayoutX(15);
+        goldIcon.setLayoutY(500);
+
+        goldText = new Text(""+ gold);
+        goldText.setTranslateX(5);
+        goldText.setTranslateY(560);
+        goldText.setTextAlignment(TextAlignment.CENTER);
         goldText.setFill(ColorManager.textColor);
-        goldText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
+        goldText.setFont(font);
 
         xpText = new Text(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
         xpText.setTranslateX(1080-250);
@@ -69,6 +78,7 @@ public class PlayerUI {
 
         GameWindow.getInstance().addPermanentUI(healthText);
         GameWindow.getInstance().addPermanentUI(healthIcon);
+        GameWindow.getInstance().addPermanentUI(goldIcon);
         GameWindow.getInstance().addPermanentUI(playerUI);
         GameWindow.getInstance().addPermanentUI(goldText);
         GameWindow.getInstance().addPermanentUI(xpText);
@@ -79,7 +89,7 @@ public class PlayerUI {
     {
         roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
         healthText.setText(""+ (int)(health));
-        goldText.setText("Gold: " + gold);
+        goldText.setText("" + gold);
         xpText.setText(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
         gameLevelText.setText("Floor "+ (PlayerController.gameLevelToWin - gameLevel));
     }

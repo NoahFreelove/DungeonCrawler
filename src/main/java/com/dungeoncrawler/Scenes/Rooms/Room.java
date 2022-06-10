@@ -10,14 +10,11 @@ import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.Do;
+import com.dungeoncrawler.Entities.Enemies.*;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Doctor;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Graveyard;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
-import com.dungeoncrawler.Entities.Enemies.Follower;
-import com.dungeoncrawler.Entities.Enemies.Frog;
-import com.dungeoncrawler.Entities.Enemies.Shooter;
-import com.dungeoncrawler.Entities.Enemies.Skeleton;
 import com.dungeoncrawler.Entities.Shop;
 
 import java.io.File;
@@ -134,7 +131,7 @@ public class Room extends GameScene {
                 pos.x = 1000;
                 pos.y = 450;
             }
-            int rand = GameMath.randRangeInclusive(0,3);
+            int rand = GameMath.randRangeInclusive(0,4);
             if(rand == 0){
                 add(new Follower(pos));
             }
@@ -153,12 +150,16 @@ public class Room extends GameScene {
                 add(new Skeleton(pos.add(50),false));
                 enemyCount++;
             }
+            else if (rand == 4)
+            {
+                add(new Wizard(pos));
+            }
             i++;
         }
     }
 
     private void createBoss(){
-        int rand = GameMath.randRangeInclusive(1,1);
+        int rand = GameMath.randRangeInclusive(0,3);
         //System.out.println(rand);
         Vector3 bossPos = new Vector3(1150-300,300);
         switch (rand)
