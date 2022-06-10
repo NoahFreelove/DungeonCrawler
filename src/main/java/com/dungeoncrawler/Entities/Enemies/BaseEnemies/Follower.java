@@ -1,13 +1,14 @@
-package com.dungeoncrawler.Entities.Enemies;
+package com.dungeoncrawler.Entities.Enemies.BaseEnemies;
 
 import com.JEngine.Components.Pathfinding_Comp;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
+import com.dungeoncrawler.Entities.Enemies.Enemy;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 
 import static com.dungeoncrawler.Entities.EnemyStats.*;
 
-public class Follower extends Enemy{
+public class Follower extends Enemy {
     private final Pathfinding_Comp pathfinding_comp;
     public Follower(Vector3 initPos) {
         super(initPos, new GameImage(FOLLOWER_IMAGE_PATH), FOLLOWER_DAMAGE, FOLLOWER_MAX_HEALTH, FOLLOWER_ATTACK_DELAY,FOLLOWER_DIFFICULTY);

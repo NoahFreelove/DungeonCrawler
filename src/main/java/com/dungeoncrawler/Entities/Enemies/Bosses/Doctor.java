@@ -33,7 +33,7 @@ public class Doctor extends Boss{
         pathfinding_comp = new Pathfinding_Comp(this);
         pathfinding_comp.setMoveSpeed(DOCTOR_MOVE_SPEED);
         pathfinding_comp.setMoveAfterSuccess(false);
-        pathfinding_comp.setSuccessRange(75);
+        pathfinding_comp.setSuccessRange(90);
         addComponent(pathfinding_comp);
 
         healSpot = new GameObject(Transform.simpleTransform(1000,100,0), new Identity("healSpot"));

@@ -15,7 +15,7 @@ public class Knight extends Boss {
 
     public Knight(Vector3 initPos, int x, int y) {
         super(initPos, new GameImage(KNIGHT_IMAGE_PATH)
-                , KNIGHT_DAMAGE, KNIGHT_MAX_HEALTH, KNIGHT_ATTACK_DELAY, KNIGHT_DIFFICULTY, "I definitely wont charge at you", 1f, x,y);
+                , KNIGHT_DAMAGE, KNIGHT_MAX_HEALTH, KNIGHT_ATTACK_DELAY, KNIGHT_DIFFICULTY, "I definitely won't charge at you", 1f, x,y);
         chargePathfind = new Pathfinding_Comp(this);
         chargePathfind.setMoveSpeed(KNIGHT_CHARGE_SPEED);
         chargePathfind.setMoveAfterSuccess(false);
@@ -49,7 +49,6 @@ public class Knight extends Boss {
         if(!canMove || !canAttack())
         {
             chargePathfind.setMoveSpeed(0);
-            return;
         }
         else {
             chargePathfind.setMoveSpeed(KNIGHT_CHARGE_SPEED);

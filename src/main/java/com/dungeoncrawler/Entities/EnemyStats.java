@@ -42,7 +42,8 @@ public record EnemyStats() {
     //endregion
 
     //region Turret
-    public static final double TURRET_DAMAGE = 3;
+    public static final double TURRET_DAMAGE = 0;
+    public static final double TURRET_PROJECTILE_DAMAGE = 3;
     public static final double TURRET_SHOOT_DELAY = 0.05;
     public static final double TURRET_SHOOT_DURATION = 5;
     public static final double TURRET_IDLE_DURATION = 2;
@@ -93,14 +94,14 @@ public record EnemyStats() {
 
     //region Wizard
     public static final double WIZARD_DAMAGE = 0;
-    public static final float WIZARD_MAX_HEALTH = 20;
-    public static final double WIZARD_TELEPORT_DELAY = 2.5;
+    public static final float WIZARD_MAX_HEALTH = 40;
+    public static final double WIZARD_TELEPORT_DELAY = 1.7;
     public static final double WIZARD_ATTACK_DELAY = 1;
     public static final String WIZARD_IMAGE_PATH = "bin/wizard.png";
-    public static final int WIZARD_DIFFICULTY = 3;
+    public static final int WIZARD_DIFFICULTY = 4;
 
     public static final float WIZARD_MAGIC_MOVE_SPEED = 6;
-    public static final double WIZARD_MAGIC_DAMAGE = 6;
+    public static final double WIZARD_MAGIC_DAMAGE = 12;
     public static final String WIZARD_MAGIC_IMAGE_PATH = "bin/wizardMagic.png";
 
     //endregion

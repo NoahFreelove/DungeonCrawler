@@ -1,16 +1,18 @@
-package com.dungeoncrawler.Entities.Enemies;
+package com.dungeoncrawler.Entities.Enemies.BaseEnemies;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
+import com.dungeoncrawler.Entities.Enemies.Enemy;
+import com.dungeoncrawler.Entities.Enemies.EnemyProjectile;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 
 import static com.dungeoncrawler.Entities.EnemyStats.*;
 
-public class Shooter extends Enemy{
-    GameTimer shootTimer = new GameTimer((long) (SHOOTER_ATTACK_DELAY*1000), args -> shoot(), true);
+public class Shooter extends Enemy {
+    GameTimer shootTimer = new GameTimer((long) (SHOOTER_ATTACK_DELAY*1000), args -> shoot(), false);
     private boolean inRoom;
     public Shooter(Vector3 initPos) {
         super(initPos, new GameImage(SHOOTER_IMAGE_PATH),
@@ -24,7 +26,6 @@ public class Shooter extends Enemy{
             shootTimer.stop();
             return;
         }
-        shootTimer = new GameTimer((long) (SHOOTER_ATTACK_DELAY*1000), args -> shoot());
         inRoom = true;
         super.activate(room);
     }
@@ -33,7 +34,6 @@ public class Shooter extends Enemy{
     public void Update(){
         if(!shootTimer.isRunning())
         {
-            shootTimer = new GameTimer((long) (SHOOTER_ATTACK_DELAY*1000), args -> shoot(), true);
             shootTimer.start();
         }
         super.Update();

@@ -6,7 +6,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
-import com.dungeoncrawler.Entities.Enemies.Skeleton;
+import com.dungeoncrawler.Entities.Enemies.BaseEnemies.Skeleton;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 
 import static com.dungeoncrawler.Entities.EnemyStats.*;

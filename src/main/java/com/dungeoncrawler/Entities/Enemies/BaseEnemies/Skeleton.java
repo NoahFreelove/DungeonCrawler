@@ -1,4 +1,4 @@
-package com.dungeoncrawler.Entities.Enemies;
+package com.dungeoncrawler.Entities.Enemies.BaseEnemies;
 
 import com.JEngine.Components.Pathfinding_Comp;
 import com.JEngine.Core.GameImage;
@@ -7,6 +7,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Graveyard;
+import com.dungeoncrawler.Entities.Enemies.Enemy;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 

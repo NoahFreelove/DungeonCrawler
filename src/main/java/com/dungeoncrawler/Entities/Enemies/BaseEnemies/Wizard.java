@@ -1,4 +1,4 @@
-package com.dungeoncrawler.Entities.Enemies;
+package com.dungeoncrawler.Entities.Enemies.BaseEnemies;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector2;
@@ -7,6 +7,8 @@ import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.Misc.GameTimer;
+import com.dungeoncrawler.Entities.Enemies.Enemy;
+import com.dungeoncrawler.Entities.Enemies.EnemyProjectile;
 
 import static com.dungeoncrawler.Entities.EnemyStats.*;
 
@@ -37,6 +39,7 @@ public class Wizard extends Enemy {
     @Override
     public void activate(GameScene room){
         teleportTimer.start();
+        teleport();
         super.activate(room);
     }
 

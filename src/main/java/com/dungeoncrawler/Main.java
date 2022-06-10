@@ -23,7 +23,7 @@ public class Main extends Application {
 
     public static GameWindow window;
     public static Stage stage;
-    public static boolean lightingOffset = true; // some machines have issues with position based lights, so this is a hacky fix
+    public static boolean lightingOffset = false; // some machines have issues with position based lights, so this is a hacky fix
 
     public static void main(String[] args) {
         launch();

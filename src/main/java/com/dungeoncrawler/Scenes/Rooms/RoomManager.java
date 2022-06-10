@@ -7,6 +7,8 @@ import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Enemies.*;
+import com.dungeoncrawler.Entities.Enemies.BaseEnemies.Follower;
+import com.dungeoncrawler.Entities.Enemies.BaseEnemies.Frog;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Boss;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Stairs.Stairs;

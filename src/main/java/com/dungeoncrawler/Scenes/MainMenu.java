@@ -128,7 +128,7 @@ public class MainMenu extends GameScene {
             });
             skillPointsButton.setTextFill(ColorManager.buttonTextColor);
             skillPointsButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
-            addUI(skillPointsButton);
+            //addUI(skillPointsButton);
         }
 
     }
