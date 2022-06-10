@@ -81,14 +81,14 @@ public class Shop extends Pawn {
         barrettSpawn = new WeaponSpawn(new Vector3(200,400), new GameImage("bin/barrett.png", 128, 128), new BarrettM82(new Vector3(200,400)), true, (floor%5 ==0)? 2000 : 3000, parent, new Vector2(-40,-50));
 
         // Items:
-        healthSpawn = new ItemSpawn(new Vector3(800,200), new GameImage("bin/heart.png"), ItemType.HEALTH, true, 50, parent, 15, "15 Health", new Vector2(10,0) );
+        healthSpawn = new ItemSpawn(new Vector3(800,200), new GameImage("bin/heart.png"), ItemType.HEALTH, true, (floor%5 ==0)? 25 : 100, parent, 30, "30 Health", new Vector2(10,0) );
         shieldSpawn= new ItemSpawn(new Vector3(1000,200), new GameImage("bin/shieldItem.png"), ItemType.SHIELD, true, 100, parent, 2, "2-Hit Shield", new Vector2(15,0));
         if(floor<6)
             return;
 
-        fireAbilitySpawn = new ItemSpawn(new Vector3(1000,400), new GameImage("bin/fireball.png"), ItemType.ABILITY, true, 300, parent, 1, "Fire Ability", new Vector2(-10,0));
-        iceAbilitySpawn = new ItemSpawn(new Vector3(800,400), new GameImage("bin/snowflake.png"), ItemType.ABILITY, true, 350, parent, 1, "Freeze Ability", new Vector2(25,0));
-        shieldAbilitySpawn = new ItemSpawn(new Vector3(900,500), new GameImage("bin/shieldAbility.png"), ItemType.ABILITY, true, 500, parent, 1, "Shield Ability", new Vector2(25,0));
+        fireAbilitySpawn = new ItemSpawn(new Vector3(1000,400), new GameImage("bin/fireball.png"), ItemType.ABILITY, true, (floor%5 ==0)? 220 : 300, parent, 1, "Fire Ability", new Vector2(-10,0));
+        iceAbilitySpawn = new ItemSpawn(new Vector3(800,400), new GameImage("bin/snowflake.png"), ItemType.ABILITY, true, (floor%5 ==0)? 300 : 350, parent, 1, "Freeze Ability", new Vector2(25,0));
+        shieldAbilitySpawn = new ItemSpawn(new Vector3(900,500), new GameImage("bin/shieldAbility.png"), ItemType.ABILITY, true, (floor%340 ==500)? 5 : 30, parent, 1, "Shield Ability", new Vector2(25,0));
         //bbGunSpawn = new WeaponSpawn(new Vector3(550,400), new GameImage("bin/bbGun.png",64,64), new BBGun(new Vector3(550,400)), true, 500, parent);
 
     }

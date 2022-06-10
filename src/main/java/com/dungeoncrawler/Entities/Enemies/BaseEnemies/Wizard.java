@@ -39,6 +39,7 @@ public class Wizard extends Enemy {
     @Override
     public void activate(GameScene room){
         teleportTimer.start();
+        setCanAttack(true);
         teleport();
         super.activate(room);
     }

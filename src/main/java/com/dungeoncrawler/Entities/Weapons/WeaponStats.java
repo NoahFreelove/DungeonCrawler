@@ -56,7 +56,7 @@ public record WeaponStats() {
     //endregion
 
     //region Staff
-    public static final float STAFF_DAMAGE = 4;
+    public static final float STAFF_DAMAGE = 5;
     public static final double STAFF_SHOOT_DELAY = 1f;
     public static final float STAFF_MAX_PROJECTILE_SIZE = 3;
     public static final float STAFF_MIN_PROJECTILE_SIZE = 0.5f;
@@ -67,4 +67,13 @@ public record WeaponStats() {
     public static final double STAFF_REWARD_MULTIPLIER = 0.5;
     //endregion
 
+    //region Knife
+    public static final float KNIFE_DAMAGE = 3;
+    public static final double KNIFE_ATTACK_DELAY = 0.05;
+    public static final float KNIFE_ATTACK_DISTANCE = 128;
+    public static final float KNIFE_ANIMATION_SPEED = 5f;
+    public static final boolean KNIFE_IS_THROWABLE = false;
+    public static final String KNIFE_IMAGE_PATH = "bin/sword.png";
+    public static final double KNIFE_REWARD_MULTIPLIER = 2;
+    //endregion
 }

@@ -71,6 +71,7 @@ public class Staff extends ProjectileWeapon{
 
         Projectile projectile = new Projectile(new Vector3(getPosition().x-xOffset, getPosition().y-yOffset), rot, dir, STAFF_DAMAGE*charge, STAFF_PROJECTILE_SPEED, new GameImage(STAFF_PROJECTILE_IMAGE_PATH), true);
         projectile.setScale(new Vector3(charge,charge,charge));
+        projectile.setEnableLighting(false);
         SceneManager.getActiveScene().add(projectile);
         charge = STAFF_MIN_PROJECTILE_SIZE;
     }

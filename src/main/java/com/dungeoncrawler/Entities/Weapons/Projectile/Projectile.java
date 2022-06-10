@@ -15,15 +15,15 @@ import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
 
 public class Projectile extends Pawn {
-    float moveSpeed;
-    Vector2 direction;
-    double damage;
-    int life = 120;
-    ProjectileCollider collider;
-    Light.Point projectileLight;
-    Lighting lightSource;
-    GameLight gl;
-    boolean ignoreOnHit;
+    private float moveSpeed;
+    private Vector2 direction;
+    private double damage;
+    private int life = 120;
+    private ProjectileCollider collider;
+    private Light.Point projectileLight;
+    private Lighting lightSource;
+    private GameLight gl;
+    private boolean ignoreOnHit;
 
     boolean enableLighting = true;
     public Projectile(Vector3 pos, Vector3 rot, Vector2 moveDirection, double damage, float moveSpeed, GameImage sprite) {
@@ -76,6 +76,8 @@ public class Projectile extends Pawn {
             yOffset = getPosition().y/256*128;
             xOffset = getPosition().x/256*128;
         }
+        if(projectileLight == null)
+            return;
         projectileLight.setX(getPosition().x+xOffset);
         projectileLight.setY(getPosition().y+yOffset);
     }

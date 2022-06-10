@@ -14,6 +14,7 @@ import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Player.Abilities.*;
 import com.dungeoncrawler.Entities.Weapons.*;
 import com.dungeoncrawler.Entities.Weapons.Melee.Boomerang;
+import com.dungeoncrawler.Entities.Weapons.Melee.Knife;
 import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
@@ -82,6 +83,7 @@ public class PlayerController extends Player {
             case "Bow" -> setSelectedWeapon(new Bow(getPosition()));
             case "BarrettM82" -> setSelectedWeapon(new BarrettM82(getPosition()));
             case "Staff" -> setSelectedWeapon(new Staff(getPosition()));
+            case "Knife" -> setSelectedWeapon(new Knife(getPosition()));
         }
 
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
