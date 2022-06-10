@@ -1,24 +1,16 @@
 package com.dungeoncrawler.Entities.Player.Abilities;
 
 import com.JEngine.Core.GameImage;
-import com.JEngine.Core.Identity;
-import com.JEngine.Core.Position.Direction;
-import com.JEngine.Core.Position.Transform;
+import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
-import com.JEngine.Game.PlayersAndPawns.Pawn;
-import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.dungeoncrawler.Entities.Weapons.Projectile.Projectile;
 
-public class FireballEffect extends Pawn {
+import static com.dungeoncrawler.Entities.Player.Abilities.AbilityStats.FIRE_DAMAGE;
+import static com.dungeoncrawler.Entities.Player.Abilities.AbilityStats.FIRE_MOVE_SPEED;
+
+public class FireballEffect extends Projectile {
     public FireballEffect(float yPos) {
-        super(Transform.simpleTransform(new Vector3(1080,yPos)), new GameImage("bin/fireball.png",128,64), new Identity("Fireball"));
-    }
-
-    @Override
-    public void Update(){
-        Move(Direction.Left, 25);
-        if(getPosition().x < -50){
-            setActive(false);
-            SceneManager.getActiveScene().remove(this);
-        }
+        super(new Vector3(1280,yPos), new Vector3(270,0,0), new Vector2(-1,0), FIRE_DAMAGE, FIRE_MOVE_SPEED, new GameImage("bin/wizardMagic.png", 96,96), true);
+        setEnableLighting(false);
     }
 }

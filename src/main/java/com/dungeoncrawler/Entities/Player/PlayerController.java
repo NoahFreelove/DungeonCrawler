@@ -18,6 +18,7 @@ import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
+import com.dungeoncrawler.Entities.Weapons.Projectile.Staff;
 import com.dungeoncrawler.Main;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Scenes.ColorManager;
@@ -53,7 +54,7 @@ public class PlayerController extends Player {
     private boolean wasdMovement = true;
 
     private double superCharge = 1;
-    private AbilityType superAbility = AbilityType.SHIELD;
+    private AbilityType superAbility = AbilityType.FIRE;
 
     // UI
     PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel);
@@ -80,6 +81,7 @@ public class PlayerController extends Player {
             case "BBGun"-> setSelectedWeapon(new BBGun(getPosition()));
             case "Bow" -> setSelectedWeapon(new Bow(getPosition()));
             case "BarrettM82" -> setSelectedWeapon(new BarrettM82(getPosition()));
+            case "Staff" -> setSelectedWeapon(new Staff(getPosition()));
         }
 
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
@@ -314,6 +316,9 @@ public class PlayerController extends Player {
         if(key == KeyCode.ENTER || key == KeyCode.Q){
             useSuper();
         }
+        if(key == KeyCode.SHIFT){
+            selectedWeapon.releaseAttackButton();
+        }
     }
 
     public boolean isAttacking() {
@@ -422,4 +427,5 @@ public class PlayerController extends Player {
     public void onHurtEnemy(){
         addSuperCharge(0.02);
     }
+
 }

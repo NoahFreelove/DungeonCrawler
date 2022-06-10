@@ -36,6 +36,8 @@ public abstract class Weapon extends Sprite {
         return false;
     }
 
+    public void releaseAttackButton(){}
+
     protected abstract void attack(SimpleDirection direction);
 
     public float getDamage() {

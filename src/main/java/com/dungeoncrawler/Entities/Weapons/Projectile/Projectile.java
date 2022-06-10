@@ -10,7 +10,6 @@ import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessingEffects.GameLight;
 import com.dungeoncrawler.Main;
-import javafx.scene.Scene;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.paint.Color;
@@ -19,11 +18,14 @@ public class Projectile extends Pawn {
     float moveSpeed;
     Vector2 direction;
     double damage;
-    int life = 60;
+    int life = 120;
     ProjectileCollider collider;
     Light.Point projectileLight;
     Lighting lightSource;
     GameLight gl;
+    boolean ignoreOnHit;
+
+    boolean enableLighting = true;
     public Projectile(Vector3 pos, Vector3 rot, Vector2 moveDirection, double damage, float moveSpeed, GameImage sprite) {
         super(new Transform(pos, rot, Vector3.oneVector()), sprite, new Identity("projectile"));
         this.direction = moveDirection;
@@ -49,8 +51,12 @@ public class Projectile extends Pawn {
         gl = new GameLight(lightSource, false);
         SceneManager.getActiveScene().addLight(gl);
     }
+    public Projectile(Vector3 pos, Vector3 rot, Vector2 moveDirection, double damage, float moveSpeed, GameImage sprite, boolean ignoreOnHit) {
+        this(pos, rot, moveDirection, damage, moveSpeed, sprite);
+        this.ignoreOnHit = ignoreOnHit;
+    }
 
-    @Override
+        @Override
     public void Update(){
 
         super.Update();
@@ -60,6 +66,7 @@ public class Projectile extends Pawn {
             destroySelf();
             return;
         }
+        projectileLight.setColor(enableLighting? Color.web("#FFD580") : Color.TRANSPARENT);
 
         Move(direction, moveSpeed);
         double xOffset = 0;
@@ -85,5 +92,15 @@ public class Projectile extends Pawn {
             }
         }
         SceneManager.getActiveScene().removeLight(gl);
+    }
+    public void onHit(){
+        if(ignoreOnHit)
+            return;
+        destroySelf();
+    }
+
+    public void setEnableLighting(boolean enabled)
+    {
+        enableLighting = enabled;
     }
 }

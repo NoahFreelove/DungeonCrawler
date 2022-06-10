@@ -15,11 +15,6 @@ public class FireAbility extends Ability {
 
     @Override
     protected void StartEffect(){
-        for (GameObject object: SceneManager.getActiveScene().getObjects()) {
-            if(object instanceof Enemy enemy){
-                enemy.takeDamage(FIRE_DAMAGE);
-            }
-        }
         FireballEffect fireballEffect1 = new FireballEffect(100);
         FireballEffect fireballEffect2 = new FireballEffect(200);
         FireballEffect fireballEffect3 = new FireballEffect(300);
