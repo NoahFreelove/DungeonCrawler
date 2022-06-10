@@ -56,21 +56,7 @@ public class Doctor extends Boss{
             pathfinding_comp.setTarget(PlayerController.instance);
             pathfinding_comp.setMoveSpeed(DOCTOR_MOVE_SPEED);
         }
-        if(getHealth() >= DOCTOR_MAX_HEALTH)
-        {
-            healthBar.setStyle("-fx-accent: yellow");
-        }
-        else if(getHealth() > DOCTOR_BASE_HEALTH + 50)
-        {
-            healthBar.setStyle("-fx-accent: green");
-        }
-        else if(getHealth() > DOCTOR_BASE_HEALTH)
-        {
-            healthBar.setStyle("-fx-accent: blue");
-        }
-        else {
-            healthBar.setStyle("-fx-accent: red");
-        }
+
 
         super.Update();
     }

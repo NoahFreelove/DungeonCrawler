@@ -158,7 +158,7 @@ public class Room extends GameScene {
     }
 
     private void createBoss(){
-        int rand = GameMath.randRangeInclusive(0,0);
+        int rand = GameMath.randRangeInclusive(1,1);
         //System.out.println(rand);
         Vector3 bossPos = new Vector3(1150-300,300);
         switch (rand)

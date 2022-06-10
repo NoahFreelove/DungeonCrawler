@@ -5,6 +5,9 @@ import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.io.File;
@@ -17,6 +20,7 @@ public class PlayerUI {
     private Text xpText;
     private Text gameLevelText;
 
+
     public PlayerUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel) {
         roomNumber = new Text();
         roomNumber.setTranslateX(10);
@@ -27,15 +31,18 @@ public class PlayerUI {
         ImageView healthIcon = new ImageView(new File("bin/heart.png").getAbsolutePath());
         healthIcon.setFitHeight(32);
         healthIcon.setFitWidth(32);
-        healthIcon.setLayoutX(10);
-        healthIcon.setLayoutY(620);
+        healthIcon.setLayoutX(15);
+        healthIcon.setLayoutY(410);
 
         healthText = new Text(""+ health);
-        healthText.setTranslateX(50);
-        healthText.setTranslateY(645);
-        healthText.setFill(ColorManager.boldText);
-        healthText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
+        healthText.setTranslateX(10);
+        healthText.setTranslateY(470);
+        healthText.setFill(ColorManager.boldText);
+        Font font = Font.font("Arial", FontWeight.BOLD, 25);
+        healthText.setFont(font);
+        healthText.setStroke(Color.WHITE);
+        healthText.setStrokeWidth(1);
         goldText = new Text("Gold: "+ gold);
         goldText.setTranslateX(320);
         goldText.setTranslateY(40);
@@ -71,7 +78,7 @@ public class PlayerUI {
     public void UpdateUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel)
     {
         roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
-        healthText.setText(""+ health);
+        healthText.setText(""+ (int)(health));
         goldText.setText("Gold: " + gold);
         xpText.setText(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
         gameLevelText.setText("Floor "+ (PlayerController.gameLevelToWin - gameLevel));

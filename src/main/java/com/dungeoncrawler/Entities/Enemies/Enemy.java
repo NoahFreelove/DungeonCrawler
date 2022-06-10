@@ -18,6 +18,9 @@ import javafx.application.Platform;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.ColorAdjust;
 
+import static com.dungeoncrawler.Entities.EnemyStats.DOCTOR_BASE_HEALTH;
+import static com.dungeoncrawler.Entities.EnemyStats.DOCTOR_MAX_HEALTH;
+
 public class Enemy extends Pawn {
     private final double damage;
     private double health;
@@ -75,6 +78,21 @@ public class Enemy extends Pawn {
             healthBar.setProgress(health/maxHealth);
             healthBar.setLayoutX(getPosition().x);
             healthBar.setLayoutY(getPosition().y - 10);
+            if(getHealth() >= 150)
+            {
+                healthBar.setStyle("-fx-accent: yellow");
+            }
+            else if(getHealth() >= 100)
+            {
+                healthBar.setStyle("-fx-accent: green");
+            }
+            else if(getHealth() >= 50)
+            {
+                healthBar.setStyle("-fx-accent: blue");
+            }
+            else {
+                healthBar.setStyle("-fx-accent: red");
+            }
         });
     }
 

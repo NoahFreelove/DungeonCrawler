@@ -1,5 +1,6 @@
 package com.dungeoncrawler.Entities.Enemies.Bosses;
 
+import com.JEngine.Components.Pathfinding_Comp;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
@@ -13,11 +14,16 @@ import static com.dungeoncrawler.Entities.EnemyStats.*;
 public class Graveyard extends Boss {
     private int skeletonsAlive = 0;
     private GameTimer spawnDelay = new GameTimer((long) (GRAVEYARD_SPAWN_DELAY*1000), args -> spawnSpookyMen(), false);
+    private final Pathfinding_Comp pathfinding_comp;
 
     public Graveyard(Vector3 initPos, int x, int y) {
         super(initPos, new GameImage(GRAVEYARD_IMAGE_PATH)
-                , GRAVEYARD_DAMAGE, GRAVEYARD_MAX_HEALTH, GRAVEYARD_ATTACK_DELAY, GRAVEYARD_DIFFICULTY, "spooky", 1f, x,y);
-
+                , GRAVEYARD_DAMAGE, GRAVEYARD_MAX_HEALTH, GRAVEYARD_ATTACK_DELAY, GRAVEYARD_DIFFICULTY, "get spook'd", 1f, x,y);
+        pathfinding_comp = new Pathfinding_Comp(this);
+        pathfinding_comp.setMoveSpeed(GRAVEYARD_SPEED);
+        pathfinding_comp.setSuccessRange(256);
+        pathfinding_comp.setMoveAfterSuccess(false);
+        addComponent(pathfinding_comp);
     }
 
     private void spawnSpookyMen(){
@@ -64,6 +70,15 @@ public class Graveyard extends Boss {
 
     @Override
     public void Update(){
+        if(!canMove)
+        {
+            pathfinding_comp.setMoveSpeed(0);
+            return;
+        }
+        else {
+            pathfinding_comp.setTarget(PlayerController.instance);
+            pathfinding_comp.setMoveSpeed(GRAVEYARD_SPEED);
+        }
         super.Update();
     }
 
