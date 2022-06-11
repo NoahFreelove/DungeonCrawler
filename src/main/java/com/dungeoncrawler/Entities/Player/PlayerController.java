@@ -55,10 +55,10 @@ public class PlayerController extends Player {
     private boolean wasdMovement = true;
 
     private double superCharge = 1;
-    private AbilityType superAbility = AbilityType.FIRE;
+    private AbilityType superAbility = AbilityType.FREEZE;
 
     // UI
-    PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel);
+    PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel, superAbility, superCharge);
 
     public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon) {
         super(Transform.simpleTransform(pos), new GameImage("bin/player.png"), new Identity("PlayerController", "player"));
@@ -114,7 +114,7 @@ public class PlayerController extends Player {
         }
 
         checkInput();
-        playerUI.UpdateUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel);
+        playerUI.UpdateUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel, superAbility, superCharge);
 
         if (selectedWeapon != null)
         {
@@ -410,7 +410,7 @@ public class PlayerController extends Player {
                     case FREEZE -> new FreezeAbility();
                     case SHIELD -> new ShieldAbility();
                 }
-                //superCharge = 0;
+                superCharge = 0;
             }
         }
     }
@@ -425,6 +425,10 @@ public class PlayerController extends Player {
     public void setSuperAbility(AbilityType ability)
     {
         this.superAbility = ability;
+        if(playerUI !=null)
+        {
+            playerUI.updateSpecialImage(ability);
+        }
     }
 
     public void onHurtEnemy(){

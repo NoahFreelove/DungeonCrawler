@@ -12,6 +12,7 @@ public class ColorManager {
     public static Color boldText = Color.RED;
     public static Color playerTextColor = Color.LIGHTGREEN;
     public static Color buttonTextColor = Color.web("#FFFFFF");
+    public static Color superChargeTextColor = Color.CYAN;
     public static Color buttonColor = Color.web("#000000");
 
 }

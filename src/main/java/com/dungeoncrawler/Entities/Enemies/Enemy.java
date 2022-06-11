@@ -54,6 +54,8 @@ public class Enemy extends Pawn {
     }
 
     public void attack() {
+        if(damage <=0)
+            return;
         canAttack = false;
         GameUtility.waitForSeconds(attackDelay, args -> canAttack = true);
     }

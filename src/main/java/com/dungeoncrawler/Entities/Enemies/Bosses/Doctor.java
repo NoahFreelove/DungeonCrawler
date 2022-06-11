@@ -45,7 +45,11 @@ public class Doctor extends Boss{
     public void Update() {
         runningToHealSpot = (getHealth() < DOCTOR_HEAL_THRESHOLD || currentlyHealing);
         if(!canMove)
+        {
             pathfinding_comp.setMoveSpeed(0);
+            return;
+        }
+
         if (runningToHealSpot)
         {
             pathfinding_comp.setTarget(healSpot);

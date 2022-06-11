@@ -1,9 +1,11 @@
 package com.dungeoncrawler.Entities.Player;
 
 import com.JEngine.Game.Visual.GameWindow;
+import com.dungeoncrawler.Entities.Player.Abilities.AbilityType;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -21,8 +23,9 @@ public class PlayerUI {
     private Text xpText;
     private Text gameLevelText;
     private ImageView healthIcon = new ImageView(new File("bin/heart.png").getAbsolutePath());
-
-    public PlayerUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel) {
+    private ImageView superIcon;
+    private Text superChargeText;
+    public PlayerUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel, AbilityType superAbility, double abilityCharge) {
         Font font = Font.font("Arial", FontWeight.BOLD, 25);
 
         roomNumber = new Text();
@@ -70,27 +73,55 @@ public class PlayerUI {
         gameLevelText.setFill(ColorManager.textColor);
         gameLevelText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
+
+        superIcon = new ImageView();
+
+        switch (superAbility){
+            case FIRE -> superIcon.setImage(new Image(new File("bin/fireball.png").getAbsolutePath()));
+            case SHIELD -> superIcon.setImage(new Image(new File("bin/shieldItem.png").getAbsolutePath()));
+            case FREEZE -> superIcon.setImage(new Image(new File("bin/snowflake.png").getAbsolutePath()));
+            case NONE -> superIcon.setImage(null);
+        }
+        superIcon.setFitWidth(32);
+        superIcon.setFitHeight(32);
+        superIcon.setTranslateX(12);
+        superIcon.setTranslateY(180);
+
+        superChargeText = new Text((int)(100*abilityCharge) + "%");
+        superChargeText.setLayoutX(10);
+        superChargeText.setLayoutY(230);
+        superChargeText.setFill(ColorManager.superChargeTextColor);
+        superChargeText.setFont(font);
+
+
         playerUI.getChildren().add(healthText);
         playerUI.getChildren().add(roomNumber);
         playerUI.getChildren().add(goldText);
         playerUI.getChildren().add(xpText);
         playerUI.getChildren().add(gameLevelText);
-
-        GameWindow.getInstance().addPermanentUI(healthText);
-        GameWindow.getInstance().addPermanentUI(healthIcon);
-        GameWindow.getInstance().addPermanentUI(goldIcon);
+        playerUI.getChildren().add(superIcon);
+        playerUI.getChildren().add(goldIcon);
+        playerUI.getChildren().add(healthIcon);
+        playerUI.getChildren().add(superChargeText);
         GameWindow.getInstance().addPermanentUI(playerUI);
-        GameWindow.getInstance().addPermanentUI(goldText);
-        GameWindow.getInstance().addPermanentUI(xpText);
-        GameWindow.getInstance().addPermanentUI(gameLevelText);
     }
 
-    public void UpdateUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel)
+    public void UpdateUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel, AbilityType superAbility, double abilityCharge)
     {
         roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
         healthText.setText(""+ (int)(health));
         goldText.setText("" + gold);
         xpText.setText(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
         gameLevelText.setText("Floor "+ (PlayerController.gameLevelToWin - gameLevel));
+        superChargeText.setText((int)(100*abilityCharge) + "%");
+    }
+
+    public void updateSpecialImage(AbilityType superAbility){
+        switch (superAbility){
+            case FIRE -> superIcon.setImage(new Image(new File("bin/fireball.png").getAbsolutePath()));
+            case SHIELD -> superIcon.setImage(new Image(new File("bin/shieldItem.png").getAbsolutePath()));
+            case FREEZE -> superIcon.setImage(new Image(new File("bin/snowflake.png").getAbsolutePath()));
+            case NONE -> superIcon.setImage(null);
+        }
     }
 }
