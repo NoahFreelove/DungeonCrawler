@@ -76,12 +76,6 @@ public class PlayerUI {
 
         superIcon = new ImageView();
 
-        switch (superAbility){
-            case FIRE -> superIcon.setImage(new Image(new File("bin/fireball.png").getAbsolutePath()));
-            case SHIELD -> superIcon.setImage(new Image(new File("bin/shieldItem.png").getAbsolutePath()));
-            case FREEZE -> superIcon.setImage(new Image(new File("bin/snowflake.png").getAbsolutePath()));
-            case NONE -> superIcon.setImage(null);
-        }
         superIcon.setFitWidth(32);
         superIcon.setFitHeight(32);
         superIcon.setTranslateX(12);
@@ -90,9 +84,9 @@ public class PlayerUI {
         superChargeText = new Text((int)(100*abilityCharge) + "%");
         superChargeText.setLayoutX(10);
         superChargeText.setLayoutY(230);
-        superChargeText.setFill(ColorManager.superChargeTextColor);
         superChargeText.setFont(font);
 
+        updateSpecialImage(superAbility);
 
         playerUI.getChildren().add(healthText);
         playerUI.getChildren().add(roomNumber);
@@ -118,10 +112,22 @@ public class PlayerUI {
 
     public void updateSpecialImage(AbilityType superAbility){
         switch (superAbility){
-            case FIRE -> superIcon.setImage(new Image(new File("bin/fireball.png").getAbsolutePath()));
-            case SHIELD -> superIcon.setImage(new Image(new File("bin/shieldItem.png").getAbsolutePath()));
-            case FREEZE -> superIcon.setImage(new Image(new File("bin/snowflake.png").getAbsolutePath()));
-            case NONE -> superIcon.setImage(null);
+            case FIRE -> {
+                superIcon.setImage(new Image(new File("bin/fireball.png").getAbsolutePath()));
+                superChargeText.setFill(ColorManager.superChargeTextColorFIRE);
+            }
+            case SHIELD -> {
+                superIcon.setImage(new Image(new File("bin/shieldItem.png").getAbsolutePath()));
+                superChargeText.setFill(ColorManager.superChargeTextColorSHIELD);
+            }
+            case FREEZE -> {
+                superIcon.setImage(new Image(new File("bin/snowflake.png").getAbsolutePath()));
+                superChargeText.setFill(ColorManager.superChargeTextColorFREEZE);
+            }
+            case NONE -> {
+                superIcon.setImage(null);
+                superChargeText.setFill(Color.TRANSPARENT);
+            }
         }
     }
 }

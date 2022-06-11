@@ -55,12 +55,12 @@ public class PlayerController extends Player {
     private boolean wasdMovement = true;
 
     private double superCharge = 1;
-    private AbilityType superAbility = AbilityType.FREEZE;
+    private AbilityType superAbility = AbilityType.FIRE;
 
     // UI
     PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel, superAbility, superCharge);
 
-    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon) {
+    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon, String superAbility, double superCharge) {
         super(Transform.simpleTransform(pos), new GameImage("bin/player.png"), new Identity("PlayerController", "player"));
         if(instance == null)
             instance = this;
@@ -74,6 +74,20 @@ public class PlayerController extends Player {
         this.gold = initGold;
         this.exp = initExp;
         this.expToNextLevel = 5*initLevel;
+        try {
+            this.superAbility = AbilityType.valueOf(superAbility);
+        }
+        catch (Exception ignore)
+        {
+            this.superAbility = AbilityType.NONE;
+        }
+
+        if(playerUI !=null)
+        {
+            playerUI.updateSpecialImage(this.superAbility);
+        }
+        this.superCharge = superCharge;
+
 
         switch (initWeapon)
         {
@@ -88,7 +102,6 @@ public class PlayerController extends Player {
 
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         addComponent(new DontDestroyOnLoad_Comp());
-
     }
 
     public PlayerController(Vector3 pos) {
@@ -256,7 +269,7 @@ public class PlayerController extends Player {
         getSprite().setColorAdjust(new ColorAdjust(1,1,0.5,1));
         hurtEffect.start();
         ShakeScreen.shake(25, 0.150);
-        addSuperCharge(0.05);
+        addSuperCharge(0.03);
     }
     public void heal(double amount) {
         health += amount;
@@ -415,6 +428,11 @@ public class PlayerController extends Player {
         }
     }
     private void addSuperCharge(double amount) {
+        if(superAbility == AbilityType.NONE)
+        {
+            superCharge = 0;
+            return;
+        }
         superCharge += GameMath.clamp(0, 1, (float) amount);
         if (superCharge > 1)
         {
@@ -425,6 +443,7 @@ public class PlayerController extends Player {
     public void setSuperAbility(AbilityType ability)
     {
         this.superAbility = ability;
+        superCharge = 0;
         if(playerUI !=null)
         {
             playerUI.updateSpecialImage(ability);
@@ -432,7 +451,14 @@ public class PlayerController extends Player {
     }
 
     public void onHurtEnemy(){
-        addSuperCharge(0.02);
+        addSuperCharge(0.01);
     }
 
+    public AbilityType getSuperAbility() {
+        return superAbility;
+    }
+
+    public double getSuperCharge() {
+        return superCharge;
+    }
 }

@@ -94,7 +94,7 @@ public class RoomManager {
         }
         String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0), saveData[0], Integer.parseInt(saveData[1]),
-                Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4]), saveData[6]));
+                Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4]), saveData[6], saveData[7], Double.parseDouble(saveData[8])));
         rooms[0][0].add(speechManager);
         SceneManager.getWindow().setBackgroundColor(ColorManager.backgroundColor);
         currentRoom = rooms[currentRoomX][currentRoomY];

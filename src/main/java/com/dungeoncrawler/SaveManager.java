@@ -12,6 +12,7 @@ public class SaveManager {
     {
         saveGame(player, false);
     }
+
     public static void saveGame(PlayerController player, boolean incrementLevel)
     {
         int gameLevel = player.getGameLevel();
@@ -19,7 +20,7 @@ public class SaveManager {
         {
             gameLevel++;
         }
-        String[] saveData = new String[7];
+        String[] saveData = new String[9];
         saveData[0] = player.getName();
         saveData[1] = "" + gameLevel;
         saveData[2] = "" + player.getPlayerLevel();
@@ -27,11 +28,14 @@ public class SaveManager {
         saveData[4] = "" + player.getExp();
         saveData[5] = "" + player.getSkillPoints();
         saveData[6] = "" + player.getSelectedWeapon().getClass().getSimpleName();
+        saveData[7] = "" + player.getSuperAbility().toString();
+        saveData[8] = "" + player.getSuperCharge();
+
         FileOperations.stringArrToFile(saveData, new File("bin/save.dat").getAbsolutePath());
     }
 
     public static void newGame(){
-        String[] saveData = new String[7];
+        String[] saveData = new String[9];
         saveData[0] = "PlayerName";
         saveData[1] = "1";
         saveData[2] = "1";
@@ -39,6 +43,8 @@ public class SaveManager {
         saveData[4] = "0";
         saveData[5] = "0";
         saveData[6] = "Sword";
+        saveData[7] = "NONE";
+        saveData[8] = "0";
         FileOperations.stringArrToFile(saveData, new File("bin/save.dat").getAbsolutePath());
     }
 }
