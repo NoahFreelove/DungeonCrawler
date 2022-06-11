@@ -6,6 +6,7 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameTimer;
+import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Enemies.*;
 import com.dungeoncrawler.Entities.Enemies.BaseEnemies.Follower;
 import com.dungeoncrawler.Entities.Enemies.BaseEnemies.Frog;
@@ -202,6 +203,7 @@ public class RoomManager {
     public static void endDungeon(boolean loadNextOne) {
         if (PlayerController.instance == null)
             return;
+        System.gc();
         SaveManager.saveGame(PlayerController.instance, true);
         PlayerController.removePlayer();
         if (loadNextOne)

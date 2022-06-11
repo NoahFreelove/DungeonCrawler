@@ -1,5 +1,6 @@
 package com.dungeoncrawler;
 
+import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameCamera;
@@ -23,7 +24,7 @@ public class Main extends Application {
 
     public static GameWindow window;
     public static Stage stage;
-    public static boolean lightingOffset = false; // some machines have issues with position based lights, so this is a hacky fix
+    public static boolean lightingOffset = true; // some machines have issues with position based lights, so this is a hacky fix
 
     public static void main(String[] args) {
         launch();
@@ -55,9 +56,13 @@ public class Main extends Application {
                     }
                 }
             });
+
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
+            window.setIcon(new GameImage("bin/icon.png",64,64));
             createMainMenu();
-        }catch (Exception e)
+
+        }
+        catch (Exception e)
         {
             System.out.println(e.getMessage() + " (start)");
         }

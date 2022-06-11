@@ -61,7 +61,7 @@ public record WeaponStats() {
     public static final float STAFF_MAX_PROJECTILE_SIZE = 3;
     public static final float STAFF_MIN_PROJECTILE_SIZE = 0.5f;
     public static final float STAFF_PROJECTILE_SPEED = 20;
-    public static final String STAFF_PROJECTILE_IMAGE_PATH = "bin/wizardMagic.png";
+    public static final String STAFF_PROJECTILE_IMAGE_PATH = "bin/fireball.png";
     public static final String STAFF_IMAGE_PATH = "bin/bow.png";
     public static final Vector2 STAFF_OFFSET = new Vector2(32,0);
     public static final double STAFF_REWARD_MULTIPLIER = 0.5;

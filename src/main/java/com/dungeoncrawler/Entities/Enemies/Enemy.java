@@ -22,6 +22,7 @@ import static com.dungeoncrawler.Entities.EnemyStats.DOCTOR_BASE_HEALTH;
 import static com.dungeoncrawler.Entities.EnemyStats.DOCTOR_MAX_HEALTH;
 
 public class Enemy extends Pawn {
+
     private final double damage;
     private double health;
     private double maxHealth;
@@ -33,6 +34,7 @@ public class Enemy extends Pawn {
     private final GameImage sprite;
     private boolean addedHealthUI;
     protected ProgressBar healthBar = new ProgressBar();
+
     public Enemy(Vector3 initPos, GameImage newSprite, double damage, double health, double attackDelay, int difficulty) {
         super(Transform.simpleTransform(initPos), newSprite, new Identity("enemy"));
         this.damage = damage;

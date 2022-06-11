@@ -10,7 +10,7 @@ import static com.dungeoncrawler.Entities.Player.Abilities.AbilityStats.FIRE_MOV
 
 public class FireballEffect extends Projectile {
     public FireballEffect(float yPos) {
-        super(new Vector3(1280,yPos), new Vector3(270,0,0), new Vector2(-1,0), FIRE_DAMAGE, FIRE_MOVE_SPEED, new GameImage("bin/wizardMagic.png", 96,96), true);
+        super(new Vector3(1280,yPos), new Vector3(270,0,0), new Vector2(-1,0), FIRE_DAMAGE, FIRE_MOVE_SPEED, new GameImage("bin/fireball.png", 96,96), true);
         setEnableLighting(false);
     }
 }

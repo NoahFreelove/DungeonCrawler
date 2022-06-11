@@ -67,13 +67,6 @@ public class Shop extends Pawn {
         itemTitleText.setFill(Color.WHITE);
         parent.addUI(itemTitleText);
 
-        Text abilityText = new Text("Abilities");
-        abilityText.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        abilityText.setX(900);
-        abilityText.setY(350);
-        abilityText.setFill(Color.WHITE);
-        parent.addUI(abilityText);
-
         // Weapons:
         bowSpawn = new WeaponSpawn(new Vector3(200,200), new GameImage("bin/bow.png"), new Bow(new Vector3(200,200)), true, (floor%5 ==0)? 100 : 200, parent, new Vector2(-10,0));
         boomerangSpawn = new WeaponSpawn(new Vector3(500,200), new GameImage("bin/boomerang.png"), new Boomerang(new Vector3(900,200)), true, (floor%5 ==0)? 125 : 250, parent, new Vector2(-8,-5));
@@ -85,7 +78,12 @@ public class Shop extends Pawn {
         shieldSpawn= new ItemSpawn(new Vector3(1000,200), new GameImage("bin/shieldItem.png"), ItemType.SHIELD, true, 100, parent, 2, "2-Hit Shield", new Vector2(15,0));
         if(floor<6)
             return;
-
+        Text abilityText = new Text("Abilities");
+        abilityText.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        abilityText.setX(900);
+        abilityText.setY(350);
+        abilityText.setFill(Color.WHITE);
+        parent.addUI(abilityText);
         fireAbilitySpawn = new ItemSpawn(new Vector3(1000,400), new GameImage("bin/fireball.png"), ItemType.ABILITY, true, (floor%5 ==0)? 220 : 300, parent, 1, "Fire Ability", new Vector2(-10,0));
         iceAbilitySpawn = new ItemSpawn(new Vector3(800,400), new GameImage("bin/snowflake.png"), ItemType.ABILITY, true, (floor%5 ==0)? 300 : 350, parent, 1, "Freeze Ability", new Vector2(25,0));
         shieldAbilitySpawn = new ItemSpawn(new Vector3(900,500), new GameImage("bin/shieldAbility.png"), ItemType.ABILITY, true, (floor%340 ==500)? 5 : 30, parent, 1, "Shield Ability", new Vector2(25,0));

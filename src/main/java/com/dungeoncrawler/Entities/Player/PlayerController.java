@@ -88,6 +88,7 @@ public class PlayerController extends Player {
 
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         addComponent(new DontDestroyOnLoad_Comp());
+
     }
 
     public PlayerController(Vector3 pos) {
