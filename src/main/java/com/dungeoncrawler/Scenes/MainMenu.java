@@ -26,6 +26,8 @@ import javafx.scene.text.Text;
 import java.io.File;
 
 public class MainMenu extends GameScene {
+    private boolean enableAnimation = false;
+
     public MainMenu() {
         super(100, "Main Menu");
         createMenu();
@@ -45,13 +47,22 @@ public class MainMenu extends GameScene {
                 new Vector2((float) (1280 / 2f - titleText.getLayoutBounds().getWidth() * 2)-10, 500),
                 new Vector2((float) (1280 / 2 - titleText.getLayoutBounds().getWidth() * 2)-10, 100),
                 titleText, 1);
-        titleAnimator.play();
-
-
+        if(enableAnimation)
+        {
+            titleAnimator.play();
+        }
+        else{
+            titleAnimator.skip();
+        }
         // Make title text scroll. Target Text, Text Ref, Duration, When done, create the menu buttons
         TextScroller scroller = new TextScroller(GameInfo.getAppName(), titleText, 1, args -> createMenuButtons());
-        scroller.play();
-
+        if(enableAnimation)
+        {
+            scroller.play();
+        }
+        else {
+            scroller.skip();
+        }
         // Create author text
         Text authorText = new Text("Made by " + GameInfo.getAuthors()[0]);
         authorText.setStyle("-fx-font-size: 13px;");
@@ -61,10 +72,11 @@ public class MainMenu extends GameScene {
 
         // make author text scroll
         TextScroller authorScroller = new TextScroller("Made by Noah Freelove", authorText, 2);
-        authorScroller.play();
+        if(enableAnimation) authorScroller.play();
+        else authorScroller.skip();
 
-        addUI(authorText);
-        addUI(titleText);
+
+        addUI(authorText,titleText);
 
         add(animRoot);
         animRoot.addComponent(scroller);

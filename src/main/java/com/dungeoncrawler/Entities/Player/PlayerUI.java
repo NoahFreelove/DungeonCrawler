@@ -25,9 +25,11 @@ public class PlayerUI {
     private ImageView healthIcon = new ImageView(new File("bin/images/heart.png").getAbsolutePath());
     private ImageView superIcon;
     private Text superChargeText;
+
+    private int gameLevel;
     public PlayerUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel, AbilityType superAbility, double abilityCharge) {
         Font font = Font.font("Arial", FontWeight.BOLD, 25);
-
+        this.gameLevel = gameLevel;
         roomNumber = new Text();
         roomNumber.setTranslateX(10);
         roomNumber.setTranslateY(40);
@@ -100,17 +102,27 @@ public class PlayerUI {
         GameWindow.getInstance().addPermanentUI(playerUI);
     }
 
-    public void UpdateUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel, AbilityType superAbility, double abilityCharge)
+    public void UpdateUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, double abilityCharge)
     {
         roomNumber.setText("Room " + RoomManager.currentRoomX + ":" + RoomManager.currentRoomY);
         healthText.setText(""+ (int)(health));
         goldText.setText("" + gold);
         xpText.setText(String.format("Level %d (%d/%d)", playerLevel, exp, expToNextLevel));
-        gameLevelText.setText("Floor "+ (PlayerController.gameLevelToWin - gameLevel));
         superChargeText.setText((int)(100*abilityCharge) + "%");
     }
 
+    public void UpdateStaticText(int gameLevel){
+        this.gameLevel = gameLevel;
+        gameLevelText.setText("Floor "+ (PlayerController.gameLevelToWin - gameLevel));
+    }
+
     public void updateSpecialImage(AbilityType superAbility){
+        if(gameLevel <6)
+        {
+            superIcon.setImage(null);
+            superChargeText.setFill(Color.TRANSPARENT);
+            return;
+        }
         switch (superAbility){
             case FIRE -> {
                 superIcon.setImage(new Image(new File("bin/images/fireball.png").getAbsolutePath()));

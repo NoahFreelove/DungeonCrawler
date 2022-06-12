@@ -100,6 +100,7 @@ public class PlayerController extends Player {
 
         addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
         addComponent(new DontDestroyOnLoad_Comp());
+        playerUI.UpdateStaticText(gameLevel);
     }
 
     public PlayerController(Vector3 pos) {
@@ -125,7 +126,7 @@ public class PlayerController extends Player {
         }
 
         checkInput();
-        playerUI.UpdateUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel, superAbility, superCharge);
+        playerUI.UpdateUI(health, gold, playerLevel, exp, expToNextLevel, superCharge);
 
         if (selectedWeapon != null)
         {
