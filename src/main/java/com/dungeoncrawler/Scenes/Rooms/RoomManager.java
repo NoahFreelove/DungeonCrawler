@@ -31,6 +31,7 @@ public class RoomManager {
     public static int height;
     public static SpeechManager speechManager;
     public static boolean inTutorial = false;
+    public static boolean inChallenge = false;
     private static Enemy tutorialEnemy = new Follower(new Vector3(0,0,0));
     public static Room currentRoom;
 
@@ -38,6 +39,8 @@ public class RoomManager {
         currentRoomY = 0;
         currentRoomX = 0;
         inTutorial = false;
+        inChallenge = false;
+
         if (overallDifficulty <= 0)
             overallDifficulty = 1;
 
@@ -94,13 +97,14 @@ public class RoomManager {
         }
         String[] playerSaveData = FileOperations.fileToStringArr(new File("bin/save/save.dat").getAbsolutePath());
         String[] skillPointData = FileOperations.fileToStringArr(new File("bin/save/skills.dat").getAbsolutePath());
+        String[] permData = FileOperations.fileToStringArr(new File("bin/save/permData.dat").getAbsolutePath());
 
         double[] skills = new double[]{Double.parseDouble(skillPointData[0]),Double.parseDouble(skillPointData[1]),
                 Double.parseDouble(skillPointData[2]),Double.parseDouble(skillPointData[3])};
 
         rooms[0][0].add(new PlayerController(new Vector3(200,300,0), playerSaveData[0], Integer.parseInt(playerSaveData[1]),
                 Integer.parseInt(playerSaveData[2]), Integer.parseInt(playerSaveData[3]), Integer.parseInt(playerSaveData[4]),
-                playerSaveData[6], playerSaveData[7], Double.parseDouble(playerSaveData[8]), skills, Integer.parseInt(playerSaveData[5])));
+                playerSaveData[6], playerSaveData[7], Double.parseDouble(playerSaveData[8]), skills, Integer.parseInt(playerSaveData[5]), Boolean.parseBoolean(permData[0])));
 
         rooms[0][0].add(speechManager);
         SceneManager.getWindow().setBackgroundColor(ColorManager.backgroundColor);
@@ -211,8 +215,20 @@ public class RoomManager {
         if (PlayerController.instance == null)
             return;
         System.gc();
+
+        if(PlayerController.instance.getGameLevel() >= PlayerController.gameLevelToWin)
+        {
+            PlayerController.instance.hasBeatGame = true;
+            SaveManager.saveGame(PlayerController.instance, false);
+            PlayerController.removePlayer();
+
+            Main.createMainMenu();
+            return;
+        }
+
         SaveManager.saveGame(PlayerController.instance, !RoomManager.inTutorial);
         PlayerController.removePlayer();
+
         if (loadNextOne)
         {
             MainMenu.loadGame();

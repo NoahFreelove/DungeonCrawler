@@ -1,5 +1,6 @@
 package com.dungeoncrawler.Scenes;
 
+import com.Challenges.ChallengeManager;
 import com.JEngine.Components.UI.TextScroller;
 import com.JEngine.Components.UI.UIAnimator;
 import com.JEngine.Core.GameObject;
@@ -15,6 +16,7 @@ import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
+import com.dungeoncrawler.Main;
 import com.dungeoncrawler.SaveManager;
 import com.dungeoncrawler.Scenes.Rooms.Room;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
@@ -30,6 +32,31 @@ public class MainMenu extends GameScene {
 
     public MainMenu() {
         super(100, "Main Menu");
+        if(!new File("bin/save/permdata.dat").exists())
+        {
+            FileOperations.stringArrToFile(new String[]{"false"},new File("bin/save/permData.dat").getAbsolutePath());
+        }
+        else {
+            String[] permData = FileOperations.fileToStringArr(new File("bin/save/permdata.dat").getAbsolutePath());
+            if(Boolean.parseBoolean(permData[0]))
+            {
+                Button skillPointsButton = new Button("Challenges");
+                skillPointsButton.setPrefWidth(200);
+                skillPointsButton.setTranslateX(10);
+                skillPointsButton.setTranslateY(500);
+
+                skillPointsButton.setOnAction(actionEvent -> {
+                    SceneManager.switchScene(new ChallengeManager(), true);
+                });
+                skillPointsButton.setTextFill(ColorManager.buttonTextColor);
+                skillPointsButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
+                addUI(skillPointsButton);
+            }
+        }
+        if(!new File("bin/save/skills.dat").exists())
+        {
+            FileOperations.stringArrToFile(new String[]{"1", "1", "1", "1"},new File("bin/save/skills.dat").getAbsolutePath());
+        }
         createMenu();
     }
 
@@ -99,7 +126,7 @@ public class MainMenu extends GameScene {
         Button newGameButton = new Button("Start New Game");
         newGameButton.setMinWidth(400);
         newGameButton.setTranslateX(440);
-        newGameButton.setTranslateY(200);
+        newGameButton.setTranslateY(400);
 
         newGameButton.setOnAction(actionEvent -> {
             GameWindow.getInstance().setTargetFPS(60);
@@ -120,7 +147,7 @@ public class MainMenu extends GameScene {
             loadButton.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
             loadButton.setMinWidth(400);
             loadButton.setTranslateX(440);
-            loadButton.setTranslateY(300);
+            loadButton.setTranslateY(250);
             loadButton.setMaxWidth(400);
             loadButton.setOnAction(actionEvent -> {
                 loadGame();
@@ -135,14 +162,24 @@ public class MainMenu extends GameScene {
             skillPointsButton.setTranslateY(600);
 
             skillPointsButton.setOnAction(actionEvent -> {
-                SceneManager.getWindow().setTargetFPS(30);
-                SkillPointScreen skillPointScreen = new SkillPointScreen();
-                SceneManager.switchScene(skillPointScreen, true);
+                SceneManager.switchScene(new SkillPointScreen(), true);
             });
             skillPointsButton.setTextFill(ColorManager.buttonTextColor);
             skillPointsButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
             addUI(skillPointsButton);
         }
+
+        Button purgeData = new Button("Purge Save Data");
+        purgeData.setPrefWidth(300);
+        purgeData.setTranslateX(950);
+        purgeData.setTranslateY(600);
+
+        purgeData.setOnAction(actionEvent -> {
+            purgeSave();
+        });
+        purgeData.setTextFill(ColorManager.buttonTextColor);
+        purgeData.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
+        addUI(purgeData);
 
     }
 
@@ -161,5 +198,12 @@ public class MainMenu extends GameScene {
             RoomManager.speechManager.startSpeech();
 
         }catch (Exception ignored){}
+    }
+
+    public static void purgeSave() {
+        FileOperations.stringArrToFile(new String[]{"false"}, new File("bin/save/permData.dat").getAbsolutePath());
+        FileOperations.stringArrToFile(new String[]{"1", "1", "1", "1"}, new File("bin/save/skills.dat").getAbsolutePath());
+        new File("bin/save/save.dat").delete();
+        Main.createMainMenu();
     }
 }

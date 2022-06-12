@@ -1,5 +1,6 @@
 package com.dungeoncrawler.Entities.Player;
 
+import com.Challenges.ChallengeManager;
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
@@ -43,6 +44,8 @@ public class PlayerController extends Player {
     private boolean hasShield = true;
     public Shield shieldInstance;
 
+    public boolean hasBeatGame;
+
     private SimpleDirection directionFacing = SimpleDirection.LEFT;
     private float moveSpeed = 15f;
     private boolean isAttacking;
@@ -57,7 +60,7 @@ public class PlayerController extends Player {
     // UI
     PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel, superAbility, superCharge);
 
-    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon, String superAbility, double superCharge, double[] skills, int skillPoints) {
+    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon, String superAbility, double superCharge, double[] skills, int skillPoints, boolean hasBeatGame) {
         super(Transform.simpleTransform(pos), new GameImage("bin/images/player.png"), new Identity("PlayerController", "player"));
         if(instance == null)
             instance = this;
@@ -71,6 +74,7 @@ public class PlayerController extends Player {
         this.gold = initGold;
         this.exp = initExp;
         this.expToNextLevel = 5*initLevel;
+        this.hasBeatGame = hasBeatGame;
         try {
             this.superAbility = AbilityType.valueOf(superAbility);
         }
@@ -393,7 +397,13 @@ public class PlayerController extends Player {
         Platform.runLater(() -> {
             SceneManager.getActiveScene().remove(PlayerController.instance);
             PlayerController.instance = null;
-            Main.createMainMenu();
+            if(RoomManager.inChallenge)
+            {
+                SceneManager.switchScene(new ChallengeManager(), true);
+            }
+            else {
+                Main.createMainMenu();
+            }
         });
     }
 

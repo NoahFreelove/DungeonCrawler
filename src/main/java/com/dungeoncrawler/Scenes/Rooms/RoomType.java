@@ -4,5 +4,6 @@ public enum RoomType {
     NORMAL,
     SPAWN,
     BOSS,
-    SHOP
+    SHOP,
+    
 }

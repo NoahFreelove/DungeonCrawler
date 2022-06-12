@@ -32,6 +32,8 @@ public class SaveManager {
         saveData[8] = "" + player.getSuperCharge();
 
         FileOperations.stringArrToFile(saveData, new File("bin/save/save.dat").getAbsolutePath());
+        FileOperations.stringArrToFile(new String[]{"" + player.hasBeatGame}, new File("bin/save/permdata.dat").getAbsolutePath());
+
     }
 
     public static void newGame(){
@@ -45,6 +47,9 @@ public class SaveManager {
         saveData[6] = "Sword";
         saveData[7] = "NONE";
         saveData[8] = "0";
+
         FileOperations.stringArrToFile(saveData, new File("bin/save/save.dat").getAbsolutePath());
+        FileOperations.stringArrToFile(new String[]{"false"}, new File("bin/save/permdata.dat").getAbsolutePath());
+
     }
 }

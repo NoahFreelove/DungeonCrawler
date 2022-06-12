@@ -15,6 +15,7 @@ import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Player.Abilities.Shield;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
+import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import javafx.application.Application;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -57,6 +58,10 @@ public class Main extends Application {
                 if (e.getCode() == KeyCode.F1) {
                     PlayerController.removePlayer();
                     createMainMenu();
+                }
+                if(e.getCode() == KeyCode.F2)
+                {
+                    RoomManager.endDungeon(false);
                 }
             });
 
