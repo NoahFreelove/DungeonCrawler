@@ -32,7 +32,7 @@ public class MainMenu extends GameScene {
         super(100, "Main Menu");
         if(!new File("bin/save/permdata.dat").exists())
         {
-            FileOperations.stringArrToFile(new String[]{"false"},new File("bin/save/permData.dat").getAbsolutePath());
+            FileOperations.stringArrToFile(new String[]{"false","1"},new File("bin/save/permData.dat").getAbsolutePath());
         }
         else {
             String[] permData = FileOperations.fileToStringArr(new File("bin/save/permdata.dat").getAbsolutePath());

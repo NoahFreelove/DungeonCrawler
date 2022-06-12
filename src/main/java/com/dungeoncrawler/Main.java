@@ -59,10 +59,6 @@ public class Main extends Application {
                     PlayerController.removePlayer();
                     createMainMenu();
                 }
-                if(e.getCode() == KeyCode.F2)
-                {
-                    RoomManager.endDungeon(false);
-                }
             });
 
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);

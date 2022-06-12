@@ -16,7 +16,7 @@ import javafx.scene.text.TextAlignment;
 import java.io.File;
 
 public class PlayerUI {
-    private Group playerUI = new Group();
+    public Group playerUI = new Group();
     private Text roomNumber;
     private Text healthText;
     private Text goldText;

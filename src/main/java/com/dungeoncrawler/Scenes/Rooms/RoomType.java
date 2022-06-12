@@ -5,5 +5,6 @@ public enum RoomType {
     SPAWN,
     BOSS,
     SHOP,
+    CHALLENGE_END
     
 }

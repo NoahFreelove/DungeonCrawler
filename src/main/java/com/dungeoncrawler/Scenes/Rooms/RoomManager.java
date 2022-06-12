@@ -15,6 +15,7 @@ import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Stairs.Stairs;
 import com.dungeoncrawler.Main;
 import com.dungeoncrawler.SaveManager;
+import com.dungeoncrawler.Scenes.Challenges.ChallengeManager;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
 import com.dungeoncrawler.Speech.SpeechManager;
@@ -148,8 +149,15 @@ public class RoomManager {
             SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
         }
 
+
         tutorialSpeechCheck();
         currentRoom = rooms[currentRoomX][currentRoomY];
+
+        if(currentRoom.getRoomType() == RoomType.CHALLENGE_END && inChallenge)
+        {
+            ChallengeManager.CompleteChallenge();
+            PlayerController.removePlayer();
+        }
     }
 
     private static void tutorialSpeechCheck(){
@@ -205,7 +213,7 @@ public class RoomManager {
                 }
             }
         }
-        if (clear)
+        if (clear && !inChallenge)
         {
             rooms[currentRoomX][currentRoomY].add(new Stairs());
         }
@@ -215,6 +223,11 @@ public class RoomManager {
         if (PlayerController.instance == null)
             return;
         System.gc();
+        if (inChallenge)
+        {
+            SceneManager.switchScene(new ChallengeManager(), true);
+            return;
+        }
 
         if(PlayerController.instance.getGameLevel() >= PlayerController.gameLevelToWin)
         {

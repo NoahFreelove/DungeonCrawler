@@ -31,6 +31,7 @@ public class Boss extends Enemy {
     public void startBattle(){
         if(hasFought)
             return;
+        System.out.println("boss");
         hasFought = true;
         RoomManager.rooms[xRoom][yRoom].add(leftWall);
         RoomManager.rooms[xRoom][yRoom].add(rightWall);

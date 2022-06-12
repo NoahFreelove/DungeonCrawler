@@ -8,7 +8,7 @@ import javafx.scene.control.Button;
 public class ChallengeButton extends Button {
 
     public ChallengeButton(int challengeIndex){
-        setTranslateY(200+ 100*(challengeIndex/6));
+        setTranslateY(200 + 100*(challengeIndex/6));
         setTranslateX(50+(challengeIndex%6)*200);
 
         setPrefWidth(150);

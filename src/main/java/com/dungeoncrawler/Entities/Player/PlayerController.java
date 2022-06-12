@@ -230,6 +230,8 @@ public class PlayerController extends Player {
     }
 
     public void addGold(int amount) {
+        if(RoomManager.inChallenge)
+            return;
         gold += amount;
     }
     public void removeGold(int amount) {
@@ -237,6 +239,8 @@ public class PlayerController extends Player {
     }
 
     public void addExp(int amount) {
+        if(RoomManager.inChallenge)
+            return;
         exp += amount;
         if(exp >= expToNextLevel) {
             playerLevel++;
@@ -396,6 +400,7 @@ public class PlayerController extends Player {
     public static void removePlayer(){
         Platform.runLater(() -> {
             SceneManager.getActiveScene().remove(PlayerController.instance);
+            SceneManager.getWindow().removePermanentUI(PlayerController.instance.playerUI.playerUI);
             PlayerController.instance = null;
             if(RoomManager.inChallenge)
             {
@@ -459,6 +464,10 @@ public class PlayerController extends Player {
         }
     }
 
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
     public void onHurtEnemy(){
         addSuperCharge(0.01);
     }
@@ -469,6 +478,10 @@ public class PlayerController extends Player {
 
     public double getSuperCharge() {
         return superCharge;
+    }
+
+    public void setPlayerLevel(int playerLevel) {
+        this.playerLevel = playerLevel;
     }
 
 }

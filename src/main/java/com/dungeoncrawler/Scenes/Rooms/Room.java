@@ -25,6 +25,7 @@ public class Room extends GameScene {
     int xPos;
     int yPos;
     int enemyCount = 0;
+    private RoomType roomType;
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, RoomType roomType, int x, int y) {
         super(200,"Room");
         this.isSpawnRoom = (roomType == RoomType.SPAWN);
@@ -32,6 +33,7 @@ public class Room extends GameScene {
         this.isShopRoom = (roomType == RoomType.SHOP);
         this.xPos = x;
         this.yPos = y;
+        this.roomType = roomType;
         GameImage floor = new GameImage("bin/images/floor.png", 1280,720);
         floor.setTiled(true);
         floor.setTileSizeX(128);
@@ -185,5 +187,9 @@ public class Room extends GameScene {
         if(RoomManager.inTutorial)
             return;
         RoomManager.checkIfDungeonClear();
+    }
+
+    public RoomType getRoomType() {
+        return roomType;
     }
 }
