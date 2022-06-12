@@ -3,8 +3,6 @@ package com.dungeoncrawler;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
-import com.dungeoncrawler.Scenes.ColorManager;
-import com.dungeoncrawler.Scenes.MainMenu;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
@@ -13,10 +11,11 @@ import javafx.scene.text.Text;
 
 public class Pause {
 
-    private static Group pauseUI = new Group();
-    private static Group parent = SceneManager.getWindow().parent;
+    private static final Group pauseUI = new Group();
+    private static final Group parent = SceneManager.getWindow().parent;
     private static boolean hasInit;
     public static boolean isPaused;
+
     public static void InitPauseMenu(){
         Text pausedText = new Text("Paused");
         pausedText.setFill(Color.WHITE);

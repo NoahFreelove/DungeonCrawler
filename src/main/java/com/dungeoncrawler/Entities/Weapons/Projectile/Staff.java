@@ -7,6 +7,10 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.GameMath;
 import com.dungeoncrawler.Entities.Player.PlayerController;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.GaussianBlur;
 
 import static com.dungeoncrawler.Entities.Weapons.WeaponStats.*;
 
@@ -14,9 +18,10 @@ public class Staff extends ProjectileWeapon{
 
     boolean charging = false;
     private float charge = STAFF_MIN_PROJECTILE_SIZE;
-
+    private ColorAdjust staffChargeIndicator = new ColorAdjust();
     public Staff(Vector3 pos) {
-        super(pos, STAFF_OFFSET, STAFF_DAMAGE, STAFF_SHOOT_DELAY, new GameImage(STAFF_IMAGE_PATH), STAFF_REWARD_MULTIPLIER, STAFF_PROJECTILE_SPEED, new GameImage(STAFF_PROJECTILE_IMAGE_PATH));
+        super(pos, STAFF_OFFSET, STAFF_DAMAGE, STAFF_SHOOT_DELAY, new GameImage(STAFF_IMAGE_PATH, 64,64), STAFF_REWARD_MULTIPLIER, STAFF_PROJECTILE_SPEED, new GameImage(STAFF_PROJECTILE_IMAGE_PATH));
+        getSprite().setColorAdjust(staffChargeIndicator);
     }
 
     @Override
@@ -32,7 +37,7 @@ public class Staff extends ProjectileWeapon{
         {
             charge+=0.023;
             charge = GameMath.clamp(STAFF_MIN_PROJECTILE_SIZE,STAFF_MAX_PROJECTILE_SIZE, charge);
-            System.out.println(charge);
+            staffChargeIndicator.setBrightness(GameMath.clamp(-1,0,-1*charge/STAFF_MAX_PROJECTILE_SIZE));
         }
     }
 
@@ -69,10 +74,13 @@ public class Staff extends ProjectileWeapon{
             }
         }
 
-        Projectile projectile = new Projectile(new Vector3(getPosition().x-xOffset, getPosition().y-yOffset), rot, dir, STAFF_DAMAGE*charge, STAFF_PROJECTILE_SPEED, new GameImage(STAFF_PROJECTILE_IMAGE_PATH), true);
+        // Projectile will penetrate multiple enemies if it's size is greater than 2
+        Projectile projectile = new Projectile(new Vector3(getPosition().x-xOffset, getPosition().y-yOffset), rot, dir, STAFF_DAMAGE*charge, STAFF_PROJECTILE_SPEED, new GameImage(STAFF_PROJECTILE_IMAGE_PATH), (charge>2));
         projectile.setScale(new Vector3(charge,charge,charge));
         projectile.setEnableLighting(false);
         SceneManager.getActiveScene().add(projectile);
         charge = STAFF_MIN_PROJECTILE_SIZE;
+        staffChargeIndicator.setBrightness(0);
+
     }
 }

@@ -9,13 +9,17 @@ import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.dungeoncrawler.Entities.Items.ItemSpawn;
 import com.dungeoncrawler.Entities.Items.ItemType;
 import com.dungeoncrawler.Entities.Weapons.Melee.Boomerang;
+import com.dungeoncrawler.Entities.Weapons.Melee.Knife;
 import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
+import com.dungeoncrawler.Entities.Weapons.Projectile.Staff;
 import com.dungeoncrawler.Entities.Weapons.WeaponSpawn;
 import com.dungeoncrawler.Scenes.Rooms.Room;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+
+import static com.dungeoncrawler.Entities.Weapons.WeaponStats.*;
 
 public class Shop extends Pawn {
 
@@ -24,9 +28,11 @@ public class Shop extends Pawn {
     private static WeaponSpawn swordSpawn;
     private static WeaponSpawn barrettSpawn;
     private static WeaponSpawn bbGunSpawn;
+    private static WeaponSpawn staffSpawn;
+    private static WeaponSpawn knifeSpawn;
+
     private static ItemSpawn healthSpawn;
     private static ItemSpawn shieldSpawn;
-
     private static ItemSpawn fireAbilitySpawn;
     private static ItemSpawn iceAbilitySpawn;
     private static ItemSpawn shieldAbilitySpawn;
@@ -43,6 +49,8 @@ public class Shop extends Pawn {
         parent.add(barrettSpawn);
         parent.add(healthSpawn);
         parent.add(shieldSpawn);
+        parent.add(staffSpawn);
+        parent.add(knifeSpawn);
         //parent.add(bbGunSpawn);
         if(floor<6)
             return;
@@ -68,10 +76,12 @@ public class Shop extends Pawn {
         parent.addUI(itemTitleText);
 
         // Weapons:
-        bowSpawn = new WeaponSpawn(new Vector3(200,200), new GameImage("bin/bow.png"), new Bow(new Vector3(200,200)), true, (floor%5 ==0)? 100 : 200, parent, new Vector2(-10,0));
-        boomerangSpawn = new WeaponSpawn(new Vector3(500,200), new GameImage("bin/boomerang.png"), new Boomerang(new Vector3(900,200)), true, (floor%5 ==0)? 125 : 250, parent, new Vector2(-8,-5));
-        swordSpawn = new WeaponSpawn(new Vector3(500,400), new GameImage("bin/sword.png"), new Sword(new Vector3(900,400)), true, (floor%5 ==0)? 5 : 30, parent, new Vector2(0,0));
-        barrettSpawn = new WeaponSpawn(new Vector3(200,400), new GameImage("bin/barrett.png", 128, 128), new BarrettM82(new Vector3(200,400)), true, (floor%5 ==0)? 2000 : 3000, parent, new Vector2(-40,-50));
+        bowSpawn = new WeaponSpawn(new Vector3(200,200), new GameImage(BOW_IMAGE_PATH), new Bow(new Vector3(200,200)), true, (floor%5 ==0)? 100 : 200, parent, new Vector2(-10,0));
+        boomerangSpawn = new WeaponSpawn(new Vector3(500,200), new GameImage(BOOMERANG_IMAGE_PATH), new Boomerang(new Vector3(900,200)), true, (floor%5 ==0)? 125 : 250, parent, new Vector2(-8,-5));
+        swordSpawn = new WeaponSpawn(new Vector3(500,400), new GameImage(SWORD_IMAGE_PATH), new Sword(new Vector3(900,400)), true, (floor%5 ==0)? 5 : 30, parent, new Vector2(0,0));
+        barrettSpawn = new WeaponSpawn(new Vector3(200,400), new GameImage(BARRETT_M82_IMAGE_PATH, 128, 128), new BarrettM82(new Vector3(200,400)), true, (floor%5 ==0)? 2000 : 3000, parent, new Vector2(-40,-50));
+        staffSpawn = new WeaponSpawn(new Vector3(350,400), new GameImage(STAFF_IMAGE_PATH,64,64), new Staff(new Vector3(350,400)), true, 5000, parent, new Vector2(0,0));
+        knifeSpawn = new WeaponSpawn(new Vector3(350,200), new GameImage(KNIFE_IMAGE_PATH,32,32), new Knife(new Vector3(350,200)), true, 50, parent, new Vector2(0,0));
 
         // Items:
         healthSpawn = new ItemSpawn(new Vector3(800,200), new GameImage("bin/heart.png"), ItemType.HEALTH, true, (floor%5 ==0)? 25 : 100, parent, 30, "30 Health", new Vector2(10,0) );
@@ -86,7 +96,7 @@ public class Shop extends Pawn {
         parent.addUI(abilityText);
         fireAbilitySpawn = new ItemSpawn(new Vector3(1000,400), new GameImage("bin/fireball.png"), ItemType.ABILITY, true, (floor%5 ==0)? 220 : 300, parent, 1, "Fire Ability", new Vector2(-10,0));
         iceAbilitySpawn = new ItemSpawn(new Vector3(800,400), new GameImage("bin/snowflake.png"), ItemType.ABILITY, true, (floor%5 ==0)? 300 : 350, parent, 1, "Freeze Ability", new Vector2(25,0));
-        shieldAbilitySpawn = new ItemSpawn(new Vector3(900,500), new GameImage("bin/shieldAbility.png"), ItemType.ABILITY, true, (floor%340 ==500)? 5 : 30, parent, 1, "Shield Ability", new Vector2(25,0));
+        shieldAbilitySpawn = new ItemSpawn(new Vector3(900,500), new GameImage("bin/shieldAbility.png"), ItemType.ABILITY, true, (floor%5==0)? 340 : 500, parent, 1, "Shield Ability", new Vector2(25,0));
         //bbGunSpawn = new WeaponSpawn(new Vector3(550,400), new GameImage("bin/bbGun.png",64,64), new BBGun(new Vector3(550,400)), true, 500, parent);
 
     }
