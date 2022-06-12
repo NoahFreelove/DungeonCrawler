@@ -204,7 +204,7 @@ public class RoomManager {
         if (PlayerController.instance == null)
             return;
         System.gc();
-        SaveManager.saveGame(PlayerController.instance, true);
+        SaveManager.saveGame(PlayerController.instance, !RoomManager.inTutorial);
         PlayerController.removePlayer();
         if (loadNextOne)
         {

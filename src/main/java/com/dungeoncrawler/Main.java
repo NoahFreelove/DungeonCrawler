@@ -38,22 +38,24 @@ public class Main extends Application {
             Main.stage = stage;
             stage.addEventHandler(KEY_PRESSED, (e) -> {
                 if (e.getCode() == KeyCode.ESCAPE) {
-                    GameUtility.exitApp();
+                    if(PlayerController.instance == null)
+                    {
+                        GameUtility.exitApp();
+                        return;
+                    }
+
+                    if(Pause.isPaused)
+                    {
+                        Pause.UnPauseGame();
+                    }
+                    else{
+                        Pause.PauseGame();
+                    }
                 }
 
                 if (e.getCode() == KeyCode.F1) {
                     PlayerController.removePlayer();
                     createMainMenu();
-                }
-                if (e.getCode() == KeyCode.F2) {
-                    SceneManager.getActiveScene().generateLightEffect();
-                }
-                if (e.getCode() == KeyCode.F3)
-                {
-                    if(PlayerController.instance !=null)
-                    {
-                        PlayerController.instance.addShield(new Shield(1));
-                    }
                 }
             });
 

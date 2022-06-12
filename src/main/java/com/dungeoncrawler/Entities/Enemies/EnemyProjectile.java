@@ -17,6 +17,8 @@ public class EnemyProjectile extends Pawn {
 
     // Make collider a bit smaller than the bullet because it's hard to dodge them all
     EnemyProjectileCollider ec = new EnemyProjectileCollider(Vector3.emptyVector(), 24,24,true,this);
+
+
     public EnemyProjectile(Vector3 initPos, double angle, double damage, float moveSpeed, GameImage sprite) {
         super(new Transform(initPos,new Vector3((float) angle+90,0,0), new Vector3(0.5f,0.5f,0)), sprite, new Identity("EnemyProjectile"));
         this.direction = angleToVector(Math.toRadians(angle));

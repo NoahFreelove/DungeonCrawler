@@ -5,14 +5,12 @@ import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.*;
 import com.JEngine.Game.PlayersAndPawns.Player;
-import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.GameMath;
-import com.JEngine.Utility.ImageProcessingEffects.ShakeScreen;
+import com.JEngine.Utility.ImageProcessingAndEffects.ShakeScreen;
 import com.JEngine.Utility.Input;
 import com.JEngine.Utility.Misc.GameTimer;
 import com.dungeoncrawler.Entities.Player.Abilities.*;
-import com.dungeoncrawler.Entities.Weapons.*;
 import com.dungeoncrawler.Entities.Weapons.Melee.Boomerang;
 import com.dungeoncrawler.Entities.Weapons.Melee.Knife;
 import com.dungeoncrawler.Entities.Weapons.Melee.Sword;
@@ -20,15 +18,12 @@ import com.dungeoncrawler.Entities.Weapons.Projectile.BBGun;
 import com.dungeoncrawler.Entities.Weapons.Projectile.BarrettM82;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Bow;
 import com.dungeoncrawler.Entities.Weapons.Projectile.Staff;
+import com.dungeoncrawler.Entities.Weapons.Weapon;
 import com.dungeoncrawler.Main;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
-import com.dungeoncrawler.Scenes.ColorManager;
-import com.JEngine.Core.Position.SimpleDirection;
 import javafx.application.Platform;
-import javafx.scene.Group;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.input.KeyCode;
-import javafx.scene.text.Text;
 
 public class PlayerController extends Player {
     public static PlayerController instance;
@@ -55,7 +50,7 @@ public class PlayerController extends Player {
     private boolean wasdMovement = true;
 
     private double superCharge = 1;
-    private AbilityType superAbility = AbilityType.FIRE;
+    private AbilityType superAbility = AbilityType.NONE;
 
     // UI
     PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel, superAbility, superCharge);

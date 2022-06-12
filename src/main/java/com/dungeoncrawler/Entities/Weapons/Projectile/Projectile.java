@@ -8,7 +8,7 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.JEngine.Utility.ImageProcessingEffects.GameLight;
+import com.JEngine.Utility.ImageProcessingAndEffects.GameLight;
 import com.dungeoncrawler.Main;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;

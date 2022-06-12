@@ -10,6 +10,5 @@ public record DungeonStartSpeeches() {
             new SpeechStruct(SpeechType.IMPORTANT, "The shop will offer discounts every 5 floors. Take advantage of these deals...", 3),
             new SpeechStruct(SpeechType.NORMAL, "You should keep boss weapons as they can be very powerful... or don't.", 3),
             new SpeechStruct(SpeechType.NORMAL, "A RED health-bar means that an enemy has < 50 HP, BLUE is > 50HP, GREEN is > 100HP, and YELLOW is >150HP", 3),
-
     };
 }

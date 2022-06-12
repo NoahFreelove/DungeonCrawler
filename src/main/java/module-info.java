@@ -11,6 +11,6 @@ module com.dungeoncrawler {
     opens com.dungeoncrawler.Entities to javafx.fxml;
     exports com.dungeoncrawler.Entities.Stairs;
     opens com.dungeoncrawler.Entities.Stairs to javafx.fxml;
-    exports com.JEngine.Utility.ImageProcessingEffects;
-    opens com.JEngine.Utility.ImageProcessingEffects to javafx.fxml;
+    exports com.JEngine.Utility.ImageProcessingAndEffects;
+    opens com.JEngine.Utility.ImageProcessingAndEffects to javafx.fxml;
 }

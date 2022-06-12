@@ -6,7 +6,7 @@ import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.JEngine.Utility.ImageProcessingEffects.GameLight;
+import com.JEngine.Utility.ImageProcessingAndEffects.GameLight;
 import com.JEngine.Utility.Misc.GameTimer;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
