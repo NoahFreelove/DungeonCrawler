@@ -1,6 +1,6 @@
 package com.dungeoncrawler.Entities.Player;
 
-import com.Challenges.ChallengeManager;
+import com.dungeoncrawler.Scenes.Challenges.ChallengeManager;
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;

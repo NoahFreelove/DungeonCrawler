@@ -1,4 +1,4 @@
-package com.Challenges;
+package com.dungeoncrawler.Scenes.Challenges;
 
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;

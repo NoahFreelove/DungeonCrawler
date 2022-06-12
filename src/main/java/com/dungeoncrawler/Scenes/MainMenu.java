@@ -1,6 +1,6 @@
 package com.dungeoncrawler.Scenes;
 
-import com.Challenges.ChallengeManager;
+import com.dungeoncrawler.Scenes.Challenges.ChallengeManager;
 import com.JEngine.Components.UI.TextScroller;
 import com.JEngine.Components.UI.UIAnimator;
 import com.JEngine.Core.GameObject;
@@ -18,10 +18,8 @@ import com.JEngine.Utility.Misc.GameUtility;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Main;
 import com.dungeoncrawler.SaveManager;
-import com.dungeoncrawler.Scenes.Rooms.Room;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Speech.DungeonStartSpeeches;
-import com.dungeoncrawler.Speech.SpeechManager;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
