@@ -101,9 +101,9 @@ public class MainMenu extends GameScene {
         addUI(newGameButton);
 
 
-        if(new File("bin/save.dat").exists())
+        if(new File("bin/save/save.dat").exists())
         {
-            String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
+            String[] saveData = FileOperations.fileToStringArr(new File("bin/save/save.dat").getAbsolutePath());
             Button loadButton = new Button("Load Game: '" + saveData[0] + "'\n(Floor " + (PlayerController.gameLevelToWin+1-Integer.parseInt(saveData[1])) + ")");
             loadButton.setTextAlignment(javafx.scene.text.TextAlignment.CENTER);
             loadButton.setMinWidth(400);
@@ -123,18 +123,19 @@ public class MainMenu extends GameScene {
             skillPointsButton.setTranslateY(600);
 
             skillPointsButton.setOnAction(actionEvent -> {
+                SceneManager.getWindow().setTargetFPS(30);
                 SkillPointScreen skillPointScreen = new SkillPointScreen();
-                SceneManager.switchScene(skillPointScreen);
+                SceneManager.switchScene(skillPointScreen, true);
             });
             skillPointsButton.setTextFill(ColorManager.buttonTextColor);
             skillPointsButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
-            //addUI(skillPointsButton);
+            addUI(skillPointsButton);
         }
 
     }
 
     public static void loadGame(){
-        String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
+        String[] saveData = FileOperations.fileToStringArr(new File("bin/save/save.dat").getAbsolutePath());
         try {
             int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
             int size = 2 + level/4;

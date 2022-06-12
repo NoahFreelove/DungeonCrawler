@@ -34,7 +34,7 @@ public class Skeleton extends Enemy {
     }
 
     private void rise(){
-        setSprite(new GameImage("bin/skeleton.png", 48,96));
+        setSprite(new GameImage("bin/images/skeleton.png", 48,96));
         risen = true;
         setCanAttack(true);
     }

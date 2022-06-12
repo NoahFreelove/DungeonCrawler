@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class SpeechManager extends Player {
     private final ArrayList<SpeechStruct> speechQueue;
-    private final GameImage background = new GameImage("bin/speechBackground.png");
+    private final GameImage background = new GameImage("bin/images/speechBackground.png");
 
     private final Text activeText;
     private SpeechStruct activeSpeech;

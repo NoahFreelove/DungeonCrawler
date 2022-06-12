@@ -24,6 +24,11 @@ public class ProjectileWeapon extends Weapon {
     }
 
     @Override
+    public void OnAdded(){
+        attackDelay = baseAttackDelay/PlayerController.skills[3];
+    }
+
+    @Override
     protected void attack(SimpleDirection direction) {
         Vector2 dir = new Vector2(0,0);
         Vector3 rot = new Vector3(0,0,0);
@@ -44,7 +49,7 @@ public class ProjectileWeapon extends Weapon {
             }
         }
 
-        Projectile projectile = new Projectile(getPosition(), rot, dir, damage, projectileSpeed, projectileImage);
+        Projectile projectile = new Projectile(getPosition(), rot, dir, damage*PlayerController.skills[2], (float) (projectileSpeed*PlayerController.skills[3]), projectileImage);
         SceneManager.getActiveScene().add(projectile);
 
     }

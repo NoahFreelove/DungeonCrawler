@@ -12,17 +12,21 @@ import com.JEngine.Core.Position.SimpleDirection;
 
 public abstract class Weapon extends Sprite {
 
+    protected float baseDamage;
     protected float damage;
+    protected double baseAttackDelay;
     protected double attackDelay;
     protected boolean ableToAttack;
-    private double rewardMultiplier;
+    private final double rewardMultiplier;
 
     public Weapon(float damage, double attackDelay, Vector3 pos, GameImage sprite, double rewardMultiplier) {
         super(Transform.simpleTransform(pos), sprite, new Identity("Weapon", "weapon"));
         addComponent(new DontDestroyOnLoad_Comp());
         this.rewardMultiplier = rewardMultiplier;
         this.damage = damage;
+        this.baseDamage = damage;
         this.attackDelay = attackDelay;
+        this.baseAttackDelay = attackDelay;
         this.ableToAttack = true;
     }
 

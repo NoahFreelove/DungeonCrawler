@@ -20,7 +20,7 @@ public class Gold extends Pawn {
 
     public Gold(Vector3 pos, int value) {
         super(Transform.simpleTransform(pos.x+16,pos.y+16,pos.z), null, new Identity("Gold", "gold"));
-        GameImage newSprite = new GameImage("bin/gold.png",32,32);
+        GameImage newSprite = new GameImage("bin/images/gold.png",32,32);
         setSprite(newSprite);
 
         collider_comp = new BoxCollider_Comp(Vector3.emptyVector(), 32, 32, true, this);

@@ -10,7 +10,7 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 public class ShieldEffect extends Pawn {
     float scale = 5;
     public ShieldEffect() {
-        super(Transform.simpleTransform(new Vector3(600,350)), new GameImage("bin/shieldItem.png",64,64), new Identity("Shield"));
+        super(Transform.simpleTransform(new Vector3(600,350)), new GameImage("bin/images/shieldItem.png",64,64), new Identity("Shield"));
     }
 
     @Override

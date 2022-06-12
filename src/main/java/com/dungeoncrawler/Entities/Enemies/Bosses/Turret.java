@@ -54,7 +54,7 @@ public class Turret extends Boss{
         shootTick.stop();
         isAlive = false;
         super.onDeath();
-        SceneManager.getActiveScene().add(new WeaponSpawn(new Vector3(getPosition().x,getPosition().y,25), new GameImage("bin/bbgun.png",64,64), new BBGun(new Vector3(getPosition().x,getPosition().y,25)), false, 0, SceneManager.getActiveScene(), new Vector2(-50,0)));
+        SceneManager.getActiveScene().add(new WeaponSpawn(new Vector3(getPosition().x,getPosition().y,25), new GameImage("bin/images/bbgun.png",64,64), new BBGun(new Vector3(getPosition().x,getPosition().y,25)), false, 0, SceneManager.getActiveScene(), new Vector2(-50,0)));
     }
 
     private void shoot(){

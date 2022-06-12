@@ -92,9 +92,16 @@ public class RoomManager {
                 }
             }
         }
-        String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
-        rooms[0][0].add(new PlayerController(new Vector3(200,300,0), saveData[0], Integer.parseInt(saveData[1]),
-                Integer.parseInt(saveData[2]), Integer.parseInt(saveData[3]), Integer.parseInt(saveData[4]), saveData[6], saveData[7], Double.parseDouble(saveData[8])));
+        String[] playerSaveData = FileOperations.fileToStringArr(new File("bin/save/save.dat").getAbsolutePath());
+        String[] skillPointData = FileOperations.fileToStringArr(new File("bin/save/skills.dat").getAbsolutePath());
+
+        double[] skills = new double[]{Double.parseDouble(skillPointData[0]),Double.parseDouble(skillPointData[1]),
+                Double.parseDouble(skillPointData[2]),Double.parseDouble(skillPointData[3])};
+
+        rooms[0][0].add(new PlayerController(new Vector3(200,300,0), playerSaveData[0], Integer.parseInt(playerSaveData[1]),
+                Integer.parseInt(playerSaveData[2]), Integer.parseInt(playerSaveData[3]), Integer.parseInt(playerSaveData[4]),
+                playerSaveData[6], playerSaveData[7], Double.parseDouble(playerSaveData[8]), skills, Integer.parseInt(playerSaveData[5])));
+
         rooms[0][0].add(speechManager);
         SceneManager.getWindow().setBackgroundColor(ColorManager.backgroundColor);
         currentRoom = rooms[currentRoomX][currentRoomY];

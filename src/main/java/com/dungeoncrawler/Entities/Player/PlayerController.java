@@ -52,11 +52,13 @@ public class PlayerController extends Player {
     private double superCharge = 1;
     private AbilityType superAbility = AbilityType.NONE;
 
+    public static double[] skills = new double[]{1,1,1,1};
+
     // UI
     PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel, superAbility, superCharge);
 
-    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon, String superAbility, double superCharge) {
-        super(Transform.simpleTransform(pos), new GameImage("bin/player.png"), new Identity("PlayerController", "player"));
+    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon, String superAbility, double superCharge, double[] skills, int skillPoints) {
+        super(Transform.simpleTransform(pos), new GameImage("bin/images/player.png"), new Identity("PlayerController", "player"));
         if(instance == null)
             instance = this;
         else
@@ -76,7 +78,8 @@ public class PlayerController extends Player {
         {
             this.superAbility = AbilityType.NONE;
         }
-
+        PlayerController.skills = skills;
+        this.skillPoints =skillPoints;
         if(playerUI !=null)
         {
             playerUI.updateSpecialImage(this.superAbility);
@@ -100,7 +103,7 @@ public class PlayerController extends Player {
     }
 
     public PlayerController(Vector3 pos) {
-        super(Transform.simpleTransform(pos), new GameImage("bin/player.png"), new Identity("PlayerController", "player"));
+        super(Transform.simpleTransform(pos), new GameImage("bin/images/player.png"), new Identity("PlayerController", "player"));
         if(instance == null)
             instance = this;
         else
@@ -456,4 +459,5 @@ public class PlayerController extends Player {
     public double getSuperCharge() {
         return superCharge;
     }
+
 }

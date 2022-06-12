@@ -32,7 +32,7 @@ public class Room extends GameScene {
         this.isShopRoom = (roomType == RoomType.SHOP);
         this.xPos = x;
         this.yPos = y;
-        GameImage floor = new GameImage("bin/floor.png", 1280,720);
+        GameImage floor = new GameImage("bin/images/floor.png", 1280,720);
         floor.setTiled(true);
         floor.setTileSizeX(128);
         floor.setTileSizeY(128);
@@ -171,7 +171,7 @@ public class Room extends GameScene {
     }
 
     private void createShop(){
-        String[] saveData = FileOperations.fileToStringArr(new File("bin/save.dat").getAbsolutePath());
+        String[] saveData = FileOperations.fileToStringArr(new File("bin/save/save.dat").getAbsolutePath());
         int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
         add(new Shop(this, level));
     }

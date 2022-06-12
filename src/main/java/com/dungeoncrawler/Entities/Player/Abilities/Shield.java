@@ -20,7 +20,7 @@ public class Shield extends Sprite {
     private GameLight gl;
     private int hits = 1;
     public Shield(int hits) {
-        super(Transform.simpleTransform(new Vector3(0,0,0)), new GameImage("bin/shieldItem.png"), new Identity("shield"));
+        super(Transform.simpleTransform(new Vector3(0,0,0)), new GameImage("bin/images/shieldItem.png"), new Identity("shield"));
         if(PlayerController.instance !=null)
         {
             if(PlayerController.instance.shieldInstance !=null)

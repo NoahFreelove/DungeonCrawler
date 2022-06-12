@@ -10,6 +10,7 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.Misc.GameUtility;
+import com.JEngine.Utility.Settings.EnginePrefs;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Player.Abilities.Shield;
 import com.dungeoncrawler.Scenes.ColorManager;
@@ -60,7 +61,7 @@ public class Main extends Application {
             });
 
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
-            window.setIcon(new GameImage("bin/icon.png",64,64));
+            window.setIcon(new GameImage("bin/images/icon.png",64,64));
             createMainMenu();
 
         }

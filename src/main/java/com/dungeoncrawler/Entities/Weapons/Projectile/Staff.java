@@ -18,7 +18,7 @@ public class Staff extends ProjectileWeapon{
 
     boolean charging = false;
     private float charge = STAFF_MIN_PROJECTILE_SIZE;
-    private ColorAdjust staffChargeIndicator = new ColorAdjust();
+    private final ColorAdjust staffChargeIndicator = new ColorAdjust();
     public Staff(Vector3 pos) {
         super(pos, STAFF_OFFSET, STAFF_DAMAGE, STAFF_SHOOT_DELAY, new GameImage(STAFF_IMAGE_PATH, 64,64), STAFF_REWARD_MULTIPLIER, STAFF_PROJECTILE_SPEED, new GameImage(STAFF_PROJECTILE_IMAGE_PATH));
         getSprite().setColorAdjust(staffChargeIndicator);
@@ -75,7 +75,7 @@ public class Staff extends ProjectileWeapon{
         }
 
         // Projectile will penetrate multiple enemies if it's size is greater than 2
-        Projectile projectile = new Projectile(new Vector3(getPosition().x-xOffset, getPosition().y-yOffset), rot, dir, STAFF_DAMAGE*charge, STAFF_PROJECTILE_SPEED, new GameImage(STAFF_PROJECTILE_IMAGE_PATH), (charge>2));
+        Projectile projectile = new Projectile(new Vector3(getPosition().x-xOffset, getPosition().y-yOffset), rot, dir, STAFF_DAMAGE*charge*PlayerController.skills[2], (float) (STAFF_PROJECTILE_SPEED*PlayerController.skills[3]), new GameImage(STAFF_PROJECTILE_IMAGE_PATH), (charge>2));
         projectile.setScale(new Vector3(charge,charge,charge));
         projectile.setEnableLighting(false);
         SceneManager.getActiveScene().add(projectile);

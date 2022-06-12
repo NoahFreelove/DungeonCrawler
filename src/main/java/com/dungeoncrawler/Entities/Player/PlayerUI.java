@@ -22,7 +22,7 @@ public class PlayerUI {
     private Text goldText;
     private Text xpText;
     private Text gameLevelText;
-    private ImageView healthIcon = new ImageView(new File("bin/heart.png").getAbsolutePath());
+    private ImageView healthIcon = new ImageView(new File("bin/images/heart.png").getAbsolutePath());
     private ImageView superIcon;
     private Text superChargeText;
     public PlayerUI(double health, int gold, int playerLevel, int exp, int expToNextLevel, int gameLevel, AbilityType superAbility, double abilityCharge) {
@@ -48,7 +48,7 @@ public class PlayerUI {
         healthText.setStrokeWidth(1);
 
 
-        ImageView goldIcon = new ImageView(new File("bin/gold.png").getAbsolutePath());
+        ImageView goldIcon = new ImageView(new File("bin/images/gold.png").getAbsolutePath());
         goldIcon.setFitHeight(32);
         goldIcon.setFitWidth(32);
         goldIcon.setLayoutX(15);
@@ -113,15 +113,15 @@ public class PlayerUI {
     public void updateSpecialImage(AbilityType superAbility){
         switch (superAbility){
             case FIRE -> {
-                superIcon.setImage(new Image(new File("bin/fireball.png").getAbsolutePath()));
+                superIcon.setImage(new Image(new File("bin/images/fireball.png").getAbsolutePath()));
                 superChargeText.setFill(ColorManager.superChargeTextColorFIRE);
             }
             case SHIELD -> {
-                superIcon.setImage(new Image(new File("bin/shieldItem.png").getAbsolutePath()));
+                superIcon.setImage(new Image(new File("bin/images/shieldItem.png").getAbsolutePath()));
                 superChargeText.setFill(ColorManager.superChargeTextColorSHIELD);
             }
             case FREEZE -> {
-                superIcon.setImage(new Image(new File("bin/snowflake.png").getAbsolutePath()));
+                superIcon.setImage(new Image(new File("bin/images/snowflake.png").getAbsolutePath()));
                 superChargeText.setFill(ColorManager.superChargeTextColorFREEZE);
             }
             case NONE -> {

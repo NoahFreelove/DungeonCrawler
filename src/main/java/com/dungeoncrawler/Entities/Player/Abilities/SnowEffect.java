@@ -11,7 +11,7 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 
 public class SnowEffect extends Pawn {
     public SnowEffect(float xPos) {
-        super(Transform.simpleTransform(new Vector3(xPos,0)), new GameImage("bin/snowflake.png",64,64), new Identity("Snow"));
+        super(Transform.simpleTransform(new Vector3(xPos,0)), new GameImage("bin/images/snowflake.png",64,64), new Identity("Snow"));
     }
 
     @Override

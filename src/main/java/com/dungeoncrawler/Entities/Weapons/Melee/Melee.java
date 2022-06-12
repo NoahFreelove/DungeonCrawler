@@ -2,6 +2,7 @@ package com.dungeoncrawler.Entities.Weapons.Melee;
 
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Position.Vector3;
+import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Utility.GameMath;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Weapons.Weapon;
@@ -10,10 +11,12 @@ import com.JEngine.Core.Position.SimpleDirection;
 public class Melee extends Weapon {
     private Vector3 weaponOffset = new Vector3(0,0,0);
     private Vector3 targetWeaponOffset = new Vector3(0,0,0);
+    private Vector3 posWhenThrown = new Vector3(0,0,0);
+
     private float animationTime = 0f;
     private float attackDistance;
     private float animationSpeed;
-    private Vector3 posWhenThrown = new Vector3(0,0,0);
+    private float baseAnimationSpeed;
     private boolean isAttacking;
     private boolean isThrowable;
     protected boolean alwaysAttacking;
@@ -22,8 +25,16 @@ public class Melee extends Weapon {
         super(damage, attackDelay, pos, sprite, rewardMultiplier);
         this.attackDistance = attackDistance;
         this.animationSpeed = animationSpeed;
+        this.baseAnimationSpeed = animationSpeed;
         this.isThrowable = isThrowable;
         addCollider(new MeleeCollider(new Vector3(0,0,0),32,32, this));
+    }
+
+    @Override
+    public void OnAdded(){
+        damage = (float)PlayerController.skills[0]*baseDamage;
+        attackDelay= baseAttackDelay/PlayerController.skills[1];
+        animationSpeed = (float) (baseAnimationSpeed*PlayerController.skills[1]);
     }
 
     @Override
