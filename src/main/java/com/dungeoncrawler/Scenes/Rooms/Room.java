@@ -45,6 +45,7 @@ public class Room extends GameScene {
         add(new Sprite(Transform.simpleTransform(0,0,-500),floor, new Identity("floor")));
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
         setEnableLighting(true);
+        removeAmbientLighting();
     }
 
     public void CreateRoom(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor){

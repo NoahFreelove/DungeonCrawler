@@ -103,7 +103,6 @@ public record EnemyStats() {
     public static final float WIZARD_MAGIC_MOVE_SPEED = 6;
     public static final double WIZARD_MAGIC_DAMAGE = 12;
     public static final String WIZARD_MAGIC_IMAGE_PATH = "bin/images/fireball.png";
-
     //endregion
 
 
