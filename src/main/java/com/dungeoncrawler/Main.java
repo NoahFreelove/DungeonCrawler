@@ -8,14 +8,11 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
-import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.Misc.GameUtility;
-import com.JEngine.Utility.Settings.EnginePrefs;
-import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Player.Abilities.Shield;
+import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
-import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import javafx.application.Application;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -59,6 +56,10 @@ public class Main extends Application {
                     PlayerController.removePlayer();
                     createMainMenu();
                 }
+                if(e.getCode() == KeyCode.F2)
+                {
+                    PlayerController.instance.addShield(new Shield(10));
+                }
             });
 
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
@@ -70,7 +71,6 @@ public class Main extends Application {
         {
             System.out.println(e.getMessage() + " (start)");
         }
-
     }
 
     static void setupGameInfo(){
@@ -84,9 +84,8 @@ public class Main extends Application {
         window.setTargetFPS(30);
         MainMenu mainMenu = new MainMenu();
 
-        new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam")); // Create the main menu camera
+        new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam"));
         SceneManager.switchScene(mainMenu, true);
-        // Create our window
         window.setBackgroundColor(ColorManager.mainMenuColor);
     }
 }

@@ -42,7 +42,7 @@ public class ChallengeOne {
         RoomManager.rooms[0][0].add(RoomManager.speechManager);
 
         PlayerController.skills = new double[]{1,1,1,1};
-        RoomManager.rooms[0][0].add(new WeaponSpawn(new Vector3(900,300,0), new GameImage(BOW_IMAGE_PATH,64,64), new BarrettM82(new Vector3(900,300)), false, 0, RoomManager.rooms[0][0], new Vector2(0,0)));
+        RoomManager.rooms[0][0].add(new WeaponSpawn(new Vector3(900,300,0), new GameImage(BOW_IMAGE_PATH,64,64), new Bow(new Vector3(900,300)), false, 0, RoomManager.rooms[0][0], new Vector2(0,0)));
         RoomManager.rooms[1][0].add(new Knight(new Vector3(600,200), 1,0));
         RoomManager.rooms[2][0].add(new ItemSpawn(new Vector3(600,300), new GameImage("bin/images/heart.png"), ItemType.HEALTH, false, 0, RoomManager.rooms[2][0], 50, "50 Health", new Vector2(10,0)));
         RoomManager.rooms[3][0].add(new Knight(new Vector3(900,300), 3,0), new Turret(new Vector3(600,300),3,0));

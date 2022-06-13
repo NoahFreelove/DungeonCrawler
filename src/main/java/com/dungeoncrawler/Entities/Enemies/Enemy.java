@@ -148,6 +148,7 @@ public class Enemy extends Pawn {
             SceneManager.getActiveScene().add(new Gold(getPosition(), (int) (difficulty*5*PlayerController.instance.getSelectedWeapon().getRewardMultiplier())));
 
         }
+        SceneManager.getActiveScene().removeUI(healthBar);
         healthBar.setVisible(false);
     }
 

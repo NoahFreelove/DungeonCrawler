@@ -42,6 +42,7 @@ public class ChallengeManager extends GameScene {
             addUI(new ChallengeButton(i));
         }
     }
+
     public static void CompleteChallenge(){
         String[] permData = FileOperations.fileToStringArr(new File("bin/save/permdata.dat").getAbsolutePath());
         int challengeLevel = Integer.parseInt(permData[1]);

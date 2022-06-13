@@ -20,7 +20,7 @@ public class ChallengeButton extends Button {
         setOnMousePressed(mouseEvent -> {
             switch (challengeIndex) {
                 case 0 -> ChallengeOne.Create();
-                case 1 -> ChallengeOne.Create();
+                case 1 -> ChallengeTwo.Create();
                 case 2 -> ChallengeOne.Create();
                 case 3 -> ChallengeOne.Create();
                 case 4 -> ChallengeOne.Create();

@@ -147,11 +147,11 @@ public class RoomManager {
             currentRoomY = currentRoomY+deltaY;
             initEnemies();
             SceneManager.switchScene(rooms[currentRoomX][currentRoomY]);
+            currentRoom = rooms[currentRoomX][currentRoomY];
         }
 
 
         tutorialSpeechCheck();
-        currentRoom = rooms[currentRoomX][currentRoomY];
 
         if(currentRoom.getRoomType() == RoomType.CHALLENGE_END && inChallenge)
         {
@@ -207,6 +207,8 @@ public class RoomManager {
         boolean clear = true;
         for (Room[] roomArr : rooms) {
             for (Room room : roomArr) {
+                if(room==null)
+                    continue;
                 if (room.enemyCount > 0) {
                     clear = false;
                     break;
