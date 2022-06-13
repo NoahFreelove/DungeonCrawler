@@ -14,6 +14,7 @@ import com.dungeoncrawler.Entities.Enemies.Bosses.Doctor;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Graveyard;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
+import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Shop;
 
 import java.io.File;
@@ -22,10 +23,13 @@ public class Room extends GameScene {
     boolean isSpawnRoom;
     boolean isBossRoom;
     boolean isShopRoom;
+
     int xPos;
     int yPos;
+
     int enemyCount = 0;
-    private RoomType roomType;
+    private final RoomType roomType;
+
     public Room(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor, RoomType roomType, int x, int y) {
         super(200,"Room");
         this.isSpawnRoom = (roomType == RoomType.SPAWN);
@@ -82,7 +86,7 @@ public class Room extends GameScene {
             add(new Wall(new Vector2(0,620), new Vector2(8.5, 1)));
             add(new Wall(new Vector2(660,620), new Vector2(8.5, 1)));
         }
-        if(RoomManager.inTutorial)
+        if(RoomManager.inTutorial || RoomManager.inChallenge)
             return;
 
         if(!isSpawnRoom && !isBossRoom && !isShopRoom)
@@ -174,7 +178,7 @@ public class Room extends GameScene {
 
     private void createShop(){
         String[] saveData = FileOperations.fileToStringArr(new File("bin/save/save.dat").getAbsolutePath());
-        int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
+        int level = GameMath.clamp(1, PlayerController.gameLevelToWin, Integer.parseInt(saveData[1]));
         add(new Shop(this, level));
     }
 

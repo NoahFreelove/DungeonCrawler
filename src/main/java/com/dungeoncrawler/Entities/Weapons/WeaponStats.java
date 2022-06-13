@@ -68,9 +68,9 @@ public record WeaponStats() {
     //endregion
 
     //region Knife
-    public static final float KNIFE_DAMAGE = 2;
+    public static final float KNIFE_DAMAGE = 3;
     public static final double KNIFE_ATTACK_DELAY = 0.1;
-    public static final float KNIFE_ATTACK_DISTANCE = 128;
+    public static final float KNIFE_ATTACK_DISTANCE = 256;
     public static final float KNIFE_ANIMATION_SPEED = 5f;
     public static final boolean KNIFE_IS_THROWABLE = false;
     public static final String KNIFE_IMAGE_PATH = "bin/images/knife.png";

@@ -23,7 +23,7 @@ public class Main extends Application {
 
     public static GameWindow window;
     public static Stage stage;
-    public static boolean lightingOffset = true; // some machines have issues with position based lights, so this is a hacky fix
+    public static boolean lightingOffset = false; // some machines have issues with position based lights, so this is a hacky fix
 
     public static void main(String[] args) {
         launch();
@@ -37,6 +37,7 @@ public class Main extends Application {
             Main.stage = stage;
             stage.addEventHandler(KEY_PRESSED, (e) -> {
                 if (e.getCode() == KeyCode.ESCAPE) {
+
                     if(PlayerController.instance == null)
                     {
                         GameUtility.exitApp();

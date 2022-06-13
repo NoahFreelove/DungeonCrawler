@@ -7,6 +7,7 @@ import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
+import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
@@ -142,7 +143,10 @@ public class Enemy extends Pawn {
         }
         PlayerController.instance.addExp(difficulty);
         RoomManager.rooms[RoomManager.currentRoomX][RoomManager.currentRoomY].removeEnemy();
-
+        if(RoomManager.inChallenge)
+        {
+            RoomManager.challengeEnemyCount--;
+        }
         if(difficulty > 0)
         {
             SceneManager.getActiveScene().add(new Gold(getPosition(), (int) (difficulty*5*PlayerController.instance.getSelectedWeapon().getRewardMultiplier())));
@@ -154,6 +158,8 @@ public class Enemy extends Pawn {
 
     protected double playerPositionToRadians(){
         double rad;
+        if(PlayerController.instance == null)
+            return 0;
         Vector3 deltaPos = PlayerController.instance.getPosition().subtract(getPosition());
 
         if(deltaPos.x<0)

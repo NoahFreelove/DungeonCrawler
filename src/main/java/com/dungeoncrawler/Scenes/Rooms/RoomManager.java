@@ -36,6 +36,8 @@ public class RoomManager {
     private static Enemy tutorialEnemy = new Follower(new Vector3(0,0,0));
     public static Room currentRoom;
 
+    public static int challengeEnemyCount;
+
     public static void CreateRooms(int width, int height, int overallDifficulty) {
         currentRoomY = 0;
         currentRoomX = 0;
@@ -153,7 +155,7 @@ public class RoomManager {
 
         tutorialSpeechCheck();
 
-        if(currentRoom.getRoomType() == RoomType.CHALLENGE_END && inChallenge)
+        if(currentRoom.getRoomType() == RoomType.CHALLENGE_END && inChallenge && challengeEnemyCount <= 0)
         {
             ChallengeManager.CompleteChallenge();
             PlayerController.removePlayer();

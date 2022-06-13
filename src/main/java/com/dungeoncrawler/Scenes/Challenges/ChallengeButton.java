@@ -21,7 +21,7 @@ public class ChallengeButton extends Button {
             switch (challengeIndex) {
                 case 0 -> ChallengeOne.Create();
                 case 1 -> ChallengeTwo.Create();
-                case 2 -> ChallengeOne.Create();
+                case 2 -> ChallengeThree.Create();
                 case 3 -> ChallengeOne.Create();
                 case 4 -> ChallengeOne.Create();
                 case 5 -> ChallengeOne.Create();
