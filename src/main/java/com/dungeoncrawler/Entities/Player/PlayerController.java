@@ -1,5 +1,7 @@
 package com.dungeoncrawler.Entities.Player;
 
+import com.JEngine.Game.Visual.Scenes.GameScene;
+import com.JEngine.Utility.ImageProcessingAndEffects.GameLight;
 import com.dungeoncrawler.Scenes.Challenges.ChallengeManager;
 import com.JEngine.Components.DontDestroyOnLoad_Comp;
 import com.JEngine.Core.GameImage;
@@ -24,7 +26,10 @@ import com.dungeoncrawler.Main;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import javafx.application.Platform;
 import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class PlayerController extends Player {
     public static PlayerController instance;
@@ -42,6 +47,9 @@ public class PlayerController extends Player {
     private int maxHealth = 20;
     private int roomsCleared = 0;
     private boolean hasShield = true;
+    private Light.Point pointLight;
+    private Lighting lighting;
+    private GameLight playerLight;
     public Shield shieldInstance;
 
     public boolean hasBeatGame;
@@ -60,7 +68,7 @@ public class PlayerController extends Player {
     // UI
     PlayerUI playerUI = new PlayerUI(health, gold, playerLevel, exp, expToNextLevel, gameLevel, superAbility, superCharge);
 
-    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon, String superAbility, double superCharge, double[] skills, int skillPoints, boolean hasBeatGame) {
+    public PlayerController(Vector3 pos, String name, int gameLevel, int initLevel, int initGold, int initExp, String initWeapon, String superAbility, double superCharge, double[] skills, int skillPoints, boolean hasBeatGame, GameScene startScene) {
         super(Transform.simpleTransform(pos), new GameImage("bin/images/player.png"), new Identity("PlayerController", "player"));
         if(instance == null)
             instance = this;
@@ -90,6 +98,22 @@ public class PlayerController extends Player {
         }
         this.superCharge = superCharge;
 
+        pointLight = new Light.Point();
+        pointLight.setColor(Color.WHITE);
+
+        pointLight.setX(getPosition().x);
+        pointLight.setY(getPosition().y);
+        pointLight.setZ(50);
+        lighting = new Lighting();
+
+        lighting.setLight(pointLight);
+        lighting.setDiffuseConstant(500);
+        lighting.setSpecularConstant(0);
+        lighting.setSurfaceScale(500);
+        lighting.setSpecularExponent(0);
+
+        playerLight = new GameLight(lighting, true);
+        SceneManager.getActiveScene().addLight(playerLight);
 
         switch (initWeapon)
         {
@@ -131,6 +155,18 @@ public class PlayerController extends Player {
 
         checkInput();
         playerUI.UpdateUI(health, gold, playerLevel, exp, expToNextLevel, superCharge);
+
+        if(pointLight !=null)
+        {
+            double xOffset = 0;
+            double yOffset = 0;
+            if(Main.lightingOffset){
+                yOffset = PlayerController.instance.getPosition().y/256*128;
+                xOffset = PlayerController.instance.getPosition().x/256*128;
+            }
+            pointLight.setX(PlayerController.instance.getPosition().x+xOffset+32);
+            pointLight.setY(PlayerController.instance.getPosition().y+yOffset+32);
+        }
 
         if (selectedWeapon != null)
         {

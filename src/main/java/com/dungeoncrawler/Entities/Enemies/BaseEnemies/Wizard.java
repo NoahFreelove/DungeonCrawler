@@ -59,7 +59,7 @@ public class Wizard extends Enemy {
         setPosition(new Vector3(generatePosition(),getPosition().z));
         if(!canAttack())
             return;
-        SceneManager.getActiveScene().add(new EnemyProjectile(getPosition(), Math.toDegrees(playerPositionToRadians()), WIZARD_MAGIC_DAMAGE, WIZARD_MAGIC_MOVE_SPEED, new GameImage(WIZARD_MAGIC_IMAGE_PATH)));
+        SceneManager.getActiveScene().add(new EnemyProjectile(getPosition(), Math.toDegrees(playerPositionToRadians()), WIZARD_MAGIC_DAMAGE, WIZARD_MAGIC_MOVE_SPEED, new GameImage(WIZARD_MAGIC_IMAGE_PATH), true));
     }
 
     private Vector2 generatePosition(){

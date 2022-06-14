@@ -39,6 +39,7 @@ public class Main extends Application {
             stage.addEventHandler(KEY_PRESSED, (e) -> {
                 if (e.getCode() == KeyCode.ESCAPE) {
 
+                    // Player instance is only null on the main menu
                     if(PlayerController.instance == null)
                     {
                         GameUtility.exitApp();
