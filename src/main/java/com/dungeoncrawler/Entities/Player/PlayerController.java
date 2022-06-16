@@ -98,6 +98,38 @@ public class PlayerController extends Player {
         }
         this.superCharge = superCharge;
 
+
+
+        switch (initWeapon)
+        {
+            case "Sword"-> setSelectedWeapon(new Sword(getPosition()));
+            case "Boomerang"-> setSelectedWeapon(new Boomerang(getPosition()));
+            case "BBGun"-> setSelectedWeapon(new BBGun(getPosition()));
+            case "Bow" -> setSelectedWeapon(new Bow(getPosition()));
+            case "BarrettM82" -> setSelectedWeapon(new BarrettM82(getPosition()));
+            case "Staff" -> setSelectedWeapon(new Staff(getPosition()));
+            case "Knife" -> setSelectedWeapon(new Knife(getPosition()));
+        }
+        createLighting();
+        addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
+        addComponent(new DontDestroyOnLoad_Comp());
+        playerUI.UpdateStaticText(gameLevel);
+    }
+
+    public PlayerController(Vector3 pos) {
+        super(Transform.simpleTransform(pos), new GameImage("bin/images/player.png"), new Identity("PlayerController", "player"));
+        if(instance == null)
+            instance = this;
+        else
+            return;
+
+        createLighting();
+        addComponents(new DontDestroyOnLoad_Comp(), new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
+        setSelectedWeapon(new Sword(getPosition()));
+        SceneManager.getActiveScene().add(selectedWeapon);
+    }
+
+    private void createLighting(){
         pointLight = new Light.Point();
         pointLight.setColor(Color.WHITE);
 
@@ -114,32 +146,8 @@ public class PlayerController extends Player {
 
         playerLight = new GameLight(lighting, true);
         SceneManager.getActiveScene().addLight(playerLight);
-
-        switch (initWeapon)
-        {
-            case "Sword"-> setSelectedWeapon(new Sword(getPosition()));
-            case "Boomerang"-> setSelectedWeapon(new Boomerang(getPosition()));
-            case "BBGun"-> setSelectedWeapon(new BBGun(getPosition()));
-            case "Bow" -> setSelectedWeapon(new Bow(getPosition()));
-            case "BarrettM82" -> setSelectedWeapon(new BarrettM82(getPosition()));
-            case "Staff" -> setSelectedWeapon(new Staff(getPosition()));
-            case "Knife" -> setSelectedWeapon(new Knife(getPosition()));
-        }
-
-        addCollider(new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
-        addComponent(new DontDestroyOnLoad_Comp());
-        playerUI.UpdateStaticText(gameLevel);
-    }
-
-    public PlayerController(Vector3 pos) {
-        super(Transform.simpleTransform(pos), new GameImage("bin/images/player.png"), new Identity("PlayerController", "player"));
-        if(instance == null)
-            instance = this;
-        else
-            return;
-        addComponents(new DontDestroyOnLoad_Comp(), new PlayerCollider(Vector3.emptyVector(), 64, 64, this));
-        setSelectedWeapon(new Sword(getPosition()));
-        SceneManager.getActiveScene().add(selectedWeapon);
+        if(RoomManager.inChallenge)
+            disableLight();
     }
 
     @Override

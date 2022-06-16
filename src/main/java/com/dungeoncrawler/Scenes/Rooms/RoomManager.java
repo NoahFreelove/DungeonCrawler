@@ -162,7 +162,7 @@ public class RoomManager {
             PlayerController.removePlayer();
         }
 
-        if (currentRoom.getRoomType() == RoomType.SHOP)
+        if (currentRoom.getRoomType() == RoomType.SHOP || inChallenge)
         {
             PlayerController.instance.disableLight();
         }
