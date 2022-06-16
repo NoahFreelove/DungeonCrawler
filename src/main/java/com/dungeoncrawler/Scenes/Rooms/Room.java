@@ -9,6 +9,7 @@ import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.GameMath;
 import com.JEngine.Utility.IO.FileOperations;
+import com.JEngine.Utility.ImageProcessingAndEffects.GameLight;
 import com.dungeoncrawler.Entities.Enemies.BaseEnemies.*;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Doctor;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Graveyard;
@@ -16,6 +17,9 @@ import com.dungeoncrawler.Entities.Enemies.Bosses.Knight;
 import com.dungeoncrawler.Entities.Enemies.Bosses.Turret;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 import com.dungeoncrawler.Entities.Shop;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
+import javafx.scene.paint.Color;
 
 import java.io.File;
 
@@ -45,7 +49,19 @@ public class Room extends GameScene {
         add(new Sprite(Transform.simpleTransform(0,0,-500),floor, new Identity("floor")));
         CreateRoom(difficulty, leftDoor, rightDoor, topDoor, bottomDoor);
         setEnableLighting(true);
-        removeAmbientLighting();
+        if(!RoomManager.inChallenge)
+        {
+            removeAmbientLighting();
+        }
+        if(roomType == RoomType.SHOP)
+        {
+            Light.Distant distantLight = new Light.Distant();
+            distantLight.setColor(Color.GREY);
+            Lighting lighting = new Lighting(distantLight);
+            lighting.setSpecularConstant(0.5);
+            GameLight gl = new GameLight(lighting,false);
+            addLight(gl);
+        }
     }
 
     public void CreateRoom(int difficulty, boolean leftDoor, boolean rightDoor, boolean topDoor, boolean bottomDoor){

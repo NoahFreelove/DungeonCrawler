@@ -56,7 +56,7 @@ public class Projectile extends Pawn {
         this.ignoreOnHit = ignoreOnHit;
     }
 
-        @Override
+    @Override
     public void Update(){
 
         super.Update();

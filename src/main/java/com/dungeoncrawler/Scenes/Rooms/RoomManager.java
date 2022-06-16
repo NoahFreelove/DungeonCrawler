@@ -161,6 +161,14 @@ public class RoomManager {
             ChallengeManager.CompleteChallenge();
             PlayerController.removePlayer();
         }
+
+        if (currentRoom.getRoomType() == RoomType.SHOP)
+        {
+            PlayerController.instance.disableLight();
+        }
+        else {
+            PlayerController.instance.enableLight();
+        }
     }
 
     private static void tutorialSpeechCheck(){

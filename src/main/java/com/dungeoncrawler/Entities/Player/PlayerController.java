@@ -436,6 +436,7 @@ public class PlayerController extends Player {
     public static void removePlayer(){
         Platform.runLater(() -> {
             SceneManager.getActiveScene().remove(PlayerController.instance);
+            SceneManager.getActiveScene().removeLight(PlayerController.instance.playerLight);
             SceneManager.getWindow().removePermanentUI(PlayerController.instance.playerUI.playerUI);
             PlayerController.instance = null;
             if(RoomManager.inChallenge)
@@ -518,6 +519,14 @@ public class PlayerController extends Player {
 
     public void setPlayerLevel(int playerLevel) {
         this.playerLevel = playerLevel;
+    }
+
+    public void disableLight(){
+        pointLight.setColor(Color.TRANSPARENT);
+    }
+
+    public void enableLight(){
+        pointLight.setColor(Color.WHITE);
     }
 
 }

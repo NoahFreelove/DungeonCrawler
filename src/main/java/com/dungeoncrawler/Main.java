@@ -15,7 +15,6 @@ import com.dungeoncrawler.Scenes.ColorManager;
 import com.dungeoncrawler.Scenes.MainMenu;
 import javafx.application.Application;
 import javafx.scene.input.KeyCode;
-import javafx.scene.shape.Sphere;
 import javafx.stage.Stage;
 
 import static javafx.scene.input.KeyEvent.KEY_PRESSED;
@@ -86,7 +85,6 @@ public class Main extends Application {
     public static void createMainMenu(){
         window.setTargetFPS(30);
         MainMenu mainMenu = new MainMenu();
-
 
         new GameCamera(Vector3.emptyVector(), window, mainMenu, null, new Identity("MenuCam"));
         SceneManager.switchScene(mainMenu, true);
