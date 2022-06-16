@@ -20,6 +20,8 @@ import com.dungeoncrawler.Main;
 import com.dungeoncrawler.SaveManager;
 import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 import com.dungeoncrawler.Speech.DungeonStartSpeeches;
+import com.dungeoncrawler.Speech.SpeechStruct;
+import com.dungeoncrawler.Speech.SpeechType;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
@@ -185,7 +187,7 @@ public class MainMenu extends GameScene {
         String[] saveData = FileOperations.fileToStringArr(new File("bin/save/save.dat").getAbsolutePath());
         try {
             int level = GameMath.clamp(1,100, Integer.parseInt(saveData[1]));
-            int size = 2 + level/4;
+            int size = 2 + level/5;
 
             //RoomManager.CreateRooms(5 + level,5 + level, level);
             RoomManager.CreateRooms(size,size, level);
@@ -193,13 +195,18 @@ public class MainMenu extends GameScene {
             GameWindow.getInstance().setTargetFPS(60);
             SceneManager.switchScene(RoomManager.rooms[0][0]);
             RoomManager.speechManager.addSpeech(DungeonStartSpeeches.speeches[GameMath.clamp(1, DungeonStartSpeeches.speeches.length-1,level)]);
+            if(level == 15)
+            {
+                RoomManager.speechManager.addSpeech(new SpeechStruct(SpeechType.PLAYER, "I can", 0.2f));
+                RoomManager.speechManager.addSpeech(new SpeechStruct(SpeechType.NORMAL, "Oh ok", 0.2f));
+            }
             RoomManager.speechManager.startSpeech();
 
         }catch (Exception ignored){}
     }
 
     public static void purgeSave() {
-        FileOperations.stringArrToFile(new String[]{"false"}, new File("bin/save/permData.dat").getAbsolutePath());
+        FileOperations.stringArrToFile(new String[]{"false","0"}, new File("bin/save/permData.dat").getAbsolutePath());
         FileOperations.stringArrToFile(new String[]{"1", "1", "1", "1"}, new File("bin/save/skills.dat").getAbsolutePath());
         new File("bin/save/save.dat").delete();
         Main.createMainMenu();

@@ -32,11 +32,11 @@ public record EnemyStats() {
 
     //region Knight
     public static final float KNIGHT_CHARGE_SPEED = 10;
-    public static final double KNIGHT_DAMAGE = 8;
+    public static final double KNIGHT_DAMAGE = 15;
     public static final double KNIGHT_ATTACK_DELAY = 0.8;
-    public static final double KNIGHT_CHARGE_DELAY = 3;
+    public static final double KNIGHT_CHARGE_DELAY = 2;
 
-    public static final double KNIGHT_MAX_HEALTH = 100;
+    public static final double KNIGHT_MAX_HEALTH = 130;
     public static final String KNIGHT_IMAGE_PATH = "bin/images/knight.png";
     public static final int KNIGHT_DIFFICULTY = 5;
     //endregion
@@ -47,7 +47,7 @@ public record EnemyStats() {
     public static final double TURRET_SHOOT_DELAY = 0.05;
     public static final double TURRET_SHOOT_DURATION = 5;
     public static final double TURRET_IDLE_DURATION = 2;
-    public static final double TURRET_MAX_HEALTH = 30;
+    public static final double TURRET_MAX_HEALTH = 45;
 
     public static final String  TURRET_PROJECTILE_IMAGE_PATH = "bin/images/bbpellet.png";
     public static final float  TURRET_PROJECTILE_SPEED = 6;
@@ -59,7 +59,7 @@ public record EnemyStats() {
     //region Graveyard
     public static final double GRAVEYARD_DAMAGE = 8;
     public static final double GRAVEYARD_ATTACK_DELAY = 1;
-    public static final double GRAVEYARD_MAX_HEALTH = 50;
+    public static final double GRAVEYARD_MAX_HEALTH = 55;
     public static final double GRAVEYARD_SPAWN_DELAY = 6;
     public static final float GRAVEYARD_SPEED = 3;
 
