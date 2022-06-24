@@ -44,12 +44,14 @@ public class Enemy extends Pawn {
         this.attackDelay = attackDelay;
         this.difficulty = difficulty;
         canAttack = true;
+
         // attack range
         addCollider(new EnemyCollider(new Vector3(-newSprite.getWidth()/4f,-newSprite.getHeight()/4f),
                 newSprite.getWidth()+ newSprite.getWidth()/2f, newSprite.getHeight()+ newSprite.getHeight()/2f, true,this));
 
-        // Actual hitbox
+        // Actual hard-collider
         addCollider(new BoxCollider_Comp(Vector3.emptyVector(), newSprite.getWidth(),newSprite.getHeight(), false, this));
+
         this.sprite = newSprite;
         startPos = initPos;
     }
@@ -64,6 +66,7 @@ public class Enemy extends Pawn {
     public double getDamage() {
         return damage;
     }
+
     public void takeDamage(double damage){
         health -= damage;
         new GameTimer(150, args -> sprite.setColorAdjust(new ColorAdjust()),true, true);

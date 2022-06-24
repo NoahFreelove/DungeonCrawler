@@ -11,7 +11,6 @@ public class Stairs extends Pawn {
     public Stairs() {
         super(Transform.simpleTransform(500,350,-500), new GameImage("bin/images/stairs.png"), new Identity("stairs"));
         addCollider(new StairsCollider(Vector3.emptyVector(), 64,64, this));
-
     }
 
     @Override

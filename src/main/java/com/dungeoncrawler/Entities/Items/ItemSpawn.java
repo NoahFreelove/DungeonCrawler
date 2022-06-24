@@ -71,15 +71,9 @@ public class ItemSpawn extends Pawn {
     private void doAction(){
         switch (itemType)
         {
-            case GOLD -> {
-                PlayerController.instance.addGold(quantity);
-            }
-            case HEALTH -> {
-                PlayerController.instance.heal(quantity);
-            }
-            case SHIELD -> {
-                PlayerController.instance.addShield(new Shield(quantity));
-            }
+            case GOLD -> PlayerController.instance.addGold(quantity);
+            case HEALTH -> PlayerController.instance.heal(quantity);
+            case SHIELD -> PlayerController.instance.addShield(new Shield(quantity));
             case ABILITY -> {
                 switch (name)
                 {

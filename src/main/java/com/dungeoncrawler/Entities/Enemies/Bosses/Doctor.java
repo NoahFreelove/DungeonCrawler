@@ -9,11 +9,9 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Misc.GameTimer;
-import com.JEngine.Utility.Misc.GenericMethod;
 import com.dungeoncrawler.Entities.Items.ItemSpawn;
 import com.dungeoncrawler.Entities.Items.ItemType;
 import com.dungeoncrawler.Entities.Player.PlayerController;
-import com.dungeoncrawler.Scenes.Rooms.RoomManager;
 
 import static com.dungeoncrawler.Entities.EnemyStats.*;
 
@@ -21,10 +19,10 @@ public class Doctor extends Boss{
 
     private boolean currentlyHealing;
     private boolean runningToHealSpot;
-    private Pathfinding_Comp pathfinding_comp;
-    private GameObject healSpot;
+    private final Pathfinding_Comp pathfinding_comp;
+    private final GameObject healSpot;
     private final GameTimer healTimer = new GameTimer(200, args -> Heal());
-    private GameTimer healDelay = new GameTimer(1000, args -> healTimer.start(), true);
+    private final GameTimer healDelay = new GameTimer(1000, args -> healTimer.start(), true);
 
     public Doctor(Vector3 initPos, int x, int y) {
         super(initPos, new GameImage(DOCTOR_IMAGE_PATH)

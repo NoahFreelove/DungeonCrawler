@@ -28,9 +28,7 @@ public class ChallengeManager extends GameScene {
         returnButton.setTranslateX(10);
         returnButton.setTranslateY(600);
 
-        returnButton.setOnAction(actionEvent -> {
-            Main.createMainMenu();
-        });
+        returnButton.setOnAction(actionEvent -> Main.createMainMenu());
         returnButton.setTextFill(ColorManager.buttonTextColor);
         returnButton.setStyle("-fx-background-color: #" + ColorManager.buttonColor.toString().substring(2) + "; -fx-focus-color: transparent; -fx-font-size: 30px;");
 
@@ -38,7 +36,7 @@ public class ChallengeManager extends GameScene {
 
         int challengeLevel = Integer.parseInt(FileOperations.fileToStringArr(new File("bin/save/permdata.dat").getAbsolutePath())[1]);
 
-        for (int i = 0; i < GameMath.clamp(0,12,challengeLevel); i++) {
+        for (int i = 0; i < GameMath.clamp(0,3,challengeLevel); i++) {
             addUI(new ChallengeButton(i));
         }
     }

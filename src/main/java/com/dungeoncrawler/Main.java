@@ -58,10 +58,6 @@ public class Main extends Application {
                     PlayerController.removePlayer();
                     createMainMenu();
                 }
-                if(e.getCode() == KeyCode.F2)
-                {
-                    PlayerController.instance.addShield(new Shield(10));
-                }
             });
 
             window = new GameWindow(new GameScene("empty"), 1f, GameInfo.getAppName(), stage);
@@ -77,8 +73,8 @@ public class Main extends Application {
 
     static void setupGameInfo(){
         GameInfo.setAppName("Dungeon Crawler");
-        GameInfo.setAppVersionMajor(0);
-        GameInfo.setAppVersionMinor(5);
+        GameInfo.setAppVersionMajor(1);
+        GameInfo.setAppVersionMinor(0);
         GameInfo.setAuthors(new String[]{"Noah Freelove"});
     }
 
