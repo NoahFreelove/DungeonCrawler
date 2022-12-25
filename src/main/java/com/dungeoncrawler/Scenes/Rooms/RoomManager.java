@@ -83,14 +83,14 @@ public class RoomManager {
                 if(i == width/2 && j == height/2)
                 {
                     rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, RoomType.SHOP, i,j);
-                    System.out.println("Shop Room: " + i + ", " + j);
+                    //System.out.println("Shop Room: " + i + ", " + j);
                 }
                 else if(i == 0 && j == 0) {
                     rooms[0][0] = new Room(randomNum, false, rightDoor, topDoor, false, RoomType.SPAWN, i,j);
                 }
                 else if(i == bossX && j == bossY) {
                     rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, RoomType.BOSS, i,j);
-                    System.out.println("Boss Room: " + i + ", " + j);
+                    //System.out.println("Boss Room: " + i + ", " + j);
                 }
                 else {
                     rooms[i][j] = new Room(randomNum, leftDoor, rightDoor, topDoor, bottomDoor, RoomType.NORMAL, i,j);

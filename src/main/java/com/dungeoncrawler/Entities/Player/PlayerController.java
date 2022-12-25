@@ -444,8 +444,11 @@ public class PlayerController extends Player {
     public static void removePlayer(){
         Platform.runLater(() -> {
             SceneManager.getActiveScene().remove(PlayerController.instance);
-            SceneManager.getActiveScene().removeLight(PlayerController.instance.playerLight);
-            SceneManager.getWindow().removePermanentUI(PlayerController.instance.playerUI.playerUI);
+            if(PlayerController.instance !=null)
+            {
+                SceneManager.getActiveScene().removeLight(PlayerController.instance.playerLight);
+                SceneManager.getWindow().removePermanentUI(PlayerController.instance.playerUI.playerUI);
+            }
             PlayerController.instance = null;
             if(RoomManager.inChallenge)
             {

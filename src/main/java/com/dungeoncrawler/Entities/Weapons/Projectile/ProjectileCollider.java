@@ -7,10 +7,11 @@ import com.dungeoncrawler.Entities.Enemies.Enemy;
 import com.dungeoncrawler.Entities.Player.PlayerController;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ProjectileCollider extends Collider_Comp {
     Projectile parent;
-    ArrayList<Enemy> enemiesHit = new ArrayList<>(1);
+    CopyOnWriteArrayList<Enemy> enemiesHit = new CopyOnWriteArrayList<>();
     public ProjectileCollider(Vector3 initialOffset, float width, float height, GameObject parent) {
         super(initialOffset, width, height, true, parent);
         this.parent = (Projectile) parent;

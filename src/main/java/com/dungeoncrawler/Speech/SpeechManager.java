@@ -14,9 +14,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class SpeechManager extends Player {
-    private final ArrayList<SpeechStruct> speechQueue;
+    private final CopyOnWriteArrayList<SpeechStruct> speechQueue;
     private final GameImage background = new GameImage("bin/images/speechBackground.png");
 
     private final Text activeText;
@@ -36,7 +37,7 @@ public class SpeechManager extends Player {
         activeText.setStyle("-fx-font-family: 'Arial';-fx-font-size: 25px;");
 
         addComponent(new DontDestroyOnLoad_Comp());
-        speechQueue = new ArrayList<>(0);
+        speechQueue = new CopyOnWriteArrayList<SpeechStruct>();
         GameWindow.getInstance().addPermanentUI(activeText);
 
     }
